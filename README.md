@@ -51,7 +51,7 @@ To set up a development environment, please follow these steps:
 1. Clone the repo
 
    ```shell
-    git clone https://github.com/JavaScript-Mastery-PRO/Cohort2_Project1_Team3.gitt
+    git clone https://github.com/JavaScript-Mastery-PRO/Cohort2_Project1_Team3.git
    ```
 
 2. Change directory to the project directory
