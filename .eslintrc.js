@@ -24,7 +24,7 @@ module.exports = {
     'arrow-body-style': ['error', 'always'],
     'react/state-in-constructor': 0,
     'import/prefer-default-export': 0,
-    allowNamedFunctions: false,
+    allowNamedFunctions: 0,
     'max-len': [
       2,
       250,

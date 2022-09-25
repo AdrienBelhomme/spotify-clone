@@ -6,6 +6,12 @@ import {
 import { useSelector } from 'react-redux';
 import { useGetWorldChartsQuery } from '../../services/shazam';
 
+const Songs = () => {
+  const { data } = useGetWorldChartsQuery();
+} 
+
+console.log(data);
+
 function Home() {
   return (
     <div>
