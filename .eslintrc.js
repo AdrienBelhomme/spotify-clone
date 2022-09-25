@@ -17,6 +17,13 @@ module.exports = {
     'react',
   ],
   rules: {
+    'react/function-component-definition': [
+      2,
+      {
+        namedComponents: 'arrow-function',
+        unnamedComponents: 'arrow-function',
+      },
+    ],
     'react/react-in-jsx-scope': 0,
     'import/extensions': 0,
     'react/prop-types': 0,
@@ -24,7 +31,7 @@ module.exports = {
     'arrow-body-style': ['error', 'always'],
     'react/state-in-constructor': 0,
     'import/prefer-default-export': 0,
-    'allowNamedFunctions': false,
+    allowNamedFunctions: 0,
     'max-len': [
       2,
       250,
