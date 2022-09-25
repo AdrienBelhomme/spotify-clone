@@ -36,7 +36,7 @@ const Sidebar = ({ setMobileOpen }) => {
                     >
                         <ListItem onClick={() => { }}>
                             <ListItemIcon>
-                                <img src={genreIcons[value]}
+                                <img src={genreIcons[label.toLowerCase()]}
                                     alt='genreimage' height={40}
                                     sx={{ filter: theme.palette.mode === 'dark' ? 'Invert(1)' : 'dark' }}
                                 />
