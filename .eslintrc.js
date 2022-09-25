@@ -16,18 +16,14 @@ module.exports = {
   plugins: [
     'react',
   ],
-
-  "react/function-component-definition": [
-    2,
-    {
-      namedComponents: "arrow-function",
-      unnamedComponents: "arrow-function",
-    },
-  ],
-
-
-
   rules: {
+    'react/function-component-definition': [
+      2,
+      {
+        namedComponents: 'arrow-function',
+        unnamedComponents: 'arrow-function',
+      },
+    ],
     'react/react-in-jsx-scope': 0,
     'import/extensions': 0,
     'react/prop-types': 0,
