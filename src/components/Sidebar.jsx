@@ -35,7 +35,7 @@ const Sidebar = ({ setMobileOpen }) => {
               key={value}
               sx={{
                 '&:hover': {
-                  backgroundColor: 'red',
+                  backgroundColor: 'blue',
                 },
               }}
               style={{ textDecoration: 'none', color: theme.palette.secondary.main }}
