@@ -32,6 +32,11 @@ const Sidebar = ({ setMobileOpen }) => {
                     <Link
                         to='/'
                         key={value}
+                        sx={{
+                            '&:hover': {
+                                backgroundColor: 'red',
+                            },
+                        }}
                         style={{ textDecoration: 'none', color: theme.palette.secondary.main }}
                     >
                         <ListItem onClick={() => { }}>

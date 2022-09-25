@@ -27,7 +27,7 @@ function Navbar() {
                     {isMobile && <IconButton
                         color='inherit'
                         edge="start"
-                        style={{ outline: 'solid' }}
+                        style={{ outline: 'none' }}
                         sx={(theme) => ({
                             marginRight: theme.spacing(2),
                             [theme.breakpoints.up('sm')]:
