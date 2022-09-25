@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Artists = () => {
+function Artists() {
   return (
     <div>Artists</div>
   );

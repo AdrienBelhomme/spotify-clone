@@ -1,16 +1,15 @@
-import React from 'react'
-import {Link} from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-const Home = () => {
+function Home() {
+    return (
+        <div>Home
+            <Link to="./Artists/">Artist</Link>
+            <Link to="./Albums/">Albums</Link>
 
-  return (
-    <div>Home
-    <Link to="./Artists/"><button >Artists</button></Link>
-    <Link to="./Albums/"><button >Albums</button></Link>
+        </div>
 
-    </div>
-
-  )
+    );
 }
 
-export default Home
+export default Home;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Albums = () => {
+function Albums() {
   return (
     <div>Albums</div>
   );
