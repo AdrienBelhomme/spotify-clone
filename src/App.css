@@ -1,0 +1,28 @@
+body {
+    height: 100vh;
+    background: linear-gradient(#28f6f3, #f219f272)
+}
+
+.App-logo {
+    object-fit: cover;
+    height: 60%;
+    width: 110%;
+    pointer-events: none;
+
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+        animation: App-logo-spin infinite 10s linear;
+    }
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
