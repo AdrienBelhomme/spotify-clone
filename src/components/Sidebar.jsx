@@ -1,14 +1,12 @@
-import React from 'react';
-import { List, ListItem, ListItemIcon, ListItemText, ListSubheader, Divider, Box, CircularProgress } from '@mui/material';
+import { List, ListItem, ListItemIcon, ListItemText, ListSubheader, Divider, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { selectGenre } from '../features/currentGenre';
 import logoLight from '../assets/images/Music_UNIVERSE__3_-removebg-preview.png';
 import logoDark from '../assets/images/Music_UNIVERSE__2_-removebg-preview.png';
 import genreIcons from '../assets/genres';
-import { useGetSongDetailsQuery } from '../services/shazam';
 
 const categories = [
   { label: 'Home', value: 'home' },
