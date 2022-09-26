@@ -15,7 +15,7 @@ const Navbar = () => {
     <>
       <AppBar
         position="fixed"
-        style={{ background: 'transparent', boxShadow: '0px 7px 7px white' }}
+        style={{ display: 'flex', background: 'transparent', boxShadow: '0px 7px 7px white' }}
         sx={{ color: theme.palette.secondary.main }}
       >
 
@@ -63,9 +63,11 @@ const Navbar = () => {
               variant="temporary"
               open={mobileOpen}
               onClose={() => { return setMobileOpen((prevMobileOpen) => { return !prevMobileOpen; }); }}
-              anchor="right"
+              anchor="left"
               ModalProps={{ keepMounted: true }}
-              PaperProps={{ sx: { width: drawerWidth } }}
+              PaperProps={{ sx: { width: drawerWidth,
+                backgroundColor: theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.4)',
+                backdropFilter: 'blur(40px)' } }}
             ><Sidebar setMobileOpen={setMobileOpen} />
             </Drawer>
           )
