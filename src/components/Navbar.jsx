@@ -20,15 +20,14 @@ const Navbar = () => {
       >
 
         <Toolbar
-          sx={(theme) => {
-            return {
-              height: '80px',
-              display: 'flex',
-              justifyContent: 'space-between',
-              marginLeft: '200px',
-              [theme.breakpoints.down('sm')]:
+          sx={{
+            height: '80px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginLeft: '200px',
+            [theme.breakpoints.down('sm')]:
                             { ml: 2, flexWrap: 'wrap' },
-            };
+
           }}
         >
           {isMobile && (
@@ -36,12 +35,10 @@ const Navbar = () => {
             color="inherit"
             edge="start"
             style={{ outline: 'none' }}
-            sx={(theme) => {
-              return {
-                marginRight: theme.spacing(2),
-                [theme.breakpoints.up('sm')]:
+            sx={{
+              marginRight: theme.spacing(2),
+              [theme.breakpoints.up('sm')]:
                                 { display: 'none' },
-              };
             }}
             onClick={() => { return setMobileOpen((prevOpenMobile) => { return !prevOpenMobile; }); }}
           >
@@ -56,10 +53,8 @@ const Navbar = () => {
         </Toolbar>
       </AppBar>
 
-      <Box sx={(theme) => {
-        return {
-          [theme.breakpoints.up('sm')]: { width: drawerWidth, flexShrink: '0' },
-        };
+      <Box sx={{
+        [theme.breakpoints.up('sm')]: { width: drawerWidth, flexShrink: '0' },
       }}
       >
         {isMobile
