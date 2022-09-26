@@ -8,7 +8,7 @@ import { selectGenre } from '../features/currentGenre';
 import logoLight from '../assets/images/Music_UNIVERSE__3_-removebg-preview.png';
 import logoDark from '../assets/images/Music_UNIVERSE__2_-removebg-preview.png';
 import genreIcons from '../assets/genres';
-import { useGetWorldChartsQuery } from '../services/shazam';
+import { useGetSongDetailsQuery } from '../services/shazam';
 
 const categories = [
   { label: 'Home', value: 'home' },

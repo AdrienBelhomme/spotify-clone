@@ -13,14 +13,52 @@ export const shazamApi = createApi({
 
       return headers;
     } }),
+
   endpoints: (builder) => {
     return {
     // Get world charts
       getWorldCharts: builder.query({
         query: () => { return 'charts/world'; },
       }),
+      // Get artits details
+      getArtistDetails: builder.query({
+        query: (artistId) => { return `artists/details?artist_id=${artistId}`; },
+      }),
+      // Get song details
+      getSongDetails: builder.query({
+        query: (trackId) => { return `tracks/details?track_id=${trackId}`; },
+      }),
+      // Get world charts by genre
+      getWorldChartsByGenre: builder.query({
+        query: (genreId) => { return `charts/genre-world?genre_code=${genreId}`; },
+      }),
+      // Get charts by country
+      getWorldChartsByCountry: builder.query({
+        query: (countryId) => { return `charts/country?country_code=${countryId}`; },
+      }),
+      // Get charts by city
+      getWorldChartsByCity: builder.query({
+        query: (cityId) => { return `charts/city?city_id=${cityId}`; },
+      }),
+      // Related songs
+      getRelatedSongs: builder.query({
+        query: (trackId) => { return `tracks/related?track_id=${trackId}`; },
+      }),
+      // Search songs
+      searchSongs: builder.query({
+        query: (offset, query) => {
+          return `search/multi?offset=${offset}&query=${query}&search_type='SONGS'`;
+        },
+      }),
+      // Search artist
+      searchArtists: builder.query({
+        query: (offset, query) => {
+          return `search/multi?offset=${offset}&query=${query}&search_type='ARTISTS'`;
+        },
+      }),
     };
   },
 });
 
-export const { useGetWorldChartsQuery } = shazamApi;
+export const { useGetWorldChartsQuery, useGetArtistDetailsQuery, useGetSongDetailsQuery, useGetWorldChartsByGenreQuery, useGetWorldChartsByCityQuery, useGetWorldChartsByCountryQuery, useGetRelatedSongsQuery, useSearchSongsQuery,
+  useSearchArtistsQuery } = shazamApi;
