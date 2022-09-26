@@ -17,7 +17,7 @@ export const shazamApi = createApi({
     return {
     // Get world charts
       getWorldCharts: builder.query({
-        query: () => { return 'charts/world?offset=2&search_type=SONGS_ARTISTS'; },
+        query: () => { return 'charts/world'; },
       }),
     };
   },
