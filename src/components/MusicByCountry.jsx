@@ -58,11 +58,11 @@ const genres = [
 ];
 
 const MusicByCountry = () => {
-  const [countryId, setCountryId] = useState(genres[0].label);
+  // const [countryId, setCountryId] = useState(genres[0].label);
   const [inputValue, setInputValue] = useState(genres[0].label);
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(genres[0]);
 
-  const { data, isFetching, error } = useGetWorldChartsByCountryQuery(countryId);
+  const { data, isFetching, error } = useGetWorldChartsByCountryQuery(value.label);
 
   if (isFetching) {
     return (
@@ -80,10 +80,6 @@ const MusicByCountry = () => {
     );
   }
 
-  // console.log(`countryId${countryId}`);
-  console.log(`inputValue${inputValue}`); // could be countryId, but can't be '', or cause an error
-  console.log({ value });
-
   return (
     <div>
       <div>MusicByCountry</div>
@@ -97,17 +93,18 @@ const MusicByCountry = () => {
         onInputChange={(event, newInputValue) => {
           setInputValue(newInputValue);
         }}
-        id="controllable-states-demo"
+        id="dropdown-selector"
         options={genres}
         sx={{ width: 300 }}
         renderInput={(params) => {
+          console.log(params);
           return (
             <TextField {...params} label="Country" />
           );
         }}
       />
 
-      <h3>{countryId}</h3>
+      <h3>{value.country}</h3>
       <p>Artist:{data[0].subtitle}</p>
       <p>Song:{data[0].title}</p>
       <p>Image: <img src={`${data[0].images.background}`} /> </p>
