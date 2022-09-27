@@ -4,9 +4,10 @@ const Home = () => {
   return (
     <div>
       Home
-      <Link to="./Artists/:id">Artist</Link>
-      <Link to="./Albums/:id">Albums</Link>
-      <Link to="./Topcharts">Top Charts</Link>
+      <Link to="./artists/:id">Artist</Link>
+      <Link to="./albums/:id">Albums</Link>
+      <Link to="./topcharts">Top Charts</Link>
+      <Link to="./country">Top Charts by Country</Link>
     </div>
   );
 };
