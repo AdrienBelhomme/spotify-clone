@@ -4,9 +4,7 @@ import { useTheme } from '@mui/material/styles';
 import { useDispatch } from 'react-redux';
 
 import { selectGenre } from '../features/currentGenre';
-import logoLight from '../assets/images/Music_UNIVERSE__3_-removebg-preview.png';
-import logoDark from '../assets/images/Music_UNIVERSE__2_-removebg-preview.png';
-import genreIcons from '../assets/genres';
+import { genreIcons, images } from '../assets';
 
 const categories = [
   { label: 'Home', value: 'home' },
@@ -29,7 +27,7 @@ const Sidebar = ({ setMobileOpen }) => {
       <Link to="/">
         <img
           className="App-logo"
-          src={theme.palette.mode === 'light' ? logoLight : logoDark}
+          src={theme.palette.mode === 'light' ? images.logoLight : images.logoDark}
           alt="musicuniverselogo"
           style={{ justifyContent: 'center', display: 'flex' }}
         />
