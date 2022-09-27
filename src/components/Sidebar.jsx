@@ -41,7 +41,7 @@ const Sidebar = () => {
                     src={genreIcons[label.toLowerCase()]}
                     alt="genreimage"
                     height={40}
-                    style={{ filter: theme.palette.mode === 'dark' ? 'Invert(1)' : 'dark' }}
+                    // style={{ filter: theme.palette.mode === 'dark' && 'Invert(1)' }}
                   />
                 </ListItemIcon>
                 <ListItemText primary={label} />
