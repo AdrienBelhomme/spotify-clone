@@ -21,7 +21,7 @@ const Sidebar = () => {
         <img
           src={theme.palette.mode === 'light' ? logoLight : logoDark}
           alt="musicuniverselogo"
-          style={{ justifyContent: 'center', display: 'flex', width: '100%', height: '40%' }}
+          style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', width: '100%', height: '55%', objectFit: 'cover' }}
         />
       </Link>
       <Divider />
