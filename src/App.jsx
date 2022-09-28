@@ -23,7 +23,7 @@ const App = () => {
             </Routes>
           </div>
           {isMobile ? (
-            <div style={{ position: 'absolute', right: '0px', bottom: '0px', width: '100%' }}>
+            <div style={{ position: 'absolute', bottom: '0px', width: '100%', left: '0px', right: '0px', padding: '5px' }}>
               <Player />
             </div>
           ) : (
