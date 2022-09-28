@@ -29,7 +29,7 @@ const MusicByCountry = () => {
   return (
     <div>
 
-      <h1>Select a country</h1>
+      <h1>Top charts by country</h1>
       <Autocomplete
         sx={{ width: 300 }}
         value={dataCountry}
@@ -66,7 +66,7 @@ const MusicByCountry = () => {
         }}
       />
 
-      <h3>{inputValue || 'France'}</h3>
+      <h3>{inputValue || 'Select a country'}</h3>
       <p>Artist:{data[0].subtitle}</p>
       <p>Song:{data[0].title}</p>
       <p>Image: <img src={`${data[0].images.background}`} width="100px" /> </p>
