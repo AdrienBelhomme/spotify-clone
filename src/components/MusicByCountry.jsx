@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useGetWorldChartsByCountryQuery } from '../services/shazam.js';
 
 import shazamList from './countryList.js';
+import GridForGenre from './GridForGenre.jsx';
 
 const MusicByCountry = () => {
   const [inputValue, setInputValue] = useState(shazamList[17].name);
@@ -30,6 +31,9 @@ const MusicByCountry = () => {
     <div>
 
       <h1>Top charts by country</h1>
+
+      <GridForGenre />
+
       <Autocomplete
         sx={{ width: 300 }}
         value={dataCountry}
@@ -61,7 +65,7 @@ const MusicByCountry = () => {
         renderInput={(params) => {
           return (
             // eslint-disable-next-line react/jsx-props-no-spreading
-            <TextField {...params} label="Country" />
+            <TextField {...params} label="Select a country" />
           );
         }}
       />
