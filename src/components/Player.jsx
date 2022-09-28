@@ -41,7 +41,7 @@ const TinyText = styled(Typography)({
 });
 
 const MusicPlayerSlider = () => {
-  const isMobile = useMediaQuery('(min-width:600px)');
+  const isMobile = useMediaQuery('(max-width:600px)');
   const theme = useTheme();
   const duration = 200; // seconds
   const [position, setPosition] = React.useState(32);
@@ -56,7 +56,7 @@ const MusicPlayerSlider = () => {
   return (
 
     <Box sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
-      {isMobile ? (
+      {!isMobile ? (
         <Widget>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <CoverImage>
