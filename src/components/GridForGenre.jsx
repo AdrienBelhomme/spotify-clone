@@ -1,4 +1,4 @@
-import { Grid, Paper } from '@mui/material';
+import { Box, Grid, Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 const Item = styled(Paper)(({ theme }) => {
@@ -13,22 +13,32 @@ const Item = styled(Paper)(({ theme }) => {
 
 const GridForGenre = () => {
   return (
-    <Grid
-      container
-      direction="row"
-      justifyContent="flex-start"
-      alignItems="center"
-      spacing={5}
-      sx={{ backgroundColor: 'grey' }}
+    <Box
+      mt={2}
+      mb={5}
+      sx={{
+        width: '100%',
+        height: 300,
+        backgroundColor: 'rgba(255, 255, 255, 0.8)',
+        borderRadius: '40px',
+        flexGrow: 1,
+      }}
     >
-      <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-        <Item>Country 1</Item>
-      </Grid>
-      <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-        <Item>Country 2</Item>
-      </Grid>
 
-    </Grid>
+      <Grid
+        justifyContent="flex-start"
+        alignItems="center"
+        container
+      >
+        <Grid container item xs={6} sm={4} md={3} lg={2} xl={1}>
+          <Item>Country 1</Item>
+        </Grid>
+        <Grid container item xs={6} sm={4} md={3} lg={2} xl={1}>
+          <Item>Country 2</Item>
+        </Grid>
+
+      </Grid>
+    </Box>
   );
 };
 
