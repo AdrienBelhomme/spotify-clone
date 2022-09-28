@@ -266,4 +266,16 @@ const getMatch = (a, b) => {
 
 getMatch(countryList, shazamCountry);
 
+const topCountries = [
+  { name: 'France', code: 'FR' },
+  { name: 'United States', code: 'US' },
+  { name: 'Canada', code: 'CA' },
+  { name: 'United Kingdom', code: 'GB' },
+  { name: 'Germany', code: 'DE' },
+  { name: 'Mexico', code: 'MX' },
+  { name: 'Japan', code: 'JP' },
+  { name: 'Australia', code: 'AU' },
+];
+
 export default shazamList;
+export { topCountries };

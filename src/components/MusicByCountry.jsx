@@ -4,6 +4,7 @@ import { useGetWorldChartsByCountryQuery } from '../services/shazam.js';
 
 import shazamList from './countryList.js';
 import GridForGenre from './GridForGenre.jsx';
+import GridForMusic from './GridForMusic.jsx';
 
 const MusicByCountry = () => {
   const [inputValue, setInputValue] = useState(shazamList[17].name);
@@ -30,9 +31,7 @@ const MusicByCountry = () => {
   return (
     <div>
 
-      <h1>Top charts by country</h1>
-
-      <GridForGenre />
+      <GridForGenre data={data} country={inputValue} />
 
       <Autocomplete
         sx={{ width: 300 }}
@@ -70,10 +69,8 @@ const MusicByCountry = () => {
         }}
       />
 
-      <h3>{inputValue || 'Select a country'}</h3>
-      <p>Artist:{data[0].subtitle}</p>
-      <p>Song:{data[0].title}</p>
-      <p>Image: <img src={`${data[0].images.background}`} width="100px" /> </p>
+      <GridForMusic data={data} country={inputValue} />
+
     </div>
 
   );
