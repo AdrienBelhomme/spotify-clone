@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
+// import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import App from './App';
 import store from './app/store';
@@ -24,6 +25,6 @@ root.render(
   <Provider store={store}>
     <ToggleColorProvider>
       <App />
-    </ToggleColorProvider>,
+    </ToggleColorProvider>
   </Provider>,
 );
