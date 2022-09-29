@@ -15,20 +15,19 @@ const Navbar = () => {
     <>
       <AppBar
         position="fixed"
-        style={{ background: 'transparent', boxShadow: '0px 7px 7px white' }}
+        style={{ display: 'flex', background: 'transparent', boxShadow: '0px 7px 7px white' }}
         sx={{ color: theme.palette.secondary.main }}
       >
 
         <Toolbar
-          sx={(theme) => {
-            return {
-              height: '80px',
-              display: 'flex',
-              justifyContent: 'space-between',
-              marginLeft: '200px',
-              [theme.breakpoints.down('sm')]:
+          sx={{
+            height: '80px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginLeft: '200px',
+            [theme.breakpoints.down('sm')]:
                             { ml: 2, flexWrap: 'wrap' },
-            };
+
           }}
         >
           {isMobile && (
@@ -36,12 +35,10 @@ const Navbar = () => {
             color="inherit"
             edge="start"
             style={{ outline: 'none' }}
-            sx={(theme) => {
-              return {
-                marginRight: theme.spacing(2),
-                [theme.breakpoints.up('sm')]:
+            sx={{
+              marginRight: theme.spacing(2),
+              [theme.breakpoints.up('sm')]:
                                 { display: 'none' },
-              };
             }}
             onClick={() => { return setMobileOpen((prevOpenMobile) => { return !prevOpenMobile; }); }}
           >
@@ -56,10 +53,8 @@ const Navbar = () => {
         </Toolbar>
       </AppBar>
 
-      <Box sx={(theme) => {
-        return {
-          [theme.breakpoints.up('sm')]: { width: drawerWidth, flexShrink: '0' },
-        };
+      <Box sx={{
+        [theme.breakpoints.up('sm')]: { width: drawerWidth, flexShrink: '0' },
       }}
       >
         {isMobile
@@ -68,9 +63,11 @@ const Navbar = () => {
               variant="temporary"
               open={mobileOpen}
               onClose={() => { return setMobileOpen((prevMobileOpen) => { return !prevMobileOpen; }); }}
-              anchor="right"
+              anchor="left"
               ModalProps={{ keepMounted: true }}
-              PaperProps={{ sx: { width: drawerWidth } }}
+              PaperProps={{ sx: { width: drawerWidth,
+                backgroundColor: theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.4)',
+                backdropFilter: 'blur(40px)' } }}
             ><Sidebar setMobileOpen={setMobileOpen} />
             </Drawer>
           )
