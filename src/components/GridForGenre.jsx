@@ -29,7 +29,7 @@ const GridForGenre = (props) => {
             sx={{ display: 'flex' }}
           >
             {topCountries.map((country, i) => {
-              return <CardCountry key={i} data={data} country={country.name} />;
+              return <CardCountry key={i} data={data} countryCode={country.code} countryName={country.name} index={i} />;
             })}
 
           </Grid>

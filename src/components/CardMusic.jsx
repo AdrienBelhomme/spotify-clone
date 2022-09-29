@@ -12,17 +12,18 @@ const Item = styled(Paper)(({ theme }) => {
     borderRadius: '12px',
     background: 'transparent',
     border: '1px solid rgba(246, 129, 30, 0.25)',
-    marginRight: '4%',
   };
 });
 
 const CardCountry = (props) => {
   const { data, index } = props;
 
-  console.log(data);
+  const selectCountry = (i) => {
+    console.log(data[i]?.hub?.actions[1]?.uri);
+  };
 
   return (
-    <div>
+    <div style={{ marginRight: '10%' }}>
 
       <h3 style={{ textAlign: 'left', color: '#2E3271', fontWeight: '600', fontSize: '16px', margin: '12px 0',
       }}
@@ -42,6 +43,7 @@ const CardCountry = (props) => {
             style={{ borderRadius: '15px' }}
           />
           <IconButton
+            onClick={() => { return selectCountry(index); }}
             aria-label="play"
             variant="soft"
             size="large"
