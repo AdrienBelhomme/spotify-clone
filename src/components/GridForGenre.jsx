@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Grid, Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
@@ -29,6 +30,47 @@ const GridForGenre = () => {
       </Grid>
 
     </Grid>
+=======
+import { Box, Grid } from '@mui/material';
+import CardCountry from './CardCountry';
+import { topCountries } from './countryList';
+
+const GridForGenre = (props) => {
+  const { data } = props;
+
+  return (
+    <div>
+      <Box
+        mt={4}
+        mb={4}
+        sx={{
+          backgroundColor: 'rgba(255, 255, 255, 0.8)',
+          borderRadius: '40px',
+          flexGrow: 1,
+          padding: '3%',
+        }}
+      >
+        <h1 style={{ marginTop: 0 }}>Top charts by country</h1>
+        <Grid container sx={{ display: 'flex' }}>
+          <Grid
+            item
+            xs={6}
+            sm={4}
+            md={4}
+            lg={3}
+            xl={3}
+            sx={{ display: 'flex' }}
+          >
+            {topCountries.map((country, i) => {
+              return <CardCountry key={i} data={data} country={country.name} />;
+            })}
+
+          </Grid>
+        </Grid>
+      </Box>
+
+    </div>
+>>>>>>> musics-by-country
   );
 };
 
