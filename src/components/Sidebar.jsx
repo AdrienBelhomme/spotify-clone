@@ -15,19 +15,12 @@ const categories = [
   { label: 'TopChart', value: 'topchart' },
 ];
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-const Sidebar = () => {
-=======
->>>>>>> develop
 const genre = [
   { label: 'Pop', value: 'POP' },
   { label: 'Dance', value: 'DANCE' },
 ];
 
 const Sidebar = ({ setMobileOpen }) => {
->>>>>>> musics-by-country
   const theme = useTheme();
   const dispatch = useDispatch();
 
