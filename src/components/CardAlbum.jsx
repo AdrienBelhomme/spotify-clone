@@ -17,29 +17,41 @@ const Item = styled(Paper)(({ theme }) => {
   };
 });
 
-const CardAlbum = ({song}) => {
-  const { data, index } = song;
+const CardAlbum = ({ song }) => {
   return (
-    <Item>
-      <img
-        src={`${data[0].images.background}`}
-        srcSet={`${data[0].images.background}`}
-        alt={`${data[0].title}-cover`}
-        loading="lazy"
-        width="180px"
-        height="180px"
-        style={{ borderRadius: '15px' }}
-      />
-      <h3 style={{ textAlign: 'left', color: '#2E3271', fontWeight: '600', fontSize: '16px', margin: '12px 0',
-      }}
-      >
-        {index}
-      </h3>
-      <h4 style={{ margin: 0, textAlign: 'left', color: 'rgba(124, 141, 181, 0.75)', fontSize: '14px', fontWeight: '400' }}>
-        Top 10
-      </h4>
-    </Item>
+    <Box sx={{ width: '100%' }}>
+      <Grid container sx={{ display: 'flex' }}>
+        <Grid
+          Item
+          xs={6}
+          sm={4}
+          md={4}
+          lg={3}
+          xl={3}
+          sx={{ display: 'flex' }}
+        >
+          <Item>
+            <img
+              alt="song_img"
+              src={song.images?.coverart}
+              loading="lazy"
+              width="180px"
+              height="180px"
+              style={{ borderRadius: '15px' }}
+            />
+            <h3 style={{ textAlign: 'left', color: '#2E3271', fontWeight: '600', fontSize: '16px', margin: '12px 0',
+            }}
+            >
+              {song.title}
+            </h3>
+            <h4>
+              {song.subtitle}
+            </h4>
 
+          </Item>
+        </Grid>
+      </Grid>
+    </Box>
   );
 };
 
