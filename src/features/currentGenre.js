@@ -7,18 +7,16 @@ export const genre = createSlice({
     genreName: '',
     countryName: 'France',
     countryCode: 'FR',
-    countryCodeAndName: { code: '', name: '' },
+    countryCodeAndName: { name: 'France', code: 'FR' },
     country: {},
     searchQuery: '',
   },
   reducers: {
     selectGenre: (state, action) => {
+      const { name, code } = action.payload;
       console.log(action.payload);
-      const { code, name } = action.payload;
-      console.log(code);
-      console.log(name);
       // eslint-disable-next-line no-param-reassign
-      state.countryCodeAndName = { code, name };
+      state.countryCodeAndName = { name, code };
       // eslint-disable-next-line no-param-reassign
       state.countryName = name;
       // eslint-disable-next-line no-param-reassign

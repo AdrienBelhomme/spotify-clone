@@ -7,4 +7,5 @@ export default configureStore({
     [shazamApi.reducerPath]: shazamApi.reducer,
     currentGenre: genreReducer,
   },
+  middleware: (getDefaultMiddleware) => { return getDefaultMiddleware().concat(shazamApi.middleware); },
 });
