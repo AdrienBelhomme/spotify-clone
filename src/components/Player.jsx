@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import { Box, Typography, Slider, IconButton, Stack, useMediaQuery } from '@mui/material';
 import { PauseRounded, PlayArrowRounded, FastForwardRounded, FastRewindRounded, VolumeUpRounded, VolumeDownRounded } from '@mui/icons-material';
@@ -39,7 +39,7 @@ const WallPaper = styled('div')({
 
 const Widget = styled('div')(({ theme }) => {
   return {
-    padding: 16,
+    padding: 10,
     borderRadius: 16,
     width: 200,
     height: '100%',
@@ -77,8 +77,8 @@ const MusicPlayerSlider = () => {
   const isMobile = useMediaQuery('(max-width:600px)');
   const theme = useTheme();
   const duration = 200; // seconds
-  const [position, setPosition] = React.useState(32);
-  const [paused, setPaused] = React.useState(false);
+  const [position, setPosition] = useState(32);
+  const [paused, setPaused] = useState(false);
   function formatDuration(value) {
     const minute = Math.floor(value / 60);
     const secondLeft = value - minute * 60;
@@ -91,8 +91,8 @@ const MusicPlayerSlider = () => {
       {!isMobile ? (
         <Box sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
           <Widget>
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <CoverImage>
+            <Box sx={{ alignItems: 'center' }}>
+              <CoverImage sx={{ height: '150px', width: '180px' }}>
                 <img
                   alt="can't win - Chilling Sunday"
                   src={logoLight}
@@ -164,7 +164,7 @@ const MusicPlayerSlider = () => {
                 mt: -1,
               }}
             >
-              <IconButton aria-label="previous song">
+              <IconButton aria-label="previous song" onClick={() => {}}>
                 <FastRewindRounded fontSize="large" htmlColor={mainIconColor} />
               </IconButton>
               <IconButton
@@ -180,7 +180,7 @@ const MusicPlayerSlider = () => {
                   <PauseRounded sx={{ fontSize: '3rem' }} htmlColor={mainIconColor} />
                 )}
               </IconButton>
-              <IconButton aria-label="next song">
+              <IconButton aria-label="next song" onClick={() => {}}>
                 <FastForwardRounded fontSize="large" htmlColor={mainIconColor} />
               </IconButton>
             </Box>
@@ -229,7 +229,7 @@ const MusicPlayerSlider = () => {
                 mt: -1,
               }}
             >
-              <IconButton aria-label="previous song">
+              <IconButton aria-label="previous song" onClick={() => {}}>
                 <FastRewindRounded fontSize="large" htmlColor={mainIconColor} />
               </IconButton>
               <IconButton
@@ -245,7 +245,7 @@ const MusicPlayerSlider = () => {
                   <PauseRounded sx={{ fontSize: '3rem' }} htmlColor={mainIconColor} />
                 )}
               </IconButton>
-              <IconButton aria-label="next song">
+              <IconButton aria-label="next song" onClick={() => {}}>
                 <FastForwardRounded fontSize="large" htmlColor={mainIconColor} />
               </IconButton>
             </Box>
