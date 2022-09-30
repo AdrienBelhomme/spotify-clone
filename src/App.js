@@ -1,4 +1,3 @@
-import React from 'react';
 import { CssBaseline, useMediaQuery } from '@mui/material';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 

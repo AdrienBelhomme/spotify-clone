@@ -13,6 +13,11 @@ const categories = [
   { label: 'TopChart', value: 'topchart' },
 ];
 
+const genre = [
+  { label: 'Pop', value: 'POP' },
+  { label: 'Dance', value: 'DANCE' },
+];
+
 const Sidebar = () => {
   const theme = useTheme();
   return (

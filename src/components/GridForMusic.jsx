@@ -25,7 +25,7 @@ const GridForGenre = (props) => {
             md={4}
             lg={3}
             xl={3}
-            sx={{ display: 'flex' }}
+            sx={{ display: 'flex', flexDirection: 'column' }}
           >
             {data.slice(0, 5).map((countrymap, i) => {
               return <CardMusic key={i} data={data} country={countrymap.name} index={i} />;
