@@ -1,7 +1,5 @@
 import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
+import { Box, Paper, Grid } from '@mui/material';
 
 const Item = styled(Paper)(({ theme }) => {
   return {
@@ -32,8 +30,8 @@ const CardAlbum = ({ song }) => {
         >
           <Item>
             <img
-              alt="song_img"
               src={song.images?.coverart}
+              alt="song_img"
               loading="lazy"
               width="180px"
               height="180px"
