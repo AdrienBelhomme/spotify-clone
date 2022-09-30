@@ -2,8 +2,6 @@ import { CssBaseline, useMediaQuery } from '@mui/material';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
 import { Navbar,
-  Sidebar,
-  Search,
   Home,
   Albums,
   Artists,

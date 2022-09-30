@@ -1,9 +1,7 @@
 import { styled } from '@mui/material/styles';
-import { Box, CircularProgress, IconButton, Paper } from '@mui/material';
+import { IconButton, Paper } from '@mui/material';
 import { PlayCircleOutline } from '@mui/icons-material';
-import { useDispatch, useSelector } from 'react-redux';
-import { topCountries } from './countryList';
-import { useGetWorldChartsByCountryQuery } from '../services/shazam.js';
+import { useDispatch } from 'react-redux';
 import { selectGenre } from '../features/currentGenre.js';
 
 const Item = styled(Paper)(({ theme }) => {
@@ -22,7 +20,7 @@ const Item = styled(Paper)(({ theme }) => {
 
 const CardCountry = (props) => {
   const { data, countryName, countryCode, index } = props;
-  const countryData = topCountries;
+
   const dispatch = useDispatch();
 
   // const { allCountryData, isFetching } = useGetWorldChartsByCountryQuery(countryData === null || undefined ? 'FR' : countryData[0].code);

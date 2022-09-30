@@ -20,7 +20,7 @@ const genre = [
   { label: 'Dance', value: 'DANCE' },
 ];
 
-const Sidebar = ({ setMobileOpen }) => {
+const Sidebar = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
 

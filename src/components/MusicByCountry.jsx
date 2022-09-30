@@ -1,23 +1,20 @@
 import { Autocomplete, Box, CircularProgress, TextField, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+// import { useDispatch, useSelector } from 'react-redux';
 import { useGetWorldChartsByCountryQuery } from '../services/shazam.js';
 
 import shazamList from './countryList.js';
 import GridForGenre from './GridForGenre.jsx';
 import GridForMusic from './GridForMusic.jsx';
-import { selectGenre } from '../features/currentGenre.js';
 
 const MusicByCountry = () => {
   const [inputValue, setInputValue] = useState(shazamList[17].name);
   const [dataCountry, setDataCountry] = useState(shazamList[17]);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const { countryName } = useSelector((state) => { return state.currentGenre; });
+  /* const { countryName } = useSelector((state) => { return state.currentGenre; });
   const { countryCode } = useSelector((state) => { return state.currentGenre; });
-  const { countryCodeAndName } = useSelector((state) => { return state.currentGenre; });
-
-  console.log(countryCodeAndName);
+  const { countryCodeAndName } = useSelector((state) => { return state.currentGenre; }); */
 
   const { data, isFetching, error } = useGetWorldChartsByCountryQuery(dataCountry === null || undefined ? 'FR' : dataCountry.code);
 
