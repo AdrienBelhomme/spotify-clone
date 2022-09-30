@@ -7,4 +7,5 @@ export default configureStore({
     [shazamApi.reducerPath]: shazamApi.reducer,
     player: playerReducer,
   },
+  middleware: (getDefaultMiddleware) => { return getDefaultMiddleware().concat(shazamApi.middleware); },
 });

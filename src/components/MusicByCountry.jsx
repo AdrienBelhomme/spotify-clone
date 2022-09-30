@@ -1,5 +1,7 @@
 import { Autocomplete, Box, CircularProgress, TextField, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectGenre } from '../features/currentGenre.js';
 import { useGetWorldChartsByCountryQuery } from '../services/shazam.js';
 
 import shazamList from './countryList.js';
@@ -9,6 +11,20 @@ import GridForMusic from './GridForMusic.jsx';
 const MusicByCountry = () => {
   const [inputValue, setInputValue] = useState(shazamList[17].name);
   const [dataCountry, setDataCountry] = useState(shazamList[17]);
+  const dispatch = useDispatch();
+
+  const updateCountry = useSelector((state) => {
+    return state.currentGenre.countryCodeAndName;
+  });
+
+  useEffect(() => {
+    console.log(updateCountry);
+    setDataCountry(updateCountry);
+  }, [updateCountry]);
+
+  /* const { countryName } = useSelector((state) => { return state.currentGenre; });
+  const { countryCode } = useSelector((state) => { return state.currentGenre; });
+  const { countryCodeAndName } = useSelector((state) => { return state.currentGenre; }); */
 
   const { data, isFetching, error } = useGetWorldChartsByCountryQuery(dataCountry === null || undefined ? 'FR' : dataCountry.code);
 
@@ -37,6 +53,7 @@ const MusicByCountry = () => {
         sx={{ width: 300 }}
         value={dataCountry}
         onChange={(event, newValue) => {
+          console.log(newValue);
           setDataCountry(newValue);
         }}
         inputValue={inputValue}

@@ -13,6 +13,12 @@ const categories = [
   { label: 'TopChart', value: 'topchart' },
 ];
 
+// eslint-disable-next-line no-unused-vars
+const genre = [
+  { label: 'Pop', value: 'POP' },
+  { label: 'Dance', value: 'DANCE' },
+];
+
 const Sidebar = () => {
   const theme = useTheme();
   return (

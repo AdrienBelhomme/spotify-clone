@@ -11,37 +11,42 @@ const Item = styled(Paper)(({ theme }) => {
     color: theme.palette.text.secondary,
     borderRadius: '12px',
     background: 'transparent',
-    border: '1px solid rgba(246, 129, 30, 0.25)',
-    marginRight: '4%',
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
   };
 });
 
 const CardCountry = (props) => {
   const { data, index } = props;
 
-  console.log(data);
+  const selectCountry = (i) => {
+    console.log(data[i]?.hub?.actions[1]?.uri);
+  };
 
   return (
-    <div>
+    <div style={{ minWidth: '500px' }}>
+      {/* chart's rank */}
 
-      <h3 style={{ textAlign: 'left', color: '#2E3271', fontWeight: '600', fontSize: '16px', margin: '12px 0',
-      }}
-      >
-        {index + 1}
-      </h3>
-
+      {/* Card Component */}
       <Item>
-        <div style={{ position: 'relative' }}>
+        <h3 style={{ width: '30px', marginRight: '15px', textAlign: 'left', color: '#2E3271', fontWeight: '600', fontSize: '16px', margin: '12px 0',
+        }}
+        >
+          {index + 1}
+        </h3>
+        <div style={{ position: 'relative', display: 'flex' }}>
           <img
             src={`${data[index].images.background}`}
             srcSet={`${data[index].images.background}`}
             alt={`${data[index].title}-cover`}
             loading="lazy"
-            width="180px"
-            height="180px"
+            width="120px"
+            height="auto"
             style={{ borderRadius: '15px' }}
           />
           <IconButton
+            onClick={() => { return selectCountry(index); }}
             aria-label="play"
             variant="soft"
             size="large"
@@ -56,15 +61,16 @@ const CardCountry = (props) => {
           </IconButton>
 
         </div>
-
-        <h3 style={{ textAlign: 'left', color: '#2E3271', fontWeight: '600', fontSize: '16px', margin: '12px 0',
-        }}
-        >
-          {data[index].title}
-        </h3>
-        <h4 style={{ margin: 0, textAlign: 'left', color: 'rgba(124, 141, 181, 0.75)', fontSize: '14px', fontWeight: '400' }}>
-          {data[index].subtitle}
-        </h4>
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <h3 style={{ textAlign: 'left', color: '#2E3271', fontWeight: '600', fontSize: '16px', margin: '12px 0',
+          }}
+          >
+            {data[index].title}
+          </h3>
+          <h4 style={{ margin: 0, textAlign: 'left', color: 'rgba(124, 141, 181, 0.75)', fontSize: '14px', fontWeight: '400' }}>
+            {data[index].subtitle}
+          </h4>
+        </div>
 
       </Item>
     </div>

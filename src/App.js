@@ -1,8 +1,11 @@
-import React from 'react';
 import { CssBaseline, useMediaQuery } from '@mui/material';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
-import { Home, Albums, Navbar, Artists, TopCharts, Player } from './components';
+import { Navbar, Home,
+  Albums,
+  Artists,
+  TopCharts,
+  Player } from './components';
 import MusicByCountry from './components/MusicByCountry';
 import './App.css';
 
