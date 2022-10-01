@@ -38,6 +38,7 @@ const MusicByCountry = () => {
   }
 
   if (error) {
+    console.log(error);
     return (
       <Typography>
         unknow error

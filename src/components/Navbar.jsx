@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { AppBar, Toolbar, Box, Drawer, useMediaQuery, IconButton } from '@mui/material';
-import { Brightness4, Brightness7, Menu } from '@mui/icons-material';
+import { Menu, DarkMode, LightMode } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
 
 import Sidebar from './Sidebar';
@@ -19,7 +19,7 @@ const Navbar = () => {
     <>
       <AppBar
         position="fixed"
-        style={{ display: 'flex', background: 'transparent', boxShadow: '0px 7px 7px white' }}
+        style={{ display: 'flex', boxShadow: '0px 7px 7px white' }}
         sx={{ color: theme.palette.secondary.main }}
       >
 
@@ -50,8 +50,8 @@ const Navbar = () => {
           </IconButton>
           )}
           {!isMobile && <Search />}
-          <IconButton color="inherit" sx={{ ml: 1 }} onClick={colorMode.toggleColorMode}>
-            {theme.palette.mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
+          <IconButton color="inherit" sx={{ ml: 1 }} style={{ fontSize: 'large' }} onClick={colorMode.toggleColorMode}>
+            {theme.palette.mode === 'dark' ? <DarkMode /> : <LightMode />}
           </IconButton>
           {isMobile && <Search />}
         </Toolbar>
