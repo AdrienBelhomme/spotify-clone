@@ -43,17 +43,16 @@ const Widget = styled('div')(({ theme }) => {
     display: 'flex',
     justifyContent: 'space-between',
     padding: 10,
-    borderTopRightRadius: 30,
-    borderTopLeftRadius: 30,
+    // borderTopRightRadius: 30,
+    // borderTopLeftRadius: 30,
     height: 100,
     left: 0,
     right: 0,
     maxWidth: '100%',
     margin: 'auto',
     position: 'relative',
-    zIndex: 9999,
     backgroundColor:
-    theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.4)',
+    theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.6)' : 'white',
     backdropFilter: 'blur(40px)',
   };
 });
@@ -95,7 +94,11 @@ const MusicPlayerSlider = () => {
   return (
     <Box>
       {!isMobile ? (
-        <Box sx={{ width: '100%', overflow: 'hidden' }}>
+        <Box sx={{ width: '100%',
+          overflow: 'hidden',
+          boxShadow: '10px 0px 30px #bf0bcc',
+        }}
+        >
           <Widget>
             <Box sx={{ alignItems: 'center', display: 'flex' }}>
               <CoverImage>
@@ -219,7 +222,7 @@ const MusicPlayerSlider = () => {
         </Box>
       ) : (
         <Box>
-          <Widget style={{ overflow: 'hidden', display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', height: '100px', padding: '10px' }}>
+          <Widget style={{ overflow: 'hidden', display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', height: '100px', padding: '10px', boxShadow: '10px 0px 35px #bf0bcc' }}>
             <CoverImage>
               <img
                 alt="can't win - Chilling Sunday"

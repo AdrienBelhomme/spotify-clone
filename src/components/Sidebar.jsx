@@ -39,7 +39,7 @@ const Sidebar = () => {
               color="inherit"
               to="/"
               key={value}
-              style={{ textDecoration: 'none', color: theme.palette.secondary.main }}
+              style={{ textDecoration: 'none', color: theme.palette.primary.main }}
             >
               <ListItem onClick={() => { }}>
                 <ListItemIcon>

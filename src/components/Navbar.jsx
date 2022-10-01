@@ -19,8 +19,10 @@ const Navbar = () => {
     <>
       <AppBar
         position="fixed"
-        style={{ display: 'flex', boxShadow: '0px 7px 7px white' }}
-        sx={{ color: theme.palette.secondary.main }}
+        style={{ display: 'flex', boxShadow: '10px 0px 20px #bf0bcc' }}
+        sx={{ backgroundColor:
+    theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.6)' : 'white',
+        backdropFilter: 'blur(40px)' }}
       >
 
         <Toolbar
@@ -38,7 +40,7 @@ const Navbar = () => {
           <IconButton
             color="inherit"
             edge="start"
-            style={{ outline: 'none' }}
+            style={{ outline: 'none', color: 'black' }}
             sx={{
               marginRight: theme.spacing(2),
               [theme.breakpoints.up('sm')]:
@@ -51,7 +53,7 @@ const Navbar = () => {
           )}
           {!isMobile && <Search />}
           <IconButton color="inherit" sx={{ ml: 1 }} style={{ fontSize: 'large' }} onClick={colorMode.toggleColorMode}>
-            {theme.palette.mode === 'dark' ? <DarkMode /> : <LightMode />}
+            {theme.palette.mode === 'dark' ? <DarkMode style={{ color: '#bf0bcc' }} /> : <LightMode style={{ color: 'black' }} />}
           </IconButton>
           {isMobile && <Search />}
         </Toolbar>
