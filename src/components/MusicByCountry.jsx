@@ -1,7 +1,8 @@
+/* eslint-disable no-console */
 import { Autocomplete, Box, CircularProgress, TextField, Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectGenre } from '../features/currentGenre.js';
+import { useSelector } from 'react-redux';
+// import { selectGenre } from '../features/currentGenre.js';
 import { useGetWorldChartsByCountryQuery } from '../services/shazam.js';
 
 import shazamList from './countryList.js';
@@ -11,7 +12,7 @@ import GridForMusic from './GridForMusic.jsx';
 const MusicByCountry = () => {
   const [inputValue, setInputValue] = useState(shazamList[17].name);
   const [dataCountry, setDataCountry] = useState(shazamList[17]);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const updateCountry = useSelector((state) => {
     return state.currentGenre.countryCodeAndName;
@@ -37,6 +38,7 @@ const MusicByCountry = () => {
   }
 
   if (error) {
+    console.log(error);
     return (
       <Typography>
         unknow error
