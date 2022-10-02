@@ -1,7 +1,13 @@
-const CustomizedInputBase = () => {
-  return (
-    <div style={{ color: 'white' }}>Artist</div>
-  );
-};
+import React from 'react'
 
-export default CustomizedInputBase;
+const Artists = () => {
+  const { id } = useParams();
+
+  return (
+    <div>Artists</div>
+  )
+}
+
+export default Artists
+
+export default Artists;
