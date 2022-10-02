@@ -4,7 +4,7 @@ import { useTheme } from '@mui/material/styles';
 import { useDispatch } from 'react-redux';
 
 import { selectGenre } from '../features/currentGenre';
-import { genreIcons, images } from '../assets';
+import { logoLight, logoDark } from '../assets';
 
 const categories = [
   { label: 'Home', value: 'home' },
@@ -26,11 +26,8 @@ const Sidebar = () => {
     <Box justifyContent="center">
       <Link to="/">
         <img
-
           className="App-logo"
-
           src={theme.palette.mode === 'light' ? logoLight : logoDark}
-
           alt="musicuniverselogo"
           style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', width: '100%', height: '55%', objectFit: 'cover' }}
         />
@@ -48,12 +45,12 @@ const Sidebar = () => {
             >
               <ListItem onClick={() => { }}>
                 <ListItemIcon>
-                  <img
+                  {/* <img
                     src={genreIcons[label.toLowerCase()]}
                     alt="genreimage"
                     height={40}
                     style={{ filter: theme.palette.mode === 'dark' ? 'Invert(1)' : 'dark' }}
-                  />
+                  /> */}
                 </ListItemIcon>
                 <ListItemText primary={label} />
               </ListItem>
