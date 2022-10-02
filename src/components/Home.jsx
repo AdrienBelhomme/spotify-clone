@@ -1,12 +1,7 @@
-import { Link } from 'react-router-dom';
-
 const Home = () => {
   return (
-    <div>
+    <div style={{ color: 'white' }}>
       Home
-      <Link to="./Artists/:id">Artist</Link>
-      <Link to="./Albums/:id">Albums</Link>
-      <Link to="./Topcharts">Top Charts</Link>
     </div>
   );
 };

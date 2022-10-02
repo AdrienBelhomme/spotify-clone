@@ -13,12 +13,14 @@ const categories = [
   { label: 'TopChart', value: 'topchart' },
 ];
 
+
 const genre = [
   { label: 'Pop', value: 'POP' },
   { label: 'Dance', value: 'DANCE' },
 ];
 
-const Sidebar = ({ setMobileOpen }) => {
+const Sidebar = () => {
+
   const theme = useTheme();
   const dispatch = useDispatch();
 
@@ -26,10 +28,13 @@ const Sidebar = ({ setMobileOpen }) => {
     <Box justifyContent="center">
       <Link to="/">
         <img
+
           className="App-logo"
-          src={theme.palette.mode === 'light' ? images.logoLight : images.logoDark}
+
+          src={theme.palette.mode === 'light' ? logoLight : logoDark}
+
           alt="musicuniverselogo"
-          style={{ justifyContent: 'center', display: 'flex' }}
+          style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', width: '100%', height: '55%', objectFit: 'cover' }}
         />
       </Link>
       <Divider />
@@ -38,13 +43,9 @@ const Sidebar = ({ setMobileOpen }) => {
         {categories.map(({ label, value }) => {
           return (
             <Link
+              color="inherit"
               to="/"
               key={value}
-              sx={{
-                '&:hover': {
-                  backgroundColor: 'blue',
-                },
-              }}
               style={{ textDecoration: 'none', color: theme.palette.secondary.main }}
             >
               <ListItem onClick={() => { }}>
@@ -53,7 +54,7 @@ const Sidebar = ({ setMobileOpen }) => {
                     src={genreIcons[label.toLowerCase()]}
                     alt="genreimage"
                     height={40}
-                    sx={{ filter: theme.palette.mode === 'dark' ? 'Invert(1)' : 'dark' }}
+                    style={{ filter: theme.palette.mode === 'dark' ? 'Invert(1)' : 'dark' }}
                   />
                 </ListItemIcon>
                 <ListItemText primary={label} />
