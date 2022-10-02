@@ -3,8 +3,7 @@ import { AppBar, Toolbar, Box, Drawer, useMediaQuery, IconButton } from '@mui/ma
 import { Brightness4, Brightness7, Menu } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
 
-import Sidebar from './Sidebar';
-import Search from './Search';
+import { Sidebar, Search } from '.';
 
 const drawerWidth = '200px';
 const Navbar = () => {

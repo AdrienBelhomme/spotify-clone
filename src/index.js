@@ -25,6 +25,6 @@ root.render(
   <ThemeProvider theme={theme}>
     <Provider store={store}>
       <App />
-    </Provider>,
+    </Provider>
   </ThemeProvider>,
 );
