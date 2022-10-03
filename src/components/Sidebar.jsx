@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import logoLight from '../assets/images/Music_UNIVERSE__3_-removebg-preview.png';
 import logoDark from '../assets/images/Music_UNIVERSE__2_-removebg-preview.png';
-import genreIcons from '../assets/genres';
+import { useDispatch } from 'react-redux';
+
+import { selectGenre } from '../features/currentGenre';
+import { genreIcons, images } from '../assets';
 
 const categories = [
   { label: 'Home', value: 'home' },
@@ -24,7 +27,11 @@ const Sidebar = () => {
     <Box justifyContent="center">
       <Link to="/">
         <img
+
+          className="App-logo"
+
           src={theme.palette.mode === 'light' ? logoLight : logoDark}
+
           alt="musicuniverselogo"
           style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', width: '100%', height: '55%', objectFit: 'cover' }}
         />
