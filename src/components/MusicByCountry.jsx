@@ -22,10 +22,6 @@ const MusicByCountry = () => {
     setDataCountry(updateCountry);
   }, [updateCountry]);
 
-  /* const { countryName } = useSelector((state) => { return state.currentGenre; });
-  const { countryCode } = useSelector((state) => { return state.currentGenre; });
-  const { countryCodeAndName } = useSelector((state) => { return state.currentGenre; }); */
-
   const { data, isFetching, error } = useGetWorldChartsByCountryQuery(dataCountry === null || undefined ? 'FR' : dataCountry.code);
 
   if (isFetching) {
@@ -47,10 +43,8 @@ const MusicByCountry = () => {
   return (
     <div>
 
-      <GridForGenre data={data} country={inputValue} />
-
       <Autocomplete
-        sx={{ width: 300 }}
+        sx={{ width: 300, margin: '2% auto' }}
         value={dataCountry}
         onChange={(event, newValue) => {
           console.log(newValue);
@@ -65,7 +59,7 @@ const MusicByCountry = () => {
         getOptionLabel={(option) => { return option.name; }}
         renderOption={(props, country) => {
           return (
-            // eslint-disable-next-line react/jsx-props-no-spreading
+          // eslint-disable-next-line react/jsx-props-no-spreading
             <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
               <img
                 loading="lazy"
@@ -80,11 +74,12 @@ const MusicByCountry = () => {
         }}
         renderInput={(params) => {
           return (
-            // eslint-disable-next-line react/jsx-props-no-spreading
+          // eslint-disable-next-line react/jsx-props-no-spreading
             <TextField {...params} label="Select a country" />
           );
         }}
       />
+      <GridForGenre data={data} country={inputValue} />
 
       <GridForMusic data={data} country={inputValue} />
 

@@ -1,5 +1,6 @@
 import { Box, Grid } from '@mui/material';
 import CardMusic from './CardMusic';
+import TopOneCard from './TopOneCard';
 
 const GridForGenre = (props) => {
   const { data, country } = props;
@@ -20,18 +21,14 @@ const GridForGenre = (props) => {
         <Grid container sx={{ display: 'flex' }}>
           <Grid
             item
-            xs={6}
-            sm={4}
-            md={4}
-            lg={3}
-            xl={3}
             sx={{ display: 'flex', flexDirection: 'column' }}
           >
-            {data.slice(0, 5).map((countrymap, i) => {
+            {data.slice(0, 10).map((countrymap, i) => {
               return <CardMusic key={i} data={data} country={countrymap.name} index={i} />;
             })}
 
           </Grid>
+          <TopOneCard data={data} country={country} />
         </Grid>
       </Box>
 

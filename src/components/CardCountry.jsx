@@ -14,7 +14,7 @@ const Item = styled(Paper)(({ theme }) => {
     color: theme.palette.text.secondary,
     borderRadius: '12px',
     background: 'transparent',
-    border: '1px solid rgba(246, 129, 30, 0.25)',
+    boxShadow: 'rgb(0 0 0 / 20%) 0px 25px 20px -20px',
   };
 });
 
@@ -23,21 +23,8 @@ const CardCountry = (props) => {
   const [countryData, setCountryData] = useState({ name: 'France', code: 'FR' });
   const dispatch = useDispatch();
 
-  /*   const multipleQueries = () => {
-    countryCode.map((code, index) => {
-      const { dataCountry, isFetching } = useGetWorldChartsByCountryQuery(code);
-    });
-  }; */
-
-  /* if (isFetching) {
-    return (
-      <Box display="flex" justifyContent="center">
-        <CircularProgress size="4rem" />
-      </Box>
-    );
-  } */
   return (
-    <div style={{ marginRight: '10%' }}>
+    <div style={{ marginRight: '3%' }}>
 
       <Item>
         <div style={{ position: 'relative' }}>
@@ -62,7 +49,7 @@ const CardCountry = (props) => {
               color: 'white',
             }}
           >
-            <PlayCircleOutline fontSize="inherit" />
+            <PlayCircleOutline sx={{ fontSize: '2.2rem' }} />
           </IconButton>
         </div>
 

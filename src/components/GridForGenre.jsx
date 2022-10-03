@@ -21,11 +21,6 @@ const GridForGenre = (props) => {
         <Grid container sx={{ display: 'flex' }}>
           <Grid
             item
-            xs={6}
-            sm={4}
-            md={4}
-            lg={3}
-            xl={3}
             sx={{ display: 'flex' }}
           >
             {topCountries.map((country, i) => {

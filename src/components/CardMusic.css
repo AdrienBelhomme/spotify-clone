@@ -1,0 +1,46 @@
+.filter-img {
+    filter: drop-shadow(0px 15px 30px rgba(0, 0, 0, 0.16));
+    margin-left: -5%;
+}
+
+
+.card-container {
+    box-shadow: 0px 25px 40px rgba(0, 0, 0, 0.02)!important;
+    background: #ffffff80!important;
+    height: 120px;
+    margin-left: 5%;
+}
+
+.card {
+    min-width: 700px; 
+    display: flex; 
+    width: 700px; 
+    margin-bottom: 7%; 
+    align-items: center;
+}
+
+.card-container:hover {
+    background: #f8f8f8!important;
+    border-radius: 8px;
+}
+
+
+.action {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+}
+
+.img {
+    position: relative;
+    display: flex; 
+    margin-right: 5%;
+}
+
+.play-button {
+    display: none;
+}
+
+.card-container:hover .play-button{
+    display: block;
+}
