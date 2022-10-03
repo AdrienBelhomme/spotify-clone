@@ -3,13 +3,17 @@ import { Box, Button, CircularProgress, Grid,Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { ArrowBack } from '@mui/icons-material';
 
-import { useGetArtistDetailsQuery } from '../services/shazam.js';
+import useStyles from './styles'
+import { useGetArtistDetailsQuery, useGetRelatedSongsQuery } from '../services/shazam.js';
 
 const Artists = () => {
  const { id } = useParams();
+ const classes = useStyles();
+ const page = 1;
 
  const { data, isFetching, error } = useGetArtistDetailsQuery(id);
-
+ const { data: songs } = useGetRelatedSongsQuery({ id, page })
+ 
  if (isFetching) {
   return (
     <Box display="flex" justifyContent="center">
@@ -35,9 +39,11 @@ if (error) {
     <Grid item lg={5} xl={4}>
     <img
     className={classes.image}
-    src={''}
-    alt={data.name}
+  
 />
+    </Grid>
+    <Grid item lg={7} xl={8} style={{display: 'flex', justifyContent: 'center', flexDirection: 'column'}}>
+   
    </Grid>
    </Grid>
     </>

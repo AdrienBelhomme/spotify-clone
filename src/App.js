@@ -1,11 +1,14 @@
 import { CssBaseline, useMediaQuery } from '@mui/material';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
+import useStyles from './styles';
+
 import { Navbar, Home, Albums, Artists, TopCharts, Player } from './components';
 import MusicByCountry from './components/MusicByCountry';
 import './App.css';
 
 const App = () => {
+  const classes = useStyles();
   const isMobile = useMediaQuery('(max-width:600px)');
   return (
     <BrowserRouter>
