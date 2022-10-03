@@ -7,10 +7,10 @@ import logoDark from '../assets/images/Music_UNIVERSE__2_-removebg-preview.png';
 import genreIcons from '../assets/genres';
 
 const categories = [
-  { label: 'Home', value: 'home' },
-  { label: 'Album', value: 'album' },
-  { label: 'Artist', value: 'artist' },
-  { label: 'TopChart', value: 'topchart' },
+  { label: 'Home', to: '/', value: 'home' },
+  { label: 'Album', to: '/albums/:id', value: 'album' },
+  { label: 'Artist', to: '/artists/:id', value: 'artist' },
+  { label: 'TopChart', to: '/country', value: 'topchart' },
 ];
 
 // eslint-disable-next-line no-unused-vars
@@ -33,24 +33,24 @@ const Sidebar = () => {
       <Divider />
       <List>
         <ListSubheader> Browse Music UNIVERSE</ListSubheader>
-        {categories.map(({ label, value }) => {
+        {categories.map((item) => {
           return (
             <Link
               color="inherit"
-              to="/"
-              key={value}
+              to={item.to}
+              key={item.value}
               style={{ textDecoration: 'none', color: theme.palette.primary.main }}
             >
               <ListItem onClick={() => { }}>
                 <ListItemIcon>
                   <img
-                    src={genreIcons[label.toLowerCase()]}
+                    src={genreIcons[item.label.toLowerCase()]}
                     alt="genreimage"
                     height={40}
                     // style={{ filter: theme.palette.mode === 'dark' && 'Invert(1)' }}
                   />
                 </ListItemIcon>
-                <ListItemText primary={label} />
+                <ListItemText primary={item.label} />
               </ListItem>
             </Link>
           );

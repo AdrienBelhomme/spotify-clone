@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+
 import { shazamApi } from '../services/shazam';
 import playerReducer from '../features/playerSlice';
 import genreReducer from '../features/currentGenre';

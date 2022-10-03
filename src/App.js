@@ -25,15 +25,17 @@ const App = () => {
           </div>
         </main>
       </div>
-      {isMobile ? (
-        <div style={{ position: 'fixed', bottom: '0px', width: '100%', left: '0px', right: '0px', padding: '5px' }}>
-          <Player />
-        </div>
-      ) : (
-        <div style={{ position: 'fixed', right: '0px', bottom: '0px', width: '100%', left: '0px', zIndex: 2 }}>
-          <Player />
-        </div>
-      ) }
+      <div style={{
+        position: 'fixed',
+        bottom: '0px',
+        width: '100%',
+        left: '0px',
+        right: '0px',
+        padding: isMobile ? '5px' : 0,
+        zIndex: isMobile ? 0 : 2 }}
+      >
+        <Player />
+      </div>
     </BrowserRouter>
   );
 };

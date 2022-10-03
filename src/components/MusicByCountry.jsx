@@ -1,9 +1,10 @@
 /* eslint-disable no-console */
-import { Autocomplete, Box, CircularProgress, TextField, Typography } from '@mui/material';
+import { Autocomplete, Box, TextField, Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 // import { selectGenre } from '../features/currentGenre.js';
 import { useGetWorldChartsByCountryQuery } from '../services/shazam.js';
+import { Loader } from './index.js';
 
 import shazamList from './countryList.js';
 import GridForGenre from './GridForGenre.jsx';
@@ -19,7 +20,7 @@ const MusicByCountry = () => {
   });
 
   useEffect(() => {
-    console.log(updateCountry);
+    // console.log(updateCountry);
     setDataCountry(updateCountry);
   }, [updateCountry]);
 
@@ -32,7 +33,7 @@ const MusicByCountry = () => {
   if (isFetching) {
     return (
       <Box display="flex" justifyContent="center">
-        <CircularProgress size="4rem" />
+        <Loader />
       </Box>
     );
   }
@@ -55,7 +56,7 @@ const MusicByCountry = () => {
         sx={{ width: 300 }}
         value={dataCountry}
         onChange={(event, newValue) => {
-          console.log(newValue);
+        //   console.log(newValue);
           setDataCountry(newValue);
         }}
         inputValue={inputValue}
