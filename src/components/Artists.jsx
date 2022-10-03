@@ -30,9 +30,18 @@ if (error) {
 }
 
   return (
-    <div>Artists {id}
-    </div>
-  )
-}
+    <>
+    <Grid container spacing={3}>
+    <Grid item lg={5} xl={4}>
+    <img
+    className={classes.image}
+    src={''}
+    alt={data.name}
+/>
+   </Grid>
+   </Grid>
+    </>
+  );
+};
 
 export default Artists
