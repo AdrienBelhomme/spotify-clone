@@ -24,18 +24,18 @@ if (error) {
   return (
     <Box display="flex" justifyContent="center" alignItems="center">
     <Button startIcon={<ArrowBack />} onClick={() => goBack()} color="primary">
-    Go Back
+    Go Back 
       </Button>
       </Box>
   );
 }
 
   return (
-    <>
+    <React.Fragment>
     <Grid container spacing={3}>
     <Grid item lg={5} xl={4}>
     <img
-   src={`https://is3-ssl.mzstatic.com/image/thumb/Features125/v4/02/1f/ea/021fea7b-9acd-3dd9-c833-68781a5c764a/mza_12805048796106822393.png/{w}x{h}bb.jpg`}
+   src={``}
    alt=""
 />
     </Grid>
@@ -49,15 +49,10 @@ if (error) {
    <Typography variant="body2" align="justify" paragraph>
     {data?.biography || 'Sorry, no bigraphy yet ...'}
    </Typography>
-   <Box marginTop="2rem' display="flex" justifyContent="space-around">
-   <Button variant="contained" color="primary" target="_blank" href={`https://is3-ssl.mzstatic.com/name/${data?.}`}>
-     Shazam
-   </Button>
-   <Button startIcon={<ArrowBack />} onClick={() => 
-   </Box>
    </Grid>
    </Grid>
     </>
+    </React.Fragment>
   );
 };
 
