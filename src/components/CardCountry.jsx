@@ -3,6 +3,7 @@ import { IconButton, Paper } from '@mui/material';
 import { PlayCircleOutline } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
+
 import { selectGenre } from '../features/currentGenre.js';
 
 const Item = styled(Paper)(({ theme }) => {
@@ -24,7 +25,8 @@ const CardCountry = (props) => {
   const dispatch = useDispatch();
 
   return (
-    <div style={{ marginRight: '3%' }}>
+
+    <div style={{ marginRight: '2%' }}>
 
       <Item>
         <div style={{ position: 'relative' }}>
@@ -59,10 +61,11 @@ const CardCountry = (props) => {
           {countryName}
         </h3>
         <h4 style={{ margin: 0, textAlign: 'left', color: 'rgba(124, 141, 181, 0.75)', fontSize: '14px', fontWeight: '400' }}>
-          Top 10
+          Top 20
         </h4>
       </Item>
     </div>
+
   );
 };
 
