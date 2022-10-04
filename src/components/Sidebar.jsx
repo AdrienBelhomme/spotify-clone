@@ -2,8 +2,10 @@ import React from 'react';
 import { List, ListItem, ListItemIcon, ListItemText, ListSubheader, Divider, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
-import logoLight from '../assets/images/Music_UNIVERSE__3_-removebg-preview.png';
-import logoDark from '../assets/images/Music_UNIVERSE__2_-removebg-preview.png';
+// import { useDispatch } from 'react-redux';
+
+// import { selectGenre } from '../features/currentGenre';
+import { logoLight, logoDark } from '../assets/index';
 import genreIcons from '../assets/genres';
 
 const categories = [
@@ -25,7 +27,8 @@ const Sidebar = () => {
     <Box justifyContent="center">
       <Link to="/">
         <img
-          src={theme.palette.mode === 'light' ? logoLight : logoDark}
+          className="App-logo"
+          src={theme.palette.mode === 'light' ? logoDark : logoLight}
           alt="musicuniverselogo"
           style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', width: '100%', height: '55%', objectFit: 'cover' }}
         />
