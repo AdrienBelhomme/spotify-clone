@@ -9,7 +9,7 @@ const App = () => {
   const isMobile = useMediaQuery('(max-width:600px)');
   return (
     <BrowserRouter>
-      <div style={{ position: 'relative', display: 'flex', height: '100vh' }}>
+      <div style={{ display: 'flex', height: '100%', width: 'calc(100% - 200px)' }}>
         <CssBaseline />
         <Navbar />
         <main style={{ flexGrow: '1', padding: '2em', marginTop: '60px', width: '100%' }}>
@@ -23,17 +23,17 @@ const App = () => {
               <Route exact path="*" element={<h1>PAGE NOT FOUND 404</h1>} />
             </Routes>
           </div>
-          {isMobile ? (
-            <div style={{ position: 'absolute', bottom: '0px', width: '100%', left: '0px', right: '0px', padding: '5px' }}>
-              <Player />
-            </div>
-          ) : (
-            <div style={{ position: 'absolute', right: '0px', bottom: '0px' }}>
-              <Player />
-            </div>
-          ) }
         </main>
       </div>
+      {isMobile ? (
+        <div style={{ position: 'fixed', bottom: '0px', width: '100%', left: '0px', right: '0px', padding: '5px' }}>
+          <Player />
+        </div>
+      ) : (
+        <div style={{ position: 'fixed', right: '0px', bottom: '0px', width: '100%', left: '0px', zIndex: 2 }}>
+          <Player />
+        </div>
+      ) }
     </BrowserRouter>
   );
 };

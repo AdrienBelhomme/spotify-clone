@@ -27,11 +27,8 @@ const Sidebar = () => {
     <Box justifyContent="center">
       <Link to="/">
         <img
-
           className="App-logo"
-
           src={theme.palette.mode === 'light' ? logoLight : logoDark}
-
           alt="musicuniverselogo"
           style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', width: '100%', height: '55%', objectFit: 'cover' }}
         />
@@ -45,11 +42,11 @@ const Sidebar = () => {
               color="inherit"
               to="/"
               key={value}
-              style={{ textDecoration: 'none', color: theme.palette.secondary.main }}
+              style={{ textDecoration: 'none', color: theme.palette.primary.main }}
             >
               <ListItem onClick={() => { }}>
                 <ListItemIcon>
-                  <img
+                  /* <img
                     src={genreIcons[label.toLowerCase()]}
                     alt="genreimage"
                     height={40}
