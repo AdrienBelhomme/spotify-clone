@@ -2,7 +2,6 @@ import { styled } from '@mui/material/styles';
 import { IconButton, Paper } from '@mui/material';
 import { PlayCircleOutline } from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
-// import { useState } from 'react';
 import { selectGenre } from '../features/currentGenre.js';
 
 const Item = styled(Paper)(({ theme }) => {

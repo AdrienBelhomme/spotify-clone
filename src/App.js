@@ -8,7 +8,7 @@ const App = () => {
   const isMobile = useMediaQuery('(max-width:600px)');
   return (
     <BrowserRouter>
-      <div style={{ display: 'flex', height: '100%', width: 'calc(100% - 200px)' }}>
+      <div style={{ postion: 'relative', display: 'flex', height: '100%', width: 'calc(100% - 200px)', zIndex: 1 }}>
         <CssBaseline />
         <Navbar />
         <main style={{ flexGrow: '1', padding: '2em', marginTop: '60px', width: '100%' }}>
@@ -24,16 +24,21 @@ const App = () => {
           </div>
         </main>
       </div>
-      <div style={{
+      {/* <div style={{
         position: 'fixed',
         bottom: '0px',
         width: '100%',
         left: '0px',
         right: '0px',
         padding: isMobile ? '5px' : 0,
-        zIndex: isMobile ? 0 : 2 }}
+        zIndex: 10 }}
       >
         <Player />
+      </div> */}
+      <div style={{ position: 'fixed', bottom: '0px', width: '100%', left: '0px', right: '0px', padding: isMobile ? '5px' : 0, zIndex: 5000 }}>
+
+        <Player />
+
       </div>
     </BrowserRouter>
   );
