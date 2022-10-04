@@ -1,13 +1,7 @@
 import { CssBaseline, useMediaQuery } from '@mui/material';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
-import { Navbar,
-  Home,
-  Albums,
-  Artists,
-  TopCharts,
-  Player } from './components';
-import MusicByCountry from './components/MusicByCountry';
+import { Navbar, Home, Albums, Artists, TopCharts, Player, MusicByCountry } from './components';
 import './App.css';
 
 const App = () => {
@@ -28,16 +22,18 @@ const App = () => {
               <Route exact path="*" element={<h1>PAGE NOT FOUND 404</h1>} />
             </Routes>
           </div>
-          {isMobile ? (
-            <div style={{ position: 'absolute', right: '0px', bottom: '0px', width: '100%' }}>
-              <Player />
-            </div>
-          ) : (
-            <div style={{ position: 'absolute', right: '0px', bottom: '0px' }}>
-              <Player />
-            </div>
-          ) }
         </main>
+      </div>
+      <div style={{
+        position: 'fixed',
+        bottom: '0px',
+        width: '100%',
+        left: '0px',
+        right: '0px',
+        padding: isMobile ? '5px' : 0,
+        zIndex: isMobile ? 0 : 2 }}
+      >
+        <Player />
       </div>
     </BrowserRouter>
   );

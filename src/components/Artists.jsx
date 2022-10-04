@@ -1,6 +1,6 @@
 const CustomizedInputBase = () => {
   return (
-    <div style={{ color: 'white' }}>Artist</div>
+    <div>Artist</div>
   );
 };
 

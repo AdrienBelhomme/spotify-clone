@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { styled } from '@mui/material/styles';
 import { IconButton, Paper } from '@mui/material';
 import { Favorite, PlayCircleOutline, Chat } from '@mui/icons-material';

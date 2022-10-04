@@ -1,9 +1,8 @@
 import { styled } from '@mui/material/styles';
 import { IconButton, Paper } from '@mui/material';
 import { PlayCircleOutline } from '@mui/icons-material';
-import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
-
+import { useDispatch } from 'react-redux';
+// import { useState } from 'react';
 import { selectGenre } from '../features/currentGenre.js';
 
 const Item = styled(Paper)(({ theme }) => {
@@ -21,7 +20,7 @@ const Item = styled(Paper)(({ theme }) => {
 
 const CardCountry = (props) => {
   const { data, countryName, countryCode, index } = props;
-  const [countryData, setCountryData] = useState({ name: 'France', code: 'FR' });
+  // const [countryData, setCountryData] = useState({ name: 'France', code: 'FR' });
   const dispatch = useDispatch();
 
   return (

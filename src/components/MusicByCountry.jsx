@@ -1,7 +1,10 @@
-import { Box, CircularProgress, Typography } from '@mui/material';
+/* eslint-disable no-console */
+import { Autocomplete, Box, TextField, Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useGetCountriesQuery, useGetWorldChartsByCountryQuery } from '../services/shazam.js';
+// import { selectGenre } from '../features/currentGenre.js';
+import { useGetWorldChartsByCountryQuery } from '../services/shazam.js';
+import { Loader } from './index.js';
 
 import GridForGenre from './GridForGenre.jsx';
 import GridForMusic from './GridForMusic.jsx';
@@ -59,12 +62,13 @@ const MusicByCountry = () => {
   if (isFetching) {
     return (
       <Box display="flex" justifyContent="center">
-        <CircularProgress size="4rem" />
+        <Loader />
       </Box>
     );
   }
 
   if (error) {
+    console.log(error);
     return (
       <Typography>
         unknow error
