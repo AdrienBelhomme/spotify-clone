@@ -6,6 +6,8 @@ import logoLight from '../assets/images/Music_UNIVERSE__3_-removebg-preview.png'
 import logoDark from '../assets/images/Music_UNIVERSE__2_-removebg-preview.png';
 import genreIcons from '../assets/genres';
 
+ff;
+
 const categories = [
   { label: 'Home', to: '/', value: 'home' },
   { label: 'Album', to: '/albums/:id', value: 'album' },
