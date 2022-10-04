@@ -3,11 +3,15 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { selectGenre } from '../features/currentGenre.js';
-import shazamList from './countryList.js';
 
-const CountrySelector = () => {
-  const [inputValue, setInputValue] = useState(shazamList[17].name);
-  const [dataCountry, setDataCountry] = useState(shazamList[17]);
+const CountrySelector = (props) => {
+  const { countriesList } = props;
+
+  const initialStateValue = countriesList ? countriesList[17].name : 'France';
+  const initialStateDataCountry = countriesList ? countriesList[17] : { code: 'FR', name: 'France' };
+
+  const [inputValue, setInputValue] = useState(initialStateValue);
+  const [dataCountry, setDataCountry] = useState(initialStateDataCountry);
   const dispatch = useDispatch();
 
   const updateCountry = useSelector((state) => {
@@ -32,7 +36,7 @@ const CountrySelector = () => {
         setInputValue(newInputValue);
       }}
       id="dropdown-selector"
-      options={shazamList}
+      options={countriesList}
       getOptionLabel={(option) => { return option.name; }}
       renderOption={(props, country) => {
         return (

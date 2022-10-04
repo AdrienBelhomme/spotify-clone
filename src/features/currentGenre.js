@@ -14,7 +14,6 @@ export const genre = createSlice({
   reducers: {
     selectGenre: (state, action) => {
       const { name, code } = action.payload;
-      console.log(action.payload);
       // eslint-disable-next-line no-param-reassign
       state.countryCodeAndName = { name, code };
       // eslint-disable-next-line no-param-reassign

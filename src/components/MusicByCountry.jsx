@@ -1,17 +1,42 @@
-import { Autocomplete, Box, CircularProgress, TextField, Typography } from '@mui/material';
+import { Box, CircularProgress, Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectGenre } from '../features/currentGenre.js';
-import { useGetWorldChartsByCountryQuery } from '../services/shazam.js';
+import { useSelector } from 'react-redux';
+import { useGetCountriesQuery, useGetWorldChartsByCountryQuery } from '../services/shazam.js';
 
-import shazamList from './countryList.js';
 import GridForGenre from './GridForGenre.jsx';
 import GridForMusic from './GridForMusic.jsx';
 
 const MusicByCountry = () => {
-  const [inputValue, setInputValue] = useState(shazamList[17].name);
-  const [dataCountry, setDataCountry] = useState(shazamList[17]);
-  const dispatch = useDispatch();
+  const { data: dataShazam, isFetchingShazam, errorShazam } = useGetCountriesQuery();
+
+  if (isFetchingShazam) {
+    return (
+      <Box display="flex" justifyContent="center">
+        <CircularProgress size="4rem" />
+      </Box>
+    );
+  }
+
+  if (errorShazam) {
+    return (
+      <Typography>
+        unknow error
+      </Typography>
+    );
+  }
+
+  const shazamList = !isFetchingShazam && dataShazam && dataShazam.map((country) => {
+    return {
+      name: country.name,
+      code: country.code,
+    };
+  });
+
+  const initialStateValue = !isFetchingShazam && dataShazam ? shazamList[17].name : 'France';
+  const initialStateDataCountry = !isFetchingShazam && dataShazam ? shazamList[17] : { code: 'FR', name: 'France' };
+
+  const [inputValue, setInputValue] = useState(initialStateValue);
+  const [dataCountry, setDataCountry] = useState(initialStateDataCountry);
 
   const updateCountry = useSelector((state) => {
     return state.currentGenre.countryCodeAndName;
@@ -50,7 +75,7 @@ const MusicByCountry = () => {
   return (
     <div>
 
-      <GridForGenre data={data} country={inputValue} />
+      <GridForGenre data={data} country={inputValue} countriesList={shazamList} />
 
       <GridForMusic data={data} country={inputValue} />
 
