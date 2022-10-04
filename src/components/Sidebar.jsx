@@ -2,9 +2,9 @@ import React from 'react';
 import { List, ListItem, ListItemIcon, ListItemText, ListSubheader, Divider, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
+import { useDispatch } from 'react-redux';
 import logoLight from '../assets/images/Music_UNIVERSE__3_-removebg-preview.png';
 import logoDark from '../assets/images/Music_UNIVERSE__2_-removebg-preview.png';
-import { useDispatch } from 'react-redux';
 
 import { selectGenre } from '../features/currentGenre';
 import { genreIcons, images } from '../assets';
