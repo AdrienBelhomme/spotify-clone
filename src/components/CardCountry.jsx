@@ -1,8 +1,9 @@
 import { styled } from '@mui/material/styles';
 import { IconButton, Paper } from '@mui/material';
 import { PlayCircleOutline } from '@mui/icons-material';
-import { useDispatch } from 'react-redux';
-// import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+
 import { selectGenre } from '../features/currentGenre.js';
 
 const Item = styled(Paper)(({ theme }) => {
@@ -14,7 +15,7 @@ const Item = styled(Paper)(({ theme }) => {
     color: theme.palette.text.secondary,
     borderRadius: '12px',
     background: 'transparent',
-    border: '1px solid rgba(246, 129, 30, 0.25)',
+    boxShadow: 'rgb(0 0 0 / 20%) 0px 25px 20px -20px',
   };
 });
 
@@ -23,21 +24,9 @@ const CardCountry = (props) => {
   // const [countryData, setCountryData] = useState({ name: 'France', code: 'FR' });
   const dispatch = useDispatch();
 
-  /*   const multipleQueries = () => {
-    countryCode.map((code, index) => {
-      const { dataCountry, isFetching } = useGetWorldChartsByCountryQuery(code);
-    });
-  }; */
-
-  /* if (isFetching) {
-    return (
-      <Box display="flex" justifyContent="center">
-        <CircularProgress size="4rem" />
-      </Box>
-    );
-  } */
   return (
-    <div style={{ marginRight: '10%' }}>
+
+    <div style={{ marginRight: '2%' }}>
 
       <Item>
         <div style={{ position: 'relative' }}>
@@ -62,7 +51,7 @@ const CardCountry = (props) => {
               color: 'white',
             }}
           >
-            <PlayCircleOutline fontSize="inherit" />
+            <PlayCircleOutline sx={{ fontSize: '2.2rem' }} />
           </IconButton>
         </div>
 
@@ -72,10 +61,11 @@ const CardCountry = (props) => {
           {countryName}
         </h3>
         <h4 style={{ margin: 0, textAlign: 'left', color: 'rgba(124, 141, 181, 0.75)', fontSize: '14px', fontWeight: '400' }}>
-          Top 10
+          Top 20
         </h4>
       </Item>
     </div>
+
   );
 };
 
