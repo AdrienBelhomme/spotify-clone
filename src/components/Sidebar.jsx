@@ -7,7 +7,8 @@ import logoLight from '../assets/images/Music_UNIVERSE__3_-removebg-preview.png'
 import logoDark from '../assets/images/Music_UNIVERSE__2_-removebg-preview.png';
 
 import { selectGenre } from '../features/currentGenre';
-import { genreIcons, images } from '../assets';
+import { images } from '../assets';
+import genreIcons from '../assets/genres';
 
 const categories = [
   { label: 'Home', value: 'home' },

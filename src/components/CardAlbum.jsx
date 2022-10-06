@@ -1,5 +1,6 @@
 import { styled } from '@mui/material/styles';
 import { Box, Paper, Grid } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const Item = styled(Paper)(({ theme }) => {
   return {
@@ -16,9 +17,10 @@ const Item = styled(Paper)(({ theme }) => {
 });
 
 const CardAlbum = ({ song }) => {
+  const navigate = useNavigate();
   return (
     <Box sx={{ width: '100%' }}>
-      <Grid container sx={{ display: 'flex' }}>
+      <Grid container spacing={1}>
         <Grid
           Item
           xs={6}
@@ -28,7 +30,11 @@ const CardAlbum = ({ song }) => {
           xl={3}
           sx={{ display: 'flex' }}
         >
-          <Item>
+          <Item onClick={() => {
+            navigate(`../SongDetails/${song?.key}`);
+            console.log(song?.key);
+          }}
+          >
             <img
               src={song.images?.coverart}
               alt="song_img"
@@ -45,6 +51,9 @@ const CardAlbum = ({ song }) => {
             <h4>
               {song.subtitle}
             </h4>
+            <h5>
+              {song?.key}
+            </h5>
 
           </Item>
         </Grid>

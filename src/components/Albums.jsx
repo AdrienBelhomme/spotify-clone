@@ -3,8 +3,9 @@ import { useGetWorldChartsQuery } from '../services/shazam';
 import CardAlbum from './CardAlbum';
 
 const Albums = () => {
-  const { data } = useGetWorldChartsQuery();
-  console.log(data);
+  const { data: songData } = useGetWorldChartsQuery();
+  //  console.log(data);
+  console.log(songData);
   return (
     <div>
       <Box
@@ -18,7 +19,7 @@ const Albums = () => {
         }}
       >
         <h1 style={{ marginTop: 0 }}>Albums</h1>
-        <Grid container sx={{ display: 'flex' }}>
+        <Grid container spacing={3}>
           <Grid
             item
             xs={6}
@@ -28,18 +29,16 @@ const Albums = () => {
             xl={3}
             sx={{ display: 'flex' }}
           >
-            {data?.map((song, i) => {
+            {songData?.map((song, i) => {
               return (
                 <CardAlbum
-                  songs={data}
+                  songs={songData}
                   key={song.key}
                   song={song}
                   i={i}
                 />
-
               );
             })}
-
           </Grid>
         </Grid>
       </Box>
@@ -47,4 +46,5 @@ const Albums = () => {
 
   );
 };
+
 export default Albums;
