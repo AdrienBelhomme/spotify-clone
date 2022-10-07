@@ -37,23 +37,11 @@ const MusicByCountry = () => {
   const initialStateDataCountry = !isFetchingShazam && dataShazam ? shazamList[17] : { code: 'FR', name: 'France' };
 
   const [inputValue, setInputValue] = useState(initialStateValue);
-  const [dataCountry, setDataCountry] = useState(initialStateDataCountry);
+  const [dataCountry, setDataCountry] = useState(!isFetchingShazam && dataShazam ? shazamList[17] : { code: 'FR', name: 'France' });
 
-  const updateCountry = useSelector((state) => {
-    return state.currentGenre.countryCodeAndName;
-  });
-
-  const updateCountryNameOnly = useSelector((state) => {
-    return state.currentGenre.countryName;
-  });
-
-  useEffect(() => {
-    setInputValue(updateCountryNameOnly);
-  }, [updateCountryNameOnly]);
-
-  useEffect(() => {
-    setDataCountry(updateCountry);
-  }, [updateCountry]);
+  const changeCountry = (country) => {
+    setDataCountry(country);
+  };
 
   const { data, isFetching, error } = useGetWorldChartsByCountryQuery(dataCountry === null || undefined ? 'FR' : dataCountry.code);
 
@@ -77,9 +65,9 @@ const MusicByCountry = () => {
   return (
     <div>
 
-      <GridForGenre data={data} country={inputValue} countriesList={shazamList} />
+      <GridForGenre data={data} country={dataCountry.name} countriesList={shazamList} changeCountry={changeCountry} />
 
-      <GridForMusic data={data} country={inputValue} />
+      <GridForMusic data={data} country={dataCountry.name} />
 
     </div>
 

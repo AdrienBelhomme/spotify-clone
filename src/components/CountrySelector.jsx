@@ -5,31 +5,31 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectGenre } from '../features/currentGenre.js';
 
 const CountrySelector = (props) => {
-  const { countriesList } = props;
+  let { countriesList, changeCountry, data } = props;
 
-  const initialStateValue = countriesList ? countriesList[17].name : 'France';
-  const initialStateDataCountry = countriesList ? countriesList[17] : { code: 'FR', name: 'France' };
+  if (countriesList === undefined) {
+    return countriesList = [
+      { code: 'FR', name: 'France' },
+      { code: 'US', name: 'United States' },
+    ];
+  }
 
-  const [inputValue, setInputValue] = useState(initialStateValue);
-  const [dataCountry, setDataCountry] = useState(initialStateDataCountry);
-  const dispatch = useDispatch();
+  console.log(countriesList);
 
-  const updateCountry = useSelector((state) => {
-    return state.currentGenre.countryCodeAndName;
-  });
+  const [value, setValue] = useState(countriesList ? countriesList[17].name : 'France');
+  const [inputValue, setInputValue] = useState(countriesList ? countriesList[17].name : 'France');
 
-  useEffect(() => {
-    setDataCountry(updateCountry);
-  }, [updateCountry]);
+  console.log(value);
+  console.log(inputValue);
 
   return (
 
     <Autocomplete
-      sx={{ width: 300, margin: '2% 0' }}
-      value={dataCountry}
+      sx={{ width: '300px' }}
+      value={value}
       onChange={(event, newValue) => {
-        dispatch(selectGenre({ name: newValue.name, code: newValue.code }));
-        setDataCountry(newValue);
+        // changeCountry({ name: newValue.name, code: newValue.code });
+        setValue(newValue);
       }}
       inputValue={inputValue}
       onInputChange={(event, newInputValue) => {
@@ -37,11 +37,11 @@ const CountrySelector = (props) => {
       }}
       id="dropdown-selector"
       options={countriesList}
-      getOptionLabel={(option) => { return option.name; }}
-      renderOption={(props, country) => {
+      // getOptionLabel={(option) => { return option.name; }}
+      renderOption={(prop, country) => {
         return (
         // eslint-disable-next-line react/jsx-props-no-spreading
-          <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
+          <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...prop}>
             <img
               loading="lazy"
               width="20"

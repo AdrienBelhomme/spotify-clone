@@ -1,8 +1,7 @@
 import { styled } from '@mui/material/styles';
 import { IconButton, Paper } from '@mui/material';
 import { PlayCircleOutline } from '@mui/icons-material';
-import { useDispatch } from 'react-redux';
-import { selectGenre } from '../features/currentGenre.js';
+import { useEffect, useState } from 'react';
 
 const Item = styled(Paper)(({ theme }) => {
   return {
@@ -18,9 +17,7 @@ const Item = styled(Paper)(({ theme }) => {
 });
 
 const CardCountry = (props) => {
-  const { data, countryName, countryCode, index } = props;
-  // const [countryData, setCountryData] = useState({ name: 'France', code: 'FR' });
-  const dispatch = useDispatch();
+  const { data, countryName, countryCode, index, changeCountry } = props;
 
   return (
 
@@ -38,7 +35,12 @@ const CardCountry = (props) => {
             style={{ borderRadius: '15px' }}
           />
           <IconButton
-            onClick={() => { return dispatch(selectGenre({ name: countryName, code: countryCode })); }}
+            onClick={() => {
+              return changeCountry({
+                name: countryName,
+                code: countryCode,
+              });
+            }}
             aria-label="play"
             variant="soft"
             size="large"
