@@ -20,7 +20,7 @@ const CardAlbum = ({ song }) => {
   const navigate = useNavigate();
   return (
     <Box sx={{ width: '100%' }}>
-      <Grid container spacing={1}>
+      <Grid spacing={3}>
         <Grid
           Item
           xs={6}
@@ -28,7 +28,7 @@ const CardAlbum = ({ song }) => {
           md={4}
           lg={3}
           xl={3}
-          sx={{ display: 'flex' }}
+          sx={{ display: 'grid' }}
         >
           <Item
             onClick={() => {
