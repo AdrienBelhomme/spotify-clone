@@ -1,6 +1,6 @@
 import { styled } from '@mui/material/styles';
 import { Box, Paper, Grid } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Item = styled(Paper)(({ theme }) => {
   return {
@@ -30,10 +30,12 @@ const CardAlbum = ({ song }) => {
           xl={3}
           sx={{ display: 'flex' }}
         >
-          <Item onClick={() => {
-            navigate(`../SongDetails/${song?.key}`);
-            console.log(song?.key);
-          }}
+          <Item
+            onClick={() => {
+              navigate(`../SongDetails/${song?.key}`);
+              console.log(song?.key);
+            }}
+
           >
             <img
               src={song.images?.coverart}
@@ -43,10 +45,11 @@ const CardAlbum = ({ song }) => {
               height="180px"
               style={{ borderRadius: '15px' }}
             />
-            <h3 style={{ textAlign: 'left', color: '#2E3271', fontWeight: '600', fontSize: '16px', margin: '12px 0',
-            }}
-            >
-              {song.title}
+            <h3>
+              <Link to={`../SongDetails/${song?.key}`}>
+                {song?.title}
+              </Link>
+
             </h3>
             <h4>
               {song.subtitle}

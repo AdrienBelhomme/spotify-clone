@@ -31,12 +31,14 @@ const Albums = () => {
           >
             {songData?.map((song, i) => {
               return (
-                <CardAlbum
-                  songs={songData}
-                  key={song.key}
-                  song={song}
-                  i={i}
-                />
+                <div>
+                  <CardAlbum
+                    songs={songData}
+                    key={song.key}
+                    song={song}
+                    i={i}
+                  />
+                </div>
               );
             })}
           </Grid>

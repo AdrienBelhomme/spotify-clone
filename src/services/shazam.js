@@ -26,7 +26,7 @@ export const shazamApi = createApi({
       }),
       // Get song details
       getSongDetails: builder.query({
-        query: (trackId) => { return `tracks/details?track_id=${trackId}`; },
+        query: ({ trackId }) => { return `tracks/details?track_id=${trackId}`; },
       }),
       // Get world charts by genre
       getWorldChartsByGenre: builder.query({
