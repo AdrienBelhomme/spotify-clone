@@ -1,6 +1,6 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import { Grid, Paper, Box } from '@mui/material';
+import { useParams, Link } from 'react-router-dom';
+import { Grid, Box, Button } from '@mui/material';
 
 import { useGetSongDetailsQuery } from '../services/shazam';
 import './SongDetails.css';
@@ -17,13 +17,15 @@ const SongDetails = () => {
       </h1>
 
       <Grid container>
-        <img
-          className="rounded-image"
-          width="200"
-          height="200"
-          alt="coverart"
-          src={songData?.images?.coverart}
-        />
+        <Button
+          onClick={() => { window.open(`${songData?.url}`, '_blank'); }}
+        >
+          <img
+            className="rounded-image"
+            alt="coverart"
+            src={songData?.images?.coverart}
+          />
+        </Button>
         <p className="p">
           <h3>
             {songData?.subtitle}

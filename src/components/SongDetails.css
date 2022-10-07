@@ -1,6 +1,12 @@
 .rounded-image{
     border-radius: 50%;
+    width: 200px;
+    height: 200px;
 }
+.rounded-image:hover {
+    border-radius: 8px;
+}
+
 .lyric-container{
     margin-top: 20px;
     margin-bottom: 20px;
