@@ -7,14 +7,6 @@ import './CardMusic.css';
 const Item = styled(Paper)(({ theme }) => {
   return {
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    textAlign: 'center',
-    background: '#FFFFFF',
-    borderRadius: '24px',
-    display: 'flex',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    color: 'white',
-    width: '700px',
   };
 });
 

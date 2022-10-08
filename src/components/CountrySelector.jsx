@@ -1,26 +1,15 @@
 import { Autocomplete, Box, TextField } from '@mui/material';
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { selectGenre } from '../features/currentGenre.js';
 
 const CountrySelector = (props) => {
-  let { countriesList, changeCountry, data } = props;
+  const { countriesList, changeCountry, countrySelected } = props;
 
-  if (countriesList === undefined) {
-    return countriesList = [
-      { code: 'FR', name: 'France' },
-      { code: 'US', name: 'United States' },
-    ];
-  }
+  const [value, setValue] = useState(countrySelected);
+  const [inputValue, setInputValue] = useState('');
 
-  console.log(countriesList);
-
-  const [value, setValue] = useState(countriesList ? countriesList[17].name : 'France');
-  const [inputValue, setInputValue] = useState(countriesList ? countriesList[17].name : 'France');
-
-  console.log(value);
-  console.log(inputValue);
+  useEffect(() => {
+    setValue(countrySelected);
+  }, [countrySelected]);
 
   return (
 
@@ -28,7 +17,7 @@ const CountrySelector = (props) => {
       sx={{ width: '300px' }}
       value={value}
       onChange={(event, newValue) => {
-        // changeCountry({ name: newValue.name, code: newValue.code });
+        changeCountry({ code: newValue.code, name: newValue.name });
         setValue(newValue);
       }}
       inputValue={inputValue}
@@ -37,7 +26,8 @@ const CountrySelector = (props) => {
       }}
       id="dropdown-selector"
       options={countriesList}
-      // getOptionLabel={(option) => { return option.name; }}
+      getOptionLabel={(option) => { return option.name; }}
+      isOptionEqualToValue={(option, valueMui) => { return option.name === valueMui.name; }}
       renderOption={(prop, country) => {
         return (
         // eslint-disable-next-line react/jsx-props-no-spreading
@@ -56,7 +46,13 @@ const CountrySelector = (props) => {
       renderInput={(params) => {
         return (
         // eslint-disable-next-line react/jsx-props-no-spreading
-          <TextField {...params} label="Select a country" />
+          <TextField
+            {...params}
+            label="Select a country"
+            inputProps={{
+              ...params.inputProps,
+            }}
+          />
         );
       }}
     />

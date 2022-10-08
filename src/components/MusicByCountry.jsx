@@ -1,6 +1,5 @@
 import { Box, CircularProgress, Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { useGetCountriesQuery, useGetWorldChartsByCountryQuery } from '../services/shazam.js';
 
 import GridForGenre from './GridForGenre.jsx';
@@ -33,11 +32,7 @@ const MusicByCountry = () => {
     };
   });
 
-  const initialStateValue = !isFetchingShazam && dataShazam ? shazamList[17].name : 'France';
-  const initialStateDataCountry = !isFetchingShazam && dataShazam ? shazamList[17] : { code: 'FR', name: 'France' };
-
-  const [inputValue, setInputValue] = useState(initialStateValue);
-  const [dataCountry, setDataCountry] = useState(!isFetchingShazam && dataShazam ? shazamList[17] : { code: 'FR', name: 'France' });
+  const [dataCountry, setDataCountry] = useState(!isFetchingShazam && dataShazam ? shazamList[31] : { code: 'FR', name: 'France' });
 
   const changeCountry = (country) => {
     setDataCountry(country);
@@ -54,7 +49,6 @@ const MusicByCountry = () => {
   }
 
   if (error) {
-    // console.log(error);
     return (
       <Typography>
         unknow error
@@ -65,9 +59,9 @@ const MusicByCountry = () => {
   return (
     <div>
 
-      <GridForGenre data={data} country={dataCountry.name} countriesList={shazamList} changeCountry={changeCountry} />
+      {shazamList && <GridForGenre data={data} countrySelected={dataCountry} countriesList={shazamList} changeCountry={changeCountry} />}
 
-      <GridForMusic data={data} country={dataCountry.name} />
+      {data && <GridForMusic data={data} country={dataCountry.name} />}
 
     </div>
 

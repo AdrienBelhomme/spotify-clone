@@ -7,7 +7,7 @@ import CountrySelector from './CountrySelector';
 import './GridForGenre.css';
 
 const GridForGenre = (props) => {
-  const { data, countriesList, changeCountry } = props;
+  const { data, countriesList, changeCountry, countrySelected, changeCountryForSelector } = props;
 
   return (
     <div>
@@ -22,7 +22,7 @@ const GridForGenre = (props) => {
         }}
       >
         <h1 style={{ marginTop: 0 }}>Top charts by country</h1>
-        <CountrySelector data={data} countriesList={countriesList} changeCountry={changeCountry} />
+        <CountrySelector changeCountryForSelector={changeCountryForSelector} countrySelected={countrySelected} data={data} countriesList={countriesList} changeCountry={changeCountry} />
         <Grid container sx={{ display: 'flex' }}>
           <Grid
             item
