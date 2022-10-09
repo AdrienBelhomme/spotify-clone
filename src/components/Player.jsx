@@ -1,44 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import { Box, Typography, Slider, IconButton, Stack, useMediaQuery } from '@mui/material';
-
 import { PauseRounded, PlayArrowRounded, FastForwardRounded, FastRewindRounded, VolumeUpRounded, VolumeDownRounded } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
+
 import logoLight from '../assets/images/Music_UNIVERSE__2_-removebg-preview.png';
 import { setActiveSong } from '../features/playerSlice';
-
-// const WallPaper = styled('div')({
-//   position: 'absolute',
-//   borderRadius: 16,
-//   width: '100%',
-//   height: '100%',
-//   top: 0,
-//   left: 0,
-//   overflow: 'hidden',
-//   background: 'linear-gradient(rgb(255, 38, 142) 0%, rgb(255, 105, 79) 100%)',
-//   transition: 'all 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275) 0s',
-//   '&:before': {
-//     content: '""',
-//     width: '140%',
-//     height: '140%',
-//     position: 'absolute',
-//     top: '-40%',
-//     right: '-50%',
-//     background:
-//         'radial-gradient(at center center, rgb(62, 79, 249) 0%, rgba(62, 79, 249, 0) 64%)',
-//   },
-//   '&:after': {
-//     content: '""',
-//     width: '140%',
-//     height: '140%',
-//     position: 'absolute',
-//     bottom: '-50%',
-//     left: '-30%',
-//     background:
-//         'radial-gradient(at center center, rgb(247, 237, 225) 0%, rgba(247, 237, 225, 0) 70%)',
-//     transform: 'rotate(30deg)',
-//   },
-// });
+import ReactMusicPlayer from './ReactMusicPlayer';
 
 const Widget = styled('div')(({ theme }) => {
   return {
@@ -85,6 +53,7 @@ const MusicPlayerSlider = () => {
   const duration = 200; // seconds
   const [position, setPosition] = useState(32);
   const [paused, setPaused] = useState({ play: false, pause: true });
+  const [url, setUrl] = useState('https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview112/v4/87/a2/c8/87a2c876-dfbd-a57e-2c13-dbd6fc3cba77/mzaf_4085762200601715015.plus.aac.ep.m4a');
 
   const dispatch = useDispatch();
 
@@ -113,6 +82,7 @@ const MusicPlayerSlider = () => {
           boxShadow: '10px 0px 30px #bf0bcc',
         }}
         >
+          <ReactMusicPlayer paused={paused} musicUrl={url} />
           <Widget>
             <Box sx={{ alignItems: 'center', display: 'flex' }}>
               <CoverImage>
