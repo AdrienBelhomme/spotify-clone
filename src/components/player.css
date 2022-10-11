@@ -1,0 +1,14 @@
+.slider-seeking {
+    height: 4px;
+}
+
+.slider-seeking.MuiSlider-thumb {
+    width: 4px;
+    height: 8px;
+    transition: 0.3s cubic-bezier(.47,1.64,.41,.8);
+}
+
+.slider-seeking.MuiSlider-thumb:before {
+    boxShadow: 0 2px 12px 0 rgba(0,0,0,0.4),
+}
+
