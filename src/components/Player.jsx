@@ -1,4 +1,4 @@
-import { useState, useEffect, forwardRef, useImperativeHandle, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import { Box, Typography, Slider, IconButton, Stack, useMediaQuery } from '@mui/material';
 import { PauseRounded, PlayArrowRounded, FastForwardRounded, FastRewindRounded, VolumeUpRounded, VolumeDownRounded } from '@mui/icons-material';
@@ -7,41 +7,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import logoLight from '../assets/images/Music_UNIVERSE__2_-removebg-preview.png';
 import { setGlobalVolume, setPlayOrPause } from '../features/playerSlice';
 import ReactMusicPlayer from './ReactMusicPlayer';
+import './player.css';
 
 const Widget = styled('div')(({ theme }) => ({
-  display: 'flex',
-  justifyContent: 'space-between',
-  padding: 10,
-  height: 100,
-  left: 0,
-  right: 0,
-  maxWidth: '100%',
-  margin: 'auto',
-  position: 'relative',
   backgroundColor:
     theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.6)' : 'white',
-  backdropFilter: 'blur(40px)',
 }));
-
-const CoverImage = styled('div')({
-  width: 100,
-  height: 100,
-  objectFit: 'cover',
-  overflow: 'hidden',
-  flexShrink: 0,
-  borderRadius: 60,
-  backgroundColor: 'rgba(0,0,0,0.08)',
-  '& > img': {
-    width: '100%',
-  },
-});
-
-const TinyText = styled(Typography)({
-  fontSize: '0.75rem',
-  opacity: 0.38,
-  fontWeight: 500,
-  letterSpacing: 0.2,
-});
 
 const Player = () => {
   const isMobile = useMediaQuery('(max-width:600px)');
@@ -56,6 +27,7 @@ const Player = () => {
   const [isSeeking, setIsSeeking] = useState(false);
   const [songDuration, setSongDuration] = useState(0);
   const [artistName, setArtistName] = useState('');
+  const [songImage, setSongImage] = useState('');
   const [songName, setSongName] = useState('');
   const [time, setTime] = useState({
     played: 0,
@@ -74,11 +46,11 @@ const Player = () => {
     setVolume(parseFloat(e.target.value));
   };
 
-  const handleSeekMouseDown = (e) => {
+  const handleSeekMouseDown = () => {
     setIsSeeking(true);
   };
 
-  const handleSeekMouseUp = (e) => {
+  const handleSeekMouseUp = () => {
     setIsSeeking(false);
   };
 
@@ -87,8 +59,12 @@ const Player = () => {
     refForPlayer.current.seekTo(parseFloat(e.target.value));
   };
 
+  const updatePlayPause = (value) => {
+    setPlay(value);
+  };
+
   // Redux get global state to update the progress bar and position (time)
-  const { playedSeconds, seeking, played, duration, song, artist } = useSelector((state) => state.playerSlice);
+  const { playedSeconds, seeking, played, duration, song, artist, alt, image } = useSelector((state) => state.playerSlice);
 
   useEffect(() => {
     setSongDuration(duration);
@@ -114,6 +90,10 @@ const Player = () => {
     setArtistName(artist);
   }, [artist]);
 
+  useEffect(() => {
+    setSongImage(image);
+  }, [image]);
+
   // Redux push to set global state and update the player volume and play/pause button
   useEffect(() => {
     dispatch(setPlayOrPause(play));
@@ -126,20 +106,16 @@ const Player = () => {
   return (
     <Box>
       {!isMobile ? (
-        <Box sx={{ width: '100%',
-          overflow: 'hidden',
-          boxShadow: '10px 0px 30px #bf0bcc',
-        }}
-        >
-          <ReactMusicPlayer refForPlayer={refForPlayer} />
-          <Widget>
+        <Box className="box-shadow">
+          <ReactMusicPlayer refForPlayer={refForPlayer} updatePlayPause={updatePlayPause} />
+          <Widget className="widget">
             <Box sx={{ alignItems: 'center', display: 'flex' }}>
-              <CoverImage>
+              <div className="cover-image">
                 <img
-                  alt="can't win - Chilling Sunday"
-                  src={logoLight}
+                  alt={alt}
+                  src={songImage}
                 />
-              </CoverImage>
+              </div>
               <Box sx={{ ml: 1.5, minWidth: 0 }}>
                 <Typography variant="caption" color="text.secondary" fontWeight={500}>
                   {songName}
@@ -196,8 +172,8 @@ const Player = () => {
                   mt: -2,
                 }}
               >
-                <TinyText>{formatDuration(Math.floor(position))}</TinyText>
-                <TinyText>-{formatDuration(Math.floor(songDuration - position))}</TinyText>
+                <Typography className="tinytext">{formatDuration(Math.floor(position))}</Typography>
+                <Typography className="tinytext">-{formatDuration(Math.floor(songDuration - position))}</Typography>
               </Box>
             </Box>
             <Box
@@ -261,17 +237,16 @@ const Player = () => {
               <VolumeUpRounded htmlColor={lightIconColor} />
             </Stack>
           </Widget>
-          {/* <WallPaper /> */}
         </Box>
       ) : (
         <Box>
           <Widget style={{ overflow: 'hidden', display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', height: '100px', padding: '10px', boxShadow: '10px 0px 35px #bf0bcc' }}>
-            <CoverImage>
+            <div className="cover-image">
               <img
                 alt="can't win - Chilling Sunday"
                 src={logoLight}
               />
-            </CoverImage>
+            </div>
             <Box
               sx={{
                 display: 'flex',

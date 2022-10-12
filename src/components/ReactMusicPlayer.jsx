@@ -5,8 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setDuration, setPlayed, setPlayedSeconds, setSeeking } from '../features/playerSlice';
 
 const ReactMusicPlayer = (props) => {
-  const { refForPlayer } = props;
-  // const refPlayer = useRef(null);
+  const { refForPlayer, updatePlayPause } = props;
   const dispatch = useDispatch();
 
   const [controls, setControls] = useState({
@@ -27,15 +26,6 @@ const ReactMusicPlayer = (props) => {
   });
 
   const { songUrl, isPlaying, volume } = useSelector((state) => state.playerSlice);
-
-  const load = (urlState) => {
-    setControls({
-      url: urlState,
-      played: 0,
-      loaded: 0,
-      pip: false,
-    });
-  };
 
   const handlePlayPause = () => {
     setControls({ ...controls, playing: !controls.playing });
@@ -66,8 +56,7 @@ const ReactMusicPlayer = (props) => {
   };
 
   const handleEnded = () => {
-    console.log('onEnded');
-    setControls({ ...controls, playing: controls.loop });
+    updatePlayPause(false);
   };
 
   const handlePause = () => {
@@ -126,11 +115,10 @@ const ReactMusicPlayer = (props) => {
           playbackRate={controls.playbackRate}
           volume={controls.volume}
           muted={controls.muted}
-          onReady={() => console.log('onReady')}
-          onStart={() => console.log('onStart')}
+          onStart={() => {}}
           onPause={handlePause}
-          onBuffer={() => console.log('onBuffer')}
-          onSeek={(e) => console.log('onSeek', e)}
+          onBuffer={() => {}}
+          onSeek={() => {}}
           onEnded={handleEnded}
           onError={(e) => console.log('onError', e)}
           onProgress={handleProgress}
