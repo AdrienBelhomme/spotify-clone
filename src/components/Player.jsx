@@ -132,7 +132,7 @@ const Player = () => {
       {!isMobile ? (
         <Box sx={{ width: '100%',
           overflow: 'hidden',
-          boxShadow: '10px 0px 30px #bf0bcc',
+          boxShadow: theme.palette.mode === 'dark' ? '10px 0px 30px #bf0bcc' : '10px 0px 30px rgba(0,0,0,0.6)',
         }}
         >
           <ReactMusicPlayer refForPlayer={refForPlayer} />
@@ -268,8 +268,12 @@ const Player = () => {
           {/* <WallPaper /> */}
         </Box>
       ) : (
-        <Box>
-          <Widget style={{ overflow: 'hidden', display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', height: '100px', padding: '10px', boxShadow: '10px 0px 35px #bf0bcc' }}>
+        <Box sx={{ width: '100%',
+          overflow: 'hidden',
+          boxShadow: theme.palette.mode === 'dark' ? '10px 0px 30px #bf0bcc' : '10px 0px 30px rgba(0,0,0,0.6)',
+        }}
+        >
+          <Widget style={{ bottom: '0px', overflow: 'hidden', display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', height: '100px', padding: '10px', boxShadow: '10px 0px 35px #bf0bcc' }}>
             <CoverImage>
               <img
                 alt="can't win - Chilling Sunday"

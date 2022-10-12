@@ -6,6 +6,9 @@ const initialState = {
   songUrl: '',
   currentIndex: 0,
   isPlaying: false,
+  isPause: false,
+  isActive: false,
+  isPlayIsPause: { play: false, pause: false },
   activeSong: {},
   genreListId: '',
   volume: 0.5,
@@ -22,37 +25,19 @@ export const playerSlice = createSlice({
   initialState,
   reducers: {
     setActiveSong: (state, action) => {
-      state.songUrl = action.payload;
+      const { isPlaying, isPause } = action.payload;
+      state.isPlaying = isPlaying;
+      state.isPause = isPause;
+      state.isPlayIsPause = { play: isPlaying, pause: isPause };
     },
-    setPlayOrPause: (state, action) => {
+    playPause: (state, action) => {
       state.isPlaying = action.payload;
-    },
-    setGlobalVolume: (state, action) => {
-      state.volume = action.payload;
-    },
-    setPlayedSeconds: (state, action) => {
-      state.playedSeconds = action.payload;
-    },
-    setPlayed: (state, action) => {
-      state.played = action.payload;
-    },
-    setSeeking: (state, action) => {
-      state.seeking = action.payload;
-    },
-    setDuration: (state, action) => {
-      state.duration = action.payload;
-    },
-    setArtistAndSong: (state, action) => {
-      const { song, artist } = action.payload;
-      state.artist = artist;
-      state.song = song;
     },
   },
 
 });
 
-export const { setActiveSong, setPlayOrPause, setGlobalVolume, setPlayedSeconds, setPlayed, setSeeking, setDuration, setArtistAndSong } = playerSlice.actions;
-export default playerSlice.reducer;
+export const { setActiveSong, playPause } = player.actions;
 
 export const globalStateUrl = (state) => state.songUrl;
 
