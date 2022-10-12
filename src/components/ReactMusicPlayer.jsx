@@ -58,11 +58,6 @@ const ReactMusicPlayer = (props) => {
     setControls({ ...controls, played: parseFloat(e.target.value) });
   };
 
-  const handleSeekMouseUp = (e) => {
-    setIsSeeking(false);
-    refForPlayer.current.seekTo(parseFloat(e.target.value));
-  };
-
   const handleProgress = (state) => {
     // We only want to update time slider if we are not currently seeking
     if (!controls.seeking) {
@@ -117,7 +112,6 @@ const ReactMusicPlayer = (props) => {
 
   return (
     <div>
-      <h1>ReactPlayer Demo</h1>
       <div className="player-wrapper">
         <ReactPlayer
           ref={refForPlayer}
@@ -143,16 +137,6 @@ const ReactMusicPlayer = (props) => {
           onDuration={handleDuration}
         />
       </div>
-      <input
-        type="range"
-        min={0}
-        max={0.999999}
-        step="any"
-        value={controls.played}
-        onMouseDown={handleSeekMouseDown}
-        onChange={handleSeekChange}
-        onMouseUp={handleSeekMouseUp}
-      />
     </div>
   );
 };

@@ -57,9 +57,9 @@ const Player = () => {
   const [songDuration, setSongDuration] = useState(0);
   const [artistName, setArtistName] = useState('');
   const [songName, setSongName] = useState('');
-  const [playedTime, setPlayedTime] = useState({
+  const [time, setTime] = useState({
     played: 0,
-    playedSeconds: 0
+    playedSeconds: 0,
   });
 
   const refForPlayer = useRef(null);
@@ -80,19 +80,11 @@ const Player = () => {
 
   const handleSeekMouseUp = (e) => {
     setIsSeeking(false);
-    refForPlayer.current.seekTo(parseFloat(e.target.value));
   };
 
   const handleSeekChange = (e) => {
-    console.log(e.target.value);
-    setPlayedTime(parseFloat(e.target.value));
-  };
-
-  const handleProgress = (state) => {
-    // We only want to update time slider if we are not currently seeking
-    if (!controls.seeking) {
-      setPlayedTime({ state.played, playedSeconds: state.playedSeconds });
-    }
+    setTime({ played: parseFloat(e.target.value) });
+    refForPlayer.current.seekTo(parseFloat(e.target.value));
   };
 
   // Redux get global state to update the progress bar and position (time)
@@ -101,6 +93,10 @@ const Player = () => {
   useEffect(() => {
     setSongDuration(duration);
   }, [duration]);
+
+  useEffect(() => {
+    setTime({ played, playedSeconds });
+  }, [played]);
 
   useEffect(() => {
     setIsSeeking(seeking);
@@ -157,13 +153,13 @@ const Player = () => {
               <Slider
                 aria-label="time-indicator"
                 size="small"
-                value={position}
+                value={time.played}
                 min={0}
-                step={0.1}
+                step={0.05}
                 max={0.999999}
-                // onMouseDown={handleSeekMouseDown}
+                onMouseDown={handleSeekMouseDown}
                 onChange={handleSeekChange}
-                // onMouseUp={handleSeekMouseUp}
+                onMouseUp={handleSeekMouseUp}
                 className="slider-seeking"
                 sx={{
                   color: theme.palette.mode === 'dark' ? '#fff' : 'rgba(0,0,0,0.87)',
