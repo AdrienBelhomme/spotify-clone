@@ -5,9 +5,10 @@ import { PauseRounded, PlayArrowRounded, FastForwardRounded, FastRewindRounded, 
 import { useDispatch, useSelector } from 'react-redux';
 
 import logoLight from '../assets/images/Music_UNIVERSE__2_-removebg-preview.png';
-import { setGlobalVolume, setPlayOrPause } from '../features/playerSlice';
+import { setActiveSong, setArtistAndSongAndImage, setDataAndIndex, setGlobalVolume, setPlayOrPause } from '../features/playerSlice';
 import ReactMusicPlayer from './ReactMusicPlayer';
 import './player.css';
+import { current } from '@reduxjs/toolkit';
 
 const Widget = styled('div')(({ theme }) => ({
   backgroundColor:
@@ -29,6 +30,8 @@ const Player = () => {
   const [artistName, setArtistName] = useState('');
   const [songImage, setSongImage] = useState('');
   const [songName, setSongName] = useState('');
+  const [globalData, setGlobalData] = useState({});
+  const [globalIndex, setGlobalIndex] = useState(0);
   const [time, setTime] = useState({
     played: 0,
     playedSeconds: 0,
@@ -62,9 +65,31 @@ const Player = () => {
   const updatePlayPause = (value) => {
     setPlay(value);
   };
+  console.log(`globalIndex${globalIndex}`);
+  const selectNextMusic = () => {
+    dispatch(setActiveSong(globalData[globalIndex + 1]?.hub?.actions[1]?.uri));
+    dispatch(setArtistAndSongAndImage({ artist: globalData[globalIndex + 1].title, song: globalData[globalIndex + 1].subtitle, image: globalData[globalIndex + 1].images.coverart, alt: globalData[globalIndex + 1].title }));
+    setGlobalIndex((prev) => prev + 1);
+  };
+  console.log(`globalIndex${globalIndex}`);
+  const selectPreviousMusic = () => {
+    if (globalIndex >= 1) {
+      dispatch(setActiveSong(globalData[globalIndex - 1]?.hub?.actions[1]?.uri));
+      dispatch(setArtistAndSongAndImage({ artist: globalData[globalIndex - 1].title, song: globalData[globalIndex - 1].subtitle, image: globalData[globalIndex - 1].images.coverart, alt: globalData[globalIndex - 1].title }));
+      setGlobalIndex((prev) => prev - 1);
+    }
+  };
 
   // Redux get global state to update the progress bar and position (time)
-  const { playedSeconds, seeking, played, duration, song, artist, alt, image } = useSelector((state) => state.playerSlice);
+  const { playedSeconds, seeking, played, duration, song, artist, alt, image, dataSongs, currentIndex } = useSelector((state) => state.playerSlice);
+
+  useEffect(() => {
+    setGlobalData(dataSongs);
+  }, [dataSongs]);
+
+  useEffect(() => {
+    setGlobalIndex(currentIndex);
+  }, [currentIndex]);
 
   useEffect(() => {
     setSongDuration(duration);
@@ -93,6 +118,10 @@ const Player = () => {
   useEffect(() => {
     setSongImage(image);
   }, [image]);
+
+  useEffect(() => {
+    setSongImage(image);
+  }, [globalIndex]);
 
   // Redux push to set global state and update the player volume and play/pause button
   useEffect(() => {
@@ -184,7 +213,7 @@ const Player = () => {
                 mt: -1,
               }}
             >
-              <IconButton aria-label="previous song" onClick={() => {}}>
+              <IconButton aria-label="previous song" onClick={() => selectPreviousMusic(globalIndex)}>
                 <FastRewindRounded fontSize="large" htmlColor={mainIconColor} />
               </IconButton>
               <IconButton
@@ -201,7 +230,7 @@ const Player = () => {
                   />
                 )}
               </IconButton>
-              <IconButton aria-label="next song" onClick={() => {}}>
+              <IconButton aria-label="next song" onClick={() => selectNextMusic(globalIndex)}>
                 <FastForwardRounded fontSize="large" htmlColor={mainIconColor} />
               </IconButton>
             </Box>

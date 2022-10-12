@@ -2,9 +2,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+  dataSongs: {},
+  currentIndex: 0,
   currentSongs: [],
   songUrl: '',
-  currentIndex: 0,
   isPlaying: false,
   activeSong: {},
   genreListId: '',
@@ -24,6 +25,9 @@ export const playerSlice = createSlice({
   initialState,
   reducers: {
     setActiveSong: (state, action) => {
+      console.log('here');
+      console.log(state.currentIndex);
+      console.log(action.payload);
       state.songUrl = action.payload;
     },
     setPlayOrPause: (state, action) => {
@@ -44,6 +48,14 @@ export const playerSlice = createSlice({
     setDuration: (state, action) => {
       state.duration = action.payload;
     },
+    setNextMusic: (state, action) => {
+      state.duration = action.payload;
+    },
+    setDataAndIndex: (state, action) => {
+      const { data, index } = action.payload;
+      state.dataSongs = data;
+      state.currentIndex = index;
+    },
     setArtistAndSongAndImage: (state, action) => {
       const { song, artist, image, alt } = action.payload;
       state.artist = artist;
@@ -55,7 +67,7 @@ export const playerSlice = createSlice({
 
 });
 
-export const { setActiveSong, setPlayOrPause, setGlobalVolume, setPlayedSeconds, setPlayed, setSeeking, setDuration, setArtistAndSongAndImage } = playerSlice.actions;
+export const { setActiveSong, setPlayOrPause, setGlobalVolume, setPlayedSeconds, setPlayed, setSeeking, setDuration, setArtistAndSongAndImage, setDataAndIndex } = playerSlice.actions;
 export default playerSlice.reducer;
 
 export const globalStateUrl = (state) => state.songUrl;

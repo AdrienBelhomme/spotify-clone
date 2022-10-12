@@ -25,28 +25,7 @@ const ReactMusicPlayer = (props) => {
     playedSeconds: 0,
   });
 
-  const { songUrl, isPlaying, volume } = useSelector((state) => state.playerSlice);
-
-  const handlePlayPause = () => {
-    setControls({ ...controls, playing: !controls.playing });
-  };
-
-  const handleToggleControls = () => {
-    const { url } = controls;
-    setControls({
-      controls: !controls.controls,
-      url: null,
-    }, () => controls.load(url));
-  };
-
-  const handleSeekMouseDown = (e) => {
-    setControls({ ...controls, seeking: true });
-  };
-
-  const handleSeekChange = (e) => {
-    console.log(e.target.value);
-    setControls({ ...controls, played: parseFloat(e.target.value) });
-  };
+  const { songUrl, isPlaying, volume, currentIndex } = useSelector((state) => state.playerSlice);
 
   const handleProgress = (state) => {
     // We only want to update time slider if we are not currently seeking
@@ -72,6 +51,10 @@ const ReactMusicPlayer = (props) => {
   useEffect(() => {
     setControls({ ...controls, url: songUrl });
   }, [songUrl]);
+
+  /* useEffect(() => {
+    setControls({ ...controls, url: songUrl });
+  }, [currentIndex]); */
 
   useEffect(() => {
     setControls({ ...controls, playing: isPlaying });
