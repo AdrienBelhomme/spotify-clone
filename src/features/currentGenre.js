@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-console */
 import { createSlice } from '@reduxjs/toolkit';
 
@@ -9,22 +10,25 @@ export const genre = createSlice({
     countryCode: 'FR',
     countryCodeAndName: { name: 'France', code: 'FR' },
     country: {},
-    searchQuery: '',
+    query: '',
+
   },
   reducers: {
     selectGenre: (state, action) => {
       const { name, code } = action.payload;
-      // eslint-disable-next-line no-param-reassign
       state.countryCodeAndName = { name, code };
-      // eslint-disable-next-line no-param-reassign
       state.countryName = name;
-      // eslint-disable-next-line no-param-reassign
       state.countryCode = code;
-      // eslint-disable-next-line no-param-reassign
+      // reseting searchQuery
+      state.query = '';
+    },
+    searchSongs: (state, action) => {
+      console.log(action.payload);
+      state.query = action.payload;
     },
   },
 });
 
-export const { selectGenre } = genre.actions;
+export const { selectGenre, searchSongs } = genre.actions;
 
 export default genre.reducer;
