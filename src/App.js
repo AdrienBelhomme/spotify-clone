@@ -1,7 +1,7 @@
 import { CssBaseline, useMediaQuery } from '@mui/material';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
-import { Navbar, Home, Albums, Artists, Player, MusicByCountry } from './components';
+import { Navbar, Home, Albums, Artists, Player, MusicByCountry, SongDetails } from './components';
 import './App.css';
 
 const App = () => {
@@ -16,7 +16,7 @@ const App = () => {
             <Routes>
               <Route exact path="/" element={<Home />} />
               <Route exact path="/albums" element={<Albums />} />
-              <Route exact path="/artists/:id" element={<Artists />} />
+              <Route exact path="/artists/:artistId" element={<Artists />} />
               <Route exact path="/country" element={<MusicByCountry />} />
               <Route exact path="/songdetails/:trackId" element={<SongDetails />} />
               <Route exact path="*" element={<h1>PAGE NOT FOUND 404</h1>} />

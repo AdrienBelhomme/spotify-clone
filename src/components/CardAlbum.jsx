@@ -2,19 +2,17 @@ import { styled } from '@mui/material/styles';
 import { Box, Paper, Grid } from '@mui/material';
 import { useNavigate, Link } from 'react-router-dom';
 
-const Item = styled(Paper)(({ theme }) => {
-  return {
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: '20px 20px',
-    textAlign: 'center',
-    background: 'transparent',
-    color: theme.palette.text.secondary,
-    borderRadius: '12px',
-    border: '1px solid rgba(246, 129, 30, 0.25)',
-    marginRight: '4%',
-  };
-});
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: '20px 20px',
+  textAlign: 'center',
+  background: 'transparent',
+  color: theme.palette.text.secondary,
+  borderRadius: '12px',
+  border: '1px solid rgba(246, 129, 30, 0.25)',
+  marginRight: '4%',
+}));
 
 const CardAlbum = ({ song }) => {
   const navigate = useNavigate();

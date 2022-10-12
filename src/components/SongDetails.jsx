@@ -44,11 +44,9 @@ const SongDetails = () => {
         </h2>
         <Grid className="lyric-container">
           {songData?.sections[1].type === 'LYRICS'
-            ? songData?.sections[1].text.map((line, i) => {
-              return (
-                <p>{line}</p>
-              );
-            }) : <p>Sorry, no lyrics found</p>}
+            ? songData?.sections[1].text.map((line, i) => (
+              <p>{line}</p>
+            )) : <p>Sorry, no lyrics found</p>}
         </Grid>
       </Box>
     </div>

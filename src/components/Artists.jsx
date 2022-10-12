@@ -8,7 +8,7 @@ import { useGetArtistDetailsQuery, useGetRelatedSongsQuery } from '../services/s
 
 const Artists = () => {
   const { artistId } = useParams();
-  const { activeSong, isPlaying } = useSelector((state) => { return state.player; });
+  const { activeSong, isPlaying } = useSelector((state) => state.player);
 
   const { data: artistData, isFetching: isFetchingArtistDetails, error } = useGetArtistDetailsQuery(artistId);
 
@@ -23,7 +23,7 @@ const Artists = () => {
   if (error) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center">
-        <Button startIcon={<ArrowBack />} onClick={() => { return goBack(); }} color="primary">
+        <Button startIcon={<ArrowBack />} onClick={() => goBack()} color="primary">
           Go Back
         </Button>
       </Box>
