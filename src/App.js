@@ -1,15 +1,14 @@
 import { CssBaseline, useMediaQuery } from '@mui/material';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
-import { Home, Albums, Navbar, Artists, TopCharts, Player, SongDetails } from './components';
-import MusicByCountry from './components/MusicByCountry';
+import { Navbar, Home, Albums, Artists, TopCharts, Player, MusicByCountry } from './components';
 import './App.css';
 
 const App = () => {
   const isMobile = useMediaQuery('(max-width:600px)');
   return (
     <BrowserRouter>
-      <div style={{ display: 'flex', height: '100%', width: 'calc(100% - 200px)' }}>
+      <div style={{ postion: 'relative', display: 'flex', height: '100%', width: 'calc(100% - 200px)', zIndex: 1 }}>
         <CssBaseline />
         <Navbar />
         <main style={{ flexGrow: '1', padding: '2em', marginTop: '60px', width: '100%' }}>
@@ -26,15 +25,22 @@ const App = () => {
           </div>
         </main>
       </div>
-      {isMobile ? (
-        <div style={{ position: 'fixed', bottom: '0px', width: '100%', left: '0px', right: '0px', padding: '5px' }}>
-          <Player />
-        </div>
-      ) : (
-        <div style={{ position: 'fixed', right: '0px', bottom: '0px', width: '100%', left: '0px', zIndex: 2 }}>
-          <Player />
-        </div>
-      ) }
+      {/* <div style={{
+        position: 'fixed',
+        bottom: '0px',
+        width: '100%',
+        left: '0px',
+        right: '0px',
+        padding: isMobile ? '5px' : 0,
+        zIndex: 10 }}
+      >
+        <Player />
+      </div> */}
+      <div style={{ position: 'fixed', bottom: '0px', width: '100%', left: '0px', right: '0px', padding: isMobile ? '5px' : 0, zIndex: 5000 }}>
+
+        <Player />
+
+      </div>
     </BrowserRouter>
   );
 };

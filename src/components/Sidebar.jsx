@@ -3,18 +3,19 @@ import { List, ListItem, ListItemIcon, ListItemText, ListSubheader, Divider, Box
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import { useDispatch } from 'react-redux';
-import logoLight from '../assets/images/Music_UNIVERSE__3_-removebg-preview.png';
-import logoDark from '../assets/images/Music_UNIVERSE__2_-removebg-preview.png';
-
 import { selectGenre } from '../features/currentGenre';
 import { images } from '../assets';
+// import { useDispatch } from 'react-redux';
+
+// import { selectGenre } from '../features/currentGenre';
+import { logoLight, logoDark } from '../assets/index';
 import genreIcons from '../assets/genres';
 
 const categories = [
-  { label: 'Home', value: 'home' },
-  { label: 'Album', value: 'album' },
-  { label: 'Artist', value: 'artist' },
-  { label: 'TopChart', value: 'topchart' },
+  { label: 'Home', to: '/', value: 'home' },
+  { label: 'Album', to: '/albums/:id', value: 'album' },
+  { label: 'Artist', to: '/artists/:id', value: 'artist' },
+  { label: 'TopChart', to: '/country', value: 'topchart' },
 ];
 
 const genre = [
@@ -29,7 +30,7 @@ const Sidebar = () => {
       <Link to="/">
         <img
           className="App-logo"
-          src={theme.palette.mode === 'light' ? logoLight : logoDark}
+          src={theme.palette.mode === 'light' ? logoDark : logoLight}
           alt="musicuniverselogo"
           style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', width: '100%', height: '55%', objectFit: 'cover' }}
         />
@@ -37,28 +38,25 @@ const Sidebar = () => {
       <Divider />
       <List>
         <ListSubheader> Browse Music UNIVERSE</ListSubheader>
-        {categories.map(({ label, value }) => {
-          return (
-            <Link
-              color="inherit"
-              to="/"
-              key={value}
-              style={{ textDecoration: 'none', color: theme.palette.primary.main }}
-            >
-              <ListItem onClick={() => { }}>
-                <ListItemIcon>
-                  /* <img
-                    src={genreIcons[label.toLowerCase()]}
-                    alt="genreimage"
-                    height={40}
-                    // style={{ filter: theme.palette.mode === 'dark' && 'Invert(1)' }}
-                  />
-                </ListItemIcon>
-                <ListItemText primary={label} />
-              </ListItem>
-            </Link>
-          );
-        })}
+        {categories.map((item) => (
+          <Link
+            color="inherit"
+            to={item.to}
+            key={item.value}
+            style={{ textDecoration: 'none', color: theme.palette.primary.main }}
+          >
+            <ListItem onClick={() => { }}>
+              <ListItemIcon>
+                <img
+                  src={genreIcons[item.label.toLowerCase()]}
+                  alt="genreimage"
+                  height={40}
+                />
+              </ListItemIcon>
+              <ListItemText primary={item.label} />
+            </ListItem>
+          </Link>
+        ))}
       </List>
 
     </Box>

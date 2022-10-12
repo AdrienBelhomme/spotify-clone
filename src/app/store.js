@@ -1,12 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
+
 import { shazamApi } from '../services/shazam';
-//import playerReducer from '../features/playerSlice';
+import playerReducer from '../features/playerSlice';
 import genreReducer from '../features/currentGenre';
 
 export default configureStore({
   reducer: {
     [shazamApi.reducerPath]: shazamApi.reducer,
-    //player: playerReducer,
+    playerSlice: playerReducer,
     currentGenre: genreReducer,
   },
   middleware: (getDefaultMiddleware) => { return getDefaultMiddleware().concat(shazamApi.middleware); },

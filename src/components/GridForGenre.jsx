@@ -2,12 +2,12 @@ import { DataObject } from '@mui/icons-material';
 import { Box, Grid } from '@mui/material';
 import CardCountry from './CardCountry';
 
-import { topCountries } from './countryList';
+import { topCountries } from './countryListApi';
 import CountrySelector from './CountrySelector';
 import './GridForGenre.css';
 
 const GridForGenre = (props) => {
-  const { data } = props;
+  const { data, countriesList, changeCountry, countrySelected, changeCountryForSelector } = props;
 
   return (
     <div>
@@ -22,7 +22,7 @@ const GridForGenre = (props) => {
         }}
       >
         <h1 style={{ marginTop: 0 }}>Top charts by country</h1>
-        <CountrySelector data={data} />
+        <CountrySelector changeCountryForSelector={changeCountryForSelector} countrySelected={countrySelected} data={data} countriesList={countriesList} changeCountry={changeCountry} />
         <Grid container sx={{ display: 'flex' }}>
           <Grid
             item
@@ -34,7 +34,7 @@ const GridForGenre = (props) => {
             className="scroll-box"
           >
             {topCountries.map((country, i) => {
-              return <CardCountry key={i} data={data} countryCode={country.code} countryName={country.name} index={i} />;
+              return <CardCountry key={i} data={data} countryCode={country.code} countryName={country.name} index={i} changeCountry={changeCountry} />;
             })}
 
           </Grid>

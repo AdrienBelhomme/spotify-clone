@@ -56,9 +56,16 @@ export const shazamApi = createApi({
           return `search/multi?offset=${offset}&query=${query}&search_type='ARTISTS'`;
         },
       }),
+      // Get List of Countries (53 in total)
+      getCountries: builder.query({
+        query: () => {
+          return 'https://shazam-core.p.rapidapi.com/v1/frame/cities';
+        },
+      }),
+
     };
   },
 });
 
-export const { useGetWorldChartsQuery, useGetArtistDetailsQuery, useGetSongDetailsQuery, useGetWorldChartsByGenreQuery, useGetWorldChartsByCityQuery, useGetWorldChartsByCountryQuery, useGetRelatedSongsQuery, useSearchSongsQuery,
+export const { useGetWorldChartsQuery, useGetCountriesQuery, useGetArtistDetailsQuery, useGetSongDetailsQuery, useGetWorldChartsByGenreQuery, useGetWorldChartsByCityQuery, useGetWorldChartsByCountryQuery, useGetRelatedSongsQuery, useSearchSongsQuery,
   useSearchArtistsQuery } = shazamApi;

@@ -9,13 +9,21 @@
     background: #ffffff80!important;
     height: 120px;
     margin-left: 5%;
+    text-align: center;
+    background: #FFFFFF;
+    border-radius: 24px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: white;
+    width: 700px;
 }
 
 .card {
     min-width: 700px; 
     display: flex; 
     width: 700px; 
-    margin-bottom: 7%; 
+    margin-bottom: 5%; 
     align-items: center;
 }
 
