@@ -52,12 +52,6 @@ export const shazamApi = createApi({
           return `search/multi?search_type=SONGS_ARTISTS&query=${query}`;
         },
       }),
-      // Search artist
-      //   searchArtists: builder.query({
-      //     query: (offset, query) => {
-      //       return `search/multi?offset=${offset}&query=${query}&search_type='ARTISTS'`;
-      //     },
-      //   }),
       // Get List of Countries (53 in total)
       getCountries: builder.query({
         query: () => {
