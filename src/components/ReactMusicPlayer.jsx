@@ -5,8 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setDuration, setPlayed, setPlayedSeconds, setSeeking } from '../features/playerSlice';
 
 const ReactMusicPlayer = (props) => {
-  const { refForPlayer } = props;
-  // const refPlayer = useRef(null);
+  const { refForPlayer, updatePlayPause } = props;
   const dispatch = useDispatch();
 
   const [controls, setControls] = useState({
@@ -26,42 +25,7 @@ const ReactMusicPlayer = (props) => {
     playedSeconds: 0,
   });
 
-  const { songUrl, isPlaying, volume } = useSelector((state) => state.playerSlice);
-
-  const load = (urlState) => {
-    setControls({
-      url: urlState,
-      played: 0,
-      loaded: 0,
-      pip: false,
-    });
-  };
-
-  const handlePlayPause = () => {
-    setControls({ ...controls, playing: !controls.playing });
-  };
-
-  const handleToggleControls = () => {
-    const { url } = controls;
-    setControls({
-      controls: !controls.controls,
-      url: null,
-    }, () => controls.load(url));
-  };
-
-  const handleSeekMouseDown = (e) => {
-    setControls({ ...controls, seeking: true });
-  };
-
-  const handleSeekChange = (e) => {
-    console.log(e.target.value);
-    setControls({ ...controls, played: parseFloat(e.target.value) });
-  };
-
-  const handleSeekMouseUp = (e) => {
-    setIsSeeking(false);
-    refForPlayer.current.seekTo(parseFloat(e.target.value));
-  };
+  const { songUrl, isPlaying, volume, currentIndex } = useSelector((state) => state.playerSlice);
 
   const handleProgress = (state) => {
     // We only want to update time slider if we are not currently seeking
@@ -71,8 +35,7 @@ const ReactMusicPlayer = (props) => {
   };
 
   const handleEnded = () => {
-    console.log('onEnded');
-    setControls({ ...controls, playing: controls.loop });
+    updatePlayPause(false);
   };
 
   const handlePause = () => {
@@ -88,6 +51,10 @@ const ReactMusicPlayer = (props) => {
   useEffect(() => {
     setControls({ ...controls, url: songUrl });
   }, [songUrl]);
+
+  /* useEffect(() => {
+    setControls({ ...controls, url: songUrl });
+  }, [currentIndex]); */
 
   useEffect(() => {
     setControls({ ...controls, playing: isPlaying });
@@ -117,7 +84,6 @@ const ReactMusicPlayer = (props) => {
 
   return (
     <div>
-      <h1>ReactPlayer Demo</h1>
       <div className="player-wrapper">
         <ReactPlayer
           ref={refForPlayer}
@@ -132,27 +98,16 @@ const ReactMusicPlayer = (props) => {
           playbackRate={controls.playbackRate}
           volume={controls.volume}
           muted={controls.muted}
-          onReady={() => console.log('onReady')}
-          onStart={() => console.log('onStart')}
+          onStart={() => {}}
           onPause={handlePause}
-          onBuffer={() => console.log('onBuffer')}
-          onSeek={(e) => console.log('onSeek', e)}
+          onBuffer={() => {}}
+          onSeek={() => {}}
           onEnded={handleEnded}
           onError={(e) => console.log('onError', e)}
           onProgress={handleProgress}
           onDuration={handleDuration}
         />
       </div>
-      <input
-        type="range"
-        min={0}
-        max={0.999999}
-        step="any"
-        value={controls.played}
-        onMouseDown={handleSeekMouseDown}
-        onChange={handleSeekChange}
-        onMouseUp={handleSeekMouseUp}
-      />
     </div>
   );
 };

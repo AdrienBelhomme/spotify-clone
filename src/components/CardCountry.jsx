@@ -36,10 +36,9 @@ const CardCountry = (props) => {
             style={{ borderRadius: '15px' }}
           />
           <IconButton
-            onClick={() => changeCountry({
-              name: countryName,
-              code: countryCode,
-            })}
+            onClick={() => {
+              changeCountry({ name: countryName, code: countryCode });
+            }}
             aria-label="play"
             variant="soft"
             size="large"

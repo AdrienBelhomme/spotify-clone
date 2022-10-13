@@ -5,7 +5,7 @@ import { Favorite, PlayCircleOutline, Chat } from '@mui/icons-material';
 
 import './CardMusic.css';
 import { useDispatch } from 'react-redux';
-import { setActiveSong, setArtistAndSong } from '../features/playerSlice';
+import { setActiveSong, setArtistAndSongAndImage, setDataAndIndex } from '../features/playerSlice';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -20,8 +20,12 @@ const CardCountry = (props) => {
     dispatch(setActiveSong(data[i]?.hub?.actions[1]?.uri));
   };
 
-  const dispatchArtistAndSong = (i) => {
-    dispatch(setArtistAndSong({ artist: data[i].title, song: data[i].subtitle }));
+  const selectDataAndIndex = (dataCard, indexCard) => {
+    dispatch(setDataAndIndex({ data: dataCard, index: indexCard }));
+  };
+
+  const dispatchArtistAndSongAndImage = (i) => {
+    dispatch(setArtistAndSongAndImage({ artist: data[i].title, song: data[i].subtitle, image: data[i].images.coverart, alt: data[i].title }));
   };
 
   return (
@@ -46,7 +50,7 @@ const CardCountry = (props) => {
           />
           <div className="play-button">
             <IconButton
-              onClick={() => { selectMusic(index); dispatchArtistAndSong(index); }}
+              onClick={() => { selectMusic(index); dispatchArtistAndSongAndImage(index); selectDataAndIndex(data, index); }}
               aria-label="play"
               variant="soft"
               size="large"

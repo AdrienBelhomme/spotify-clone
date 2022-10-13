@@ -12,3 +12,42 @@
     boxShadow: 0 2px 12px 0 rgba(0,0,0,0.4),
 }
 
+.tinytext {
+font-size: 0.75rem!important;
+opacity: 0.38!important;
+font-weight: 500!important;
+letter-spacing: 0.2!important;
+}
+
+.cover-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    overflow: hidden;
+    flex-shrink: 0;
+    border-radius: 60px;
+    background-color: rgba(0,0,0,0.08);
+}
+
+.cover-image img {
+    width: 100%;
+}
+
+.widget {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    height: 100px;
+    left: 0;
+    right: 0;
+    max-width: 100%;
+    margin: auto;
+    position: relative;
+    backdrop-filter: blur(40px);
+}
+
+.box-shadow { 
+    width: 100%;
+    overflow: hidden;
+    box-shadow: 1px 0px 1px black;
+  } 

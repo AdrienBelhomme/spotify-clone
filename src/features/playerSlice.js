@@ -2,9 +2,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+  dataSongs: {},
+  currentIndex: 0,
   currentSongs: [],
   songUrl: '',
-  currentIndex: 0,
   isPlaying: false,
   activeSong: {},
   genreListId: '',
@@ -13,8 +14,10 @@ const initialState = {
   played: 0,
   seeking: false,
   duration: 0,
-  artist: '',
-  song: '',
+  artist: 'Chris Brown',
+  song: 'Under The Influence',
+  image: 'https://is5-ssl.mzstatic.com/image/thumb/Music122/v4/97/ec/96/97ec963b-8829-f040-fe40-508069d6044b/196589418449.jpg/400x400cc.jpg',
+  alt: '',
 };
 
 export const playerSlice = createSlice({
@@ -22,6 +25,9 @@ export const playerSlice = createSlice({
   initialState,
   reducers: {
     setActiveSong: (state, action) => {
+      console.log('here');
+      console.log(state.currentIndex);
+      console.log(action.payload);
       state.songUrl = action.payload;
     },
     setPlayOrPause: (state, action) => {
@@ -42,16 +48,26 @@ export const playerSlice = createSlice({
     setDuration: (state, action) => {
       state.duration = action.payload;
     },
-    setArtistAndSong: (state, action) => {
-      const { song, artist } = action.payload;
+    setNextMusic: (state, action) => {
+      state.duration = action.payload;
+    },
+    setDataAndIndex: (state, action) => {
+      const { data, index } = action.payload;
+      state.dataSongs = data;
+      state.currentIndex = index;
+    },
+    setArtistAndSongAndImage: (state, action) => {
+      const { song, artist, image, alt } = action.payload;
       state.artist = artist;
       state.song = song;
+      state.image = image;
+      state.alt = alt;
     },
   },
 
 });
 
-export const { setActiveSong, setPlayOrPause, setGlobalVolume, setPlayedSeconds, setPlayed, setSeeking, setDuration, setArtistAndSong } = playerSlice.actions;
+export const { setActiveSong, setPlayOrPause, setGlobalVolume, setPlayedSeconds, setPlayed, setSeeking, setDuration, setArtistAndSongAndImage, setDataAndIndex } = playerSlice.actions;
 export default playerSlice.reducer;
 
 export const globalStateUrl = (state) => state.songUrl;

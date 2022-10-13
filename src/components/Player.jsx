@@ -1,84 +1,21 @@
-/* eslint-disable no-console */
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import { Box, Typography, Slider, IconButton, Stack, useMediaQuery } from '@mui/material';
 
 import { PauseRounded, PlayArrowRounded, FastForwardRounded, FastRewindRounded, VolumeUpRounded, VolumeDownRounded } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
 import logoLight from '../assets/images/Music_UNIVERSE__2_-removebg-preview.png';
-import { setActiveSong } from '../features/playerSlice';
-
-// const WallPaper = styled('div')({
-//   position: 'absolute',
-//   borderRadius: 16,
-//   width: '100%',
-//   height: '100%',
-//   top: 0,
-//   left: 0,
-//   overflow: 'hidden',
-//   background: 'linear-gradient(rgb(255, 38, 142) 0%, rgb(255, 105, 79) 100%)',
-//   transition: 'all 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275) 0s',
-//   '&:before': {
-//     content: '""',
-//     width: '140%',
-//     height: '140%',
-//     position: 'absolute',
-//     top: '-40%',
-//     right: '-50%',
-//     background:
-//         'radial-gradient(at center center, rgb(62, 79, 249) 0%, rgba(62, 79, 249, 0) 64%)',
-//   },
-//   '&:after': {
-//     content: '""',
-//     width: '140%',
-//     height: '140%',
-//     position: 'absolute',
-//     bottom: '-50%',
-//     left: '-30%',
-//     background:
-//         'radial-gradient(at center center, rgb(247, 237, 225) 0%, rgba(247, 237, 225, 0) 70%)',
-//     transform: 'rotate(30deg)',
-//   },
-// });
+import { setActiveSong, setArtistAndSongAndImage, setDataAndIndex, setGlobalVolume, setPlayOrPause } from '../features/playerSlice';
+import ReactMusicPlayer from './ReactMusicPlayer';
+import './player.css';
+import { current } from '@reduxjs/toolkit';
 
 const Widget = styled('div')(({ theme }) => ({
-  display: 'flex',
-  justifyContent: 'space-between',
-  padding: 10,
-  // borderTopRightRadius: 30,
-  // borderTopLeftRadius: 30,
-  height: 100,
-  left: 0,
-  right: 0,
-  maxWidth: '100%',
-  margin: 'auto',
-  position: 'relative',
   backgroundColor:
     theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.6)' : 'white',
-  backdropFilter: 'blur(40px)',
 }));
 
-const CoverImage = styled('div')({
-  width: 100,
-  height: 100,
-  objectFit: 'cover',
-  overflow: 'hidden',
-  flexShrink: 0,
-  borderRadius: 60,
-  backgroundColor: 'rgba(0,0,0,0.08)',
-  '& > img': {
-    width: '100%',
-  },
-});
-
-const TinyText = styled(Typography)({
-  fontSize: '0.75rem',
-  opacity: 0.38,
-  fontWeight: 500,
-  letterSpacing: 0.2,
-});
-
-const MusicPlayerSlider = () => {
+const Player = () => {
   const isMobile = useMediaQuery('(max-width:600px)');
   const theme = useTheme();
   const duration = 200; // seconds
@@ -87,9 +24,20 @@ const MusicPlayerSlider = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(setActiveSong({ isPlaying: paused.play, isPause: paused.pause }));
-  }, [paused]);
+  const [position, setPosition] = useState(0);
+  const [play, setPlay] = useState(false);
+  const [volume, setVolume] = useState(0.5);
+  const [isSeeking, setIsSeeking] = useState(false);
+  const [songDuration, setSongDuration] = useState(0);
+  const [artistName, setArtistName] = useState('');
+  const [songImage, setSongImage] = useState('');
+  const [songName, setSongName] = useState('');
+  const [globalData, setGlobalData] = useState({});
+  const [globalIndex, setGlobalIndex] = useState(0);
+  const [time, setTime] = useState({
+    played: 0,
+    playedSeconds: 0,
+  });
 
   const updatePlayerWithGlobalState = useSelector((state) => state.playerSlice.isPlayIsPause);
 
@@ -100,24 +48,107 @@ const MusicPlayerSlider = () => {
     const secondLeft = value - minute * 60;
     return `${minute}:${secondLeft < 10 ? `0${secondLeft}` : secondLeft}`;
   }
-  const mainIconColor = theme.palette.mode === 'dark' ? '#fff' : '#000';
-  const lightIconColor = theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.4)';
+
+  const handleVolumeChange = (e) => {
+    setVolume(parseFloat(e.target.value));
+  };
+
+  const handleSeekMouseDown = () => {
+    setIsSeeking(true);
+  };
+
+  const handleSeekMouseUp = () => {
+    setIsSeeking(false);
+  };
+
+  const handleSeekChange = (e) => {
+    setTime({ played: parseFloat(e.target.value) });
+    refForPlayer.current.seekTo(parseFloat(e.target.value));
+  };
+
+  const updatePlayPause = (value) => {
+    setPlay(value);
+  };
+  console.log(`globalIndex${globalIndex}`);
+  const selectNextMusic = () => {
+    dispatch(setActiveSong(globalData[globalIndex + 1]?.hub?.actions[1]?.uri));
+    dispatch(setArtistAndSongAndImage({ artist: globalData[globalIndex + 1].title, song: globalData[globalIndex + 1].subtitle, image: globalData[globalIndex + 1].images.coverart, alt: globalData[globalIndex + 1].title }));
+    setGlobalIndex((prev) => prev + 1);
+  };
+  console.log(`globalIndex${globalIndex}`);
+  const selectPreviousMusic = () => {
+    if (globalIndex >= 1) {
+      dispatch(setActiveSong(globalData[globalIndex - 1]?.hub?.actions[1]?.uri));
+      dispatch(setArtistAndSongAndImage({ artist: globalData[globalIndex - 1].title, song: globalData[globalIndex - 1].subtitle, image: globalData[globalIndex - 1].images.coverart, alt: globalData[globalIndex - 1].title }));
+      setGlobalIndex((prev) => prev - 1);
+    }
+  };
+
+  // Redux get global state to update the progress bar and position (time)
+  const { playedSeconds, seeking, played, duration, song, artist, alt, image, dataSongs, currentIndex } = useSelector((state) => state.playerSlice);
+
+  useEffect(() => {
+    setGlobalData(dataSongs);
+  }, [dataSongs]);
+
+  useEffect(() => {
+    setGlobalIndex(currentIndex);
+  }, [currentIndex]);
+
+  useEffect(() => {
+    setSongDuration(duration);
+  }, [duration]);
+
+  useEffect(() => {
+    setTime({ played, playedSeconds });
+  }, [played]);
+
+  useEffect(() => {
+    setIsSeeking(seeking);
+  }, [seeking]);
+
+  useEffect(() => {
+    setPosition(playedSeconds);
+  }, [playedSeconds]);
+
+  useEffect(() => {
+    setSongName(song);
+  }, [song]);
+
+  useEffect(() => {
+    setArtistName(artist);
+  }, [artist]);
+
+  useEffect(() => {
+    setSongImage(image);
+  }, [image]);
+
+  useEffect(() => {
+    setSongImage(image);
+  }, [globalIndex]);
+
+  // Redux push to set global state and update the player volume and play/pause button
+  useEffect(() => {
+    dispatch(setPlayOrPause(play));
+  }, [play]);
+
+  useEffect(() => {
+    dispatch(setGlobalVolume(volume));
+  }, [volume]);
+
   return (
     <Box>
       {!isMobile ? (
-        <Box sx={{ width: '100%',
-          overflow: 'hidden',
-          boxShadow: theme.palette.mode === 'dark' ? '10px 0px 30px #bf0bcc' : '10px 0px 30px rgba(0,0,0,0.6)',
-        }}
-        >
-          <Widget>
+        <Box className="box-shadow">
+          <ReactMusicPlayer refForPlayer={refForPlayer} updatePlayPause={updatePlayPause} />
+          <Widget className="widget">
             <Box sx={{ alignItems: 'center', display: 'flex' }}>
-              <CoverImage>
+              <div className="cover-image">
                 <img
-                  alt="can't win - Chilling Sunday"
-                  src={logoLight}
+                  alt={alt}
+                  src={songImage}
                 />
-              </CoverImage>
+              </div>
               <Box sx={{ ml: 1.5, minWidth: 0 }}>
                 <Typography variant="caption" color="text.secondary" fontWeight={500}>
                   Somewhere i belong
@@ -131,11 +162,14 @@ const MusicPlayerSlider = () => {
               <Slider
                 aria-label="time-indicator"
                 size="small"
-                value={position}
+                value={time.played}
                 min={0}
-                step={1}
-                max={duration}
-                onChange={(_, value) => setPosition(value)}
+                step={0.05}
+                max={0.999999}
+                onMouseDown={handleSeekMouseDown}
+                onChange={handleSeekChange}
+                onMouseUp={handleSeekMouseUp}
+                className="slider-seeking"
                 sx={{
                   color: theme.palette.mode === 'dark' ? '#fff' : 'rgba(0,0,0,0.87)',
                   height: 4,
@@ -171,8 +205,8 @@ const MusicPlayerSlider = () => {
                   mt: -2,
                 }}
               >
-                <TinyText>{formatDuration(position)}</TinyText>
-                <TinyText>-{formatDuration(duration - position)}</TinyText>
+                <Typography className="tinytext">{formatDuration(Math.floor(position))}</Typography>
+                <Typography className="tinytext">-{formatDuration(Math.floor(songDuration - position))}</Typography>
               </Box>
             </Box>
             <Box
@@ -183,7 +217,7 @@ const MusicPlayerSlider = () => {
                 mt: -1,
               }}
             >
-              <IconButton aria-label="previous song" onClick={() => {}}>
+              <IconButton aria-label="previous song" onClick={() => selectPreviousMusic(globalIndex)}>
                 <FastRewindRounded fontSize="large" htmlColor={mainIconColor} />
               </IconButton>
               <IconButton
@@ -199,7 +233,7 @@ const MusicPlayerSlider = () => {
                   <PauseRounded sx={{ fontSize: '3rem' }} htmlColor={mainIconColor} />
                 )}
               </IconButton>
-              <IconButton aria-label="next song" onClick={() => {}}>
+              <IconButton aria-label="next song" onClick={() => selectNextMusic(globalIndex)}>
                 <FastForwardRounded fontSize="large" htmlColor={mainIconColor} />
               </IconButton>
             </Box>
@@ -229,21 +263,16 @@ const MusicPlayerSlider = () => {
               <VolumeUpRounded htmlColor={lightIconColor} />
             </Stack>
           </Widget>
-          {/* <WallPaper /> */}
         </Box>
       ) : (
-        <Box sx={{ width: '100%',
-          overflow: 'hidden',
-          boxShadow: theme.palette.mode === 'dark' ? '10px 0px 30px #bf0bcc' : '10px 0px 30px rgba(0,0,0,0.6)',
-        }}
-        >
-          <Widget style={{ bottom: '0px', overflow: 'hidden', display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', height: '100px', padding: '10px', boxShadow: '10px 0px 35px #bf0bcc' }}>
-            <CoverImage>
+        <Box>
+          <Widget style={{ overflow: 'hidden', display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', height: '100px', padding: '10px', boxShadow: '10px 0px 35px #bf0bcc' }}>
+            <div className="cover-image">
               <img
                 alt="can't win - Chilling Sunday"
                 src={logoLight}
               />
-            </CoverImage>
+            </div>
             <Box
               sx={{
                 display: 'flex',
