@@ -1,35 +1,24 @@
 import { Autocomplete, Box, TextField } from '@mui/material';
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { selectGenre } from '../features/currentGenre.js';
 
 const CountrySelector = (props) => {
-  const { countriesList } = props;
+  const { countriesList, changeCountry, countrySelected } = props;
 
-  const initialStateValue = countriesList ? countriesList[17].name : 'France';
-  const initialStateDataCountry = countriesList ? countriesList[17] : { code: 'FR', name: 'France' };
-
-  const [inputValue, setInputValue] = useState(initialStateValue);
-  const [dataCountry, setDataCountry] = useState(initialStateDataCountry);
-  const dispatch = useDispatch();
-
-  const updateCountry = useSelector((state) => {
-    return state.currentGenre.countryCodeAndName;
-  });
+  const [value, setValue] = useState(countrySelected);
+  const [inputValue, setInputValue] = useState('');
 
   useEffect(() => {
-    setDataCountry(updateCountry);
-  }, [updateCountry]);
+    setValue(countrySelected);
+  }, [countrySelected]);
 
   return (
 
     <Autocomplete
-      sx={{ width: 300, margin: '2% 0' }}
-      value={dataCountry}
+      sx={{ width: '300px' }}
+      value={value}
       onChange={(event, newValue) => {
-        dispatch(selectGenre({ name: newValue.name, code: newValue.code }));
-        setDataCountry(newValue);
+        changeCountry({ code: newValue.code, name: newValue.name });
+        setValue(newValue);
       }}
       inputValue={inputValue}
       onInputChange={(event, newInputValue) => {
@@ -38,10 +27,11 @@ const CountrySelector = (props) => {
       id="dropdown-selector"
       options={countriesList}
       getOptionLabel={(option) => { return option.name; }}
-      renderOption={(props, country) => {
+      isOptionEqualToValue={(option, valueMui) => { return option.name === valueMui.name; }}
+      renderOption={(prop, country) => {
         return (
         // eslint-disable-next-line react/jsx-props-no-spreading
-          <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
+          <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...prop}>
             <img
               loading="lazy"
               width="20"
@@ -56,7 +46,13 @@ const CountrySelector = (props) => {
       renderInput={(params) => {
         return (
         // eslint-disable-next-line react/jsx-props-no-spreading
-          <TextField {...params} label="Select a country" />
+          <TextField
+            {...params}
+            label="Select a country"
+            inputProps={{
+              ...params.inputProps,
+            }}
+          />
         );
       }}
     />

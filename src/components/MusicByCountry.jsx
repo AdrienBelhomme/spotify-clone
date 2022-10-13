@@ -1,6 +1,5 @@
 import { Box, Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { useGetCountriesQuery, useGetWorldChartsByCountryQuery } from '../services/shazam.js';
 
 import GridForGenre from './GridForGenre.jsx';
@@ -33,27 +32,11 @@ const MusicByCountry = () => {
     };
   });
 
-  const initialStateValue = !isFetchingShazam && dataShazam ? shazamList[17].name : 'France';
-  const initialStateDataCountry = !isFetchingShazam && dataShazam ? shazamList[17] : { code: 'FR', name: 'France' };
+  const [dataCountry, setDataCountry] = useState(!isFetchingShazam && dataShazam ? shazamList[31] : { code: 'FR', name: 'France' });
 
-  const [inputValue, setInputValue] = useState(initialStateValue);
-  const [dataCountry, setDataCountry] = useState(initialStateDataCountry);
-
-  const updateCountry = useSelector((state) => {
-    return state.currentGenre.countryCodeAndName;
-  });
-
-  const updateCountryNameOnly = useSelector((state) => {
-    return state.currentGenre.countryName;
-  });
-
-  useEffect(() => {
-    setInputValue(updateCountryNameOnly);
-  }, [updateCountryNameOnly]);
-
-  useEffect(() => {
-    setDataCountry(updateCountry);
-  }, [updateCountry]);
+  const changeCountry = (country) => {
+    setDataCountry(country);
+  };
 
   const { data, isFetching, error } = useGetWorldChartsByCountryQuery(dataCountry === null || undefined ? 'FR' : dataCountry.code);
 
@@ -66,7 +49,6 @@ const MusicByCountry = () => {
   }
 
   if (error) {
-    // console.log(error);
     return (
       <Typography>
         unknow error
@@ -77,9 +59,9 @@ const MusicByCountry = () => {
   return (
     <div>
 
-      <GridForGenre data={data} country={inputValue} countriesList={shazamList} />
+      {shazamList && <GridForGenre data={data} countrySelected={dataCountry} countriesList={shazamList} changeCountry={changeCountry} />}
 
-      <GridForMusic data={data} country={inputValue} />
+      {data && <GridForMusic data={data} country={dataCountry.name} />}
 
     </div>
 

@@ -2,27 +2,30 @@
 import { styled } from '@mui/material/styles';
 import { IconButton, Paper } from '@mui/material';
 import { Favorite, PlayCircleOutline, Chat } from '@mui/icons-material';
-import './CardMusic.css';
 
-const Item = styled(Paper)(({ theme }) => {
-  return {
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    textAlign: 'center',
-    background: '#FFFFFF',
-    borderRadius: '24px',
-    display: 'flex',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    color: 'white',
-    width: '700px',
-  };
-});
+import './CardMusic.css';
+import { useDispatch } from 'react-redux';
+import { setActiveSong, setArtistAndSongAndImage, setDataAndIndex } from '../features/playerSlice';
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+}));
 
 const CardCountry = (props) => {
   const { data, index } = props;
 
+  const dispatch = useDispatch();
+
   const selectMusic = (i) => {
-    console.log(data[i]?.hub?.actions[1]?.uri);
+    dispatch(setActiveSong(data[i]?.hub?.actions[1]?.uri));
+  };
+
+  const selectDataAndIndex = (dataCard, indexCard) => {
+    dispatch(setDataAndIndex({ data: dataCard, index: indexCard }));
+  };
+
+  const dispatchArtistAndSongAndImage = (i) => {
+    dispatch(setArtistAndSongAndImage({ artist: data[i].title, song: data[i].subtitle, image: data[i].images.coverart, alt: data[i].title }));
   };
 
   return (
@@ -47,7 +50,7 @@ const CardCountry = (props) => {
           />
           <div className="play-button">
             <IconButton
-              onClick={() => { return selectMusic(index); }}
+              onClick={() => { selectMusic(index); dispatchArtistAndSongAndImage(index); selectDataAndIndex(data, index); }}
               aria-label="play"
               variant="soft"
               size="large"

@@ -9,6 +9,14 @@
     background: #ffffff80!important;
     height: 120px;
     margin-left: 5%;
+    text-align: center;
+    background: #FFFFFF;
+    border-radius: 24px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: white;
+    width: 700px;
 }
 
 .card {
