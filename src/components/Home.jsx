@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Box, Grid } from '@mui/material';
 // import { useNavigate } from 'react-router-dom';
 
-// import CardMusic from './CardMusic';
+import CardMusic from './CardMusic';
 import './GridForMusic.css';
 import { useSearchSongsQuery } from '../services/shazam';
 import Loader from './Loader';
@@ -13,7 +13,6 @@ const Home = () => {
   const { query } = useSelector((state) => { return state.currentGenre; });
 
   const { data, isFetching, error } = useSearchSongsQuery(query);
-  console.log('Here', data);
 
   const songs = data?.tracks?.hits.map((song) => { return song.track; });
 
@@ -47,12 +46,10 @@ const Home = () => {
               flexDirection: 'column',
             }}
           >
-            {songs?.map((song) => {
+            {songs?.map((song, index) => {
               return (
-                <div key={song.key}>
-                  <p>{song.title}</p>
-                  <img src={song.images.coverart} alt="searchimg" />
-                </div>
+                <CardMusic key={song.key} data={songs} index={index} />
+
               );
             })}
 
@@ -65,3 +62,8 @@ const Home = () => {
   );
 };
 export default Home;
+
+//   <div key={song.key}>
+// <p>{song.title}</p>
+// <img src={song.images.coverart} alt="searchimg" />
+// </div>

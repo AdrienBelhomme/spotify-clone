@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { InputAdornment, TextField, Paper, useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 
 import { searchSongs } from '../features/currentGenre';
 import search from '../assets/images/search.png';
@@ -12,10 +13,12 @@ const Search = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const isMobile = useMediaQuery('(max-width:600px)');
+  const location = useLocation();
 
   const handleSearch = (event) => {
     if (event.key === 'Enter') { dispatch(searchSongs(query)); }
   };
+  if (location.pathname !== '/') { return 'null'; }
 
   return (
     <div>

@@ -48,7 +48,7 @@ export const shazamApi = createApi({
       // Search songs
       searchSongs: builder.query({
         query: (query) => {
-          console.log(query);
+          if (query === '') { return 'charts/world'; }
           return `search/multi?search_type=SONGS_ARTISTS&query=${query}`;
         },
       }),
