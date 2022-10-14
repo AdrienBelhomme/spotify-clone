@@ -33,9 +33,7 @@ const GridForGenre = (props) => {
               overflowX: 'auto' }}
             className="scroll-box"
           >
-            {topCountries.map((country, i) => {
-              return <CardCountry key={i} data={data} countryCode={country.code} countryName={country.name} index={i} changeCountry={changeCountry} />;
-            })}
+            {topCountries.map((country, i) => <CardCountry key={i} data={data} countryCode={country.code} countryName={country.name} index={i} changeCountry={changeCountry} />)}
 
           </Grid>
         </Grid>

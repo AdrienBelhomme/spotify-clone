@@ -40,8 +40,8 @@ const CardCountry = (props) => {
         <div className="img">
           <img
             className="filter-img"
-            src={`${data[index].images.coverart}`}
-            srcSet={`${data[index].images.coverart}`}
+            src={data[index].images.coverart}
+            srcSet={data[index].images.coverart}
             alt={`${data[index].title}-cover`}
             loading="lazy"
             width="100px"

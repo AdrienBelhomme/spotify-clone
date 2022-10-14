@@ -26,34 +26,30 @@ const CountrySelector = (props) => {
       }}
       id="dropdown-selector"
       options={countriesList}
-      getOptionLabel={(option) => { return option.name; }}
-      isOptionEqualToValue={(option, valueMui) => { return option.name === valueMui.name; }}
-      renderOption={(prop, country) => {
-        return (
+      getOptionLabel={(option) => option.name}
+      isOptionEqualToValue={(option, valueMui) => option.name === valueMui.name}
+      renderOption={(prop, country) => (
         // eslint-disable-next-line react/jsx-props-no-spreading
-          <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...prop}>
-            <img
-              loading="lazy"
-              width="20"
-              src={`https://flagcdn.com/w20/${country.code.toLowerCase()}.png`}
-              srcSet={`https://flagcdn.com/w40/${country.code.toLowerCase()}.png 2x`}
-              alt=""
-            />
-            {country.name}
-          </Box>
-        );
-      }}
-      renderInput={(params) => {
-        return (
-        // eslint-disable-next-line react/jsx-props-no-spreading
-          <TextField
-            {...params}
-            label="Select a country"
-            inputProps={{
-              ...params.inputProps,
-            }}
+        <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...prop}>
+          <img
+            loading="lazy"
+            width="20"
+            src={`https://flagcdn.com/w20/${country.code.toLowerCase()}.png`}
+            srcSet={`https://flagcdn.com/w40/${country.code.toLowerCase()}.png 2x`}
+            alt=""
           />
-        );
+          {country.name}
+        </Box>
+      )}
+      renderInput={(params) => {
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        <TextField
+          {...params}
+          label="Select a country"
+          inputProps={{
+            ...params.inputProps,
+          }}
+        />;
       }}
     />
 
