@@ -24,11 +24,10 @@ const GridForMusic = (props) => {
             item
             sx={{ display: 'flex',
               flexDirection: 'column',
+              marginBottom: '3rem',
             }}
           >
-            {data.slice(0, 20).map((countrymap, i) => {
-              return <CardMusic key={i} data={data} country={countrymap.name} index={i} />;
-            })}
+            {data.slice(0, 20).map((countrymap, i) => <CardMusic key={i} data={data} country={countrymap.name} index={i} />)}
 
           </Grid>
           <TopOneCard data={data} country={country} />
