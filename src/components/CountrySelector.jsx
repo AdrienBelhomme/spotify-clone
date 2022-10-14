@@ -41,16 +41,16 @@ const CountrySelector = (props) => {
           {country.name}
         </Box>
       )}
-      renderInput={(params) => {
-        // eslint-disable-next-line react/jsx-props-no-spreading
+      renderInput={(params) => (
         <TextField
+          // eslint-disable-next-line react/jsx-props-no-spreading
           {...params}
           label="Select a country"
           inputProps={{
             ...params.inputProps,
           }}
-        />;
-      }}
+        />
+      )}
     />
 
   );
