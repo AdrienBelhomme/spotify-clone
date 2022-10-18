@@ -25,12 +25,10 @@ const MusicByCountry = () => {
     );
   }
 
-  const shazamList = !isFetchingShazam && dataShazam && dataShazam.map((country) => {
-    return {
-      name: country.name,
-      code: country.code,
-    };
-  });
+  const shazamList = !isFetchingShazam && dataShazam && dataShazam.map((country) => ({
+    name: country.name,
+    code: country.code,
+  }));
 
   const [dataCountry, setDataCountry] = useState(!isFetchingShazam && dataShazam ? shazamList[31] : { code: 'FR', name: 'France' });
 
