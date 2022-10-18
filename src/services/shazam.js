@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const shazamApiKey = process.env.REACT_APP_SHAZAM_KEY;
@@ -20,7 +21,7 @@ export const shazamApi = createApi({
       getWorldCharts: builder.query({
         query: () => { return 'charts/world'; },
       }),
-      // Get artits details
+      // Get artists details
       getArtistDetails: builder.query({
         query: (artistId) => { return `artists/details?artist_id=${artistId}`; },
       }),
@@ -46,14 +47,9 @@ export const shazamApi = createApi({
       }),
       // Search songs
       searchSongs: builder.query({
-        query: (offset, query) => {
-          return `search/multi?offset=${offset}&query=${query}&search_type='SONGS'`;
-        },
-      }),
-      // Search artist
-      searchArtists: builder.query({
-        query: (offset, query) => {
-          return `search/multi?offset=${offset}&query=${query}&search_type='ARTISTS'`;
+        query: (query) => {
+          if (query === '') { return 'charts/world'; }
+          return `search/multi?search_type=SONGS_ARTISTS&query=${query}`;
         },
       }),
       // Get List of Countries (53 in total)
@@ -67,5 +63,13 @@ export const shazamApi = createApi({
   },
 });
 
-export const { useGetWorldChartsQuery, useGetCountriesQuery, useGetArtistDetailsQuery, useGetSongDetailsQuery, useGetWorldChartsByGenreQuery, useGetWorldChartsByCityQuery, useGetWorldChartsByCountryQuery, useGetRelatedSongsQuery, useSearchSongsQuery,
+export const { useGetWorldChartsQuery,
+  useGetCountriesQuery,
+  useGetArtistDetailsQuery,
+  useGetSongDetailsQuery,
+  useGetWorldChartsByGenreQuery,
+  useGetWorldChartsByCityQuery,
+  useGetWorldChartsByCountryQuery,
+  useGetRelatedSongsQuery,
+  useSearchSongsQuery,
   useSearchArtistsQuery } = shazamApi;

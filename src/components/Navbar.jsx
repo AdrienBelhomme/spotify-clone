@@ -19,7 +19,7 @@ const Navbar = () => {
     <>
       <AppBar
         position="fixed"
-        style={{ display: 'flex', boxShadow: '10px 0px 20px #bf0bcc' }}
+        style={{ display: 'flex', boxShadow: theme.palette.mode === 'dark' ? '10px 0px 30px #bf0bcc' : '10px 0px 30px rgba(0,0,0,0.6)' }}
         sx={{ backgroundColor:
     theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.6)' : 'white',
         backdropFilter: 'blur(40px)' }}

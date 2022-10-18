@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { useGetCountriesQuery, useGetWorldChartsByCountryQuery } from '../services/shazam.js';
 
@@ -12,7 +12,7 @@ const MusicByCountry = () => {
   if (isFetchingShazam) {
     return (
       <Box display="flex" justifyContent="center">
-        <CircularProgress size="4rem" />
+        <Loader />
       </Box>
     );
   }
