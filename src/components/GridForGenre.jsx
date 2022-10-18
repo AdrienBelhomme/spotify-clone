@@ -1,34 +1,45 @@
-import { Grid, Paper } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { DataObject } from '@mui/icons-material';
+import { Box, Grid } from '@mui/material';
+import CardCountry from './CardCountry';
 
-const Item = styled(Paper)(({ theme }) => {
-  return {
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  };
-});
+import { topCountries } from './countryListApi';
+import CountrySelector from './CountrySelector';
+import './GridForGenre.css';
 
-const GridForGenre = () => {
+const GridForGenre = (props) => {
+  const { data, countriesList, changeCountry, countrySelected, changeCountryForSelector } = props;
+
   return (
-    <Grid
-      container
-      direction="row"
-      justifyContent="flex-start"
-      alignItems="center"
-      spacing={5}
-      sx={{ backgroundColor: 'grey' }}
-    >
-      <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-        <Item>Country 1</Item>
-      </Grid>
-      <Grid item xs={6} sm={4} md={3} lg={2} xl={1}>
-        <Item>Country 2</Item>
-      </Grid>
+    <div>
+      <Box
+        mt={4}
+        mb={4}
+        sx={{
+          backgroundColor: 'rgba(255, 255, 255, 0.8)',
+          borderRadius: '40px',
+          flexGrow: 1,
+          padding: '3%',
+        }}
+      >
+        <h1 style={{ marginTop: 0 }}>Top charts by country</h1>
+        <CountrySelector changeCountryForSelector={changeCountryForSelector} countrySelected={countrySelected} data={data} countriesList={countriesList} changeCountry={changeCountry} />
+        <Grid container sx={{ display: 'flex' }}>
+          <Grid
+            item
+            sx={{
+              display: 'flex',
+              flexWrap: 'nowrap',
+              paddingBottom: '25px',
+              overflowX: 'auto' }}
+            className="scroll-box"
+          >
+            {topCountries.map((country, i) => <CardCountry key={i} data={data} countryCode={country.code} countryName={country.name} index={i} changeCountry={changeCountry} />)}
 
-    </Grid>
+          </Grid>
+        </Grid>
+      </Box>
+
+    </div>
   );
 };
 

@@ -1,185 +1,210 @@
-import * as React from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import { Box, Typography, Slider, IconButton, Stack, useMediaQuery } from '@mui/material';
 import { PauseRounded, PlayArrowRounded, FastForwardRounded, FastRewindRounded, VolumeUpRounded, VolumeDownRounded } from '@mui/icons-material';
+import { useDispatch, useSelector } from 'react-redux';
+
 import logoLight from '../assets/images/Music_UNIVERSE__2_-removebg-preview.png';
+import { setActiveSong, setArtistAndSongAndImage, setDataAndIndex, setGlobalVolume, setPlayOrPause } from '../features/playerSlice';
+import ReactMusicPlayer from './ReactMusicPlayer';
+import './player.css';
+import { current } from '@reduxjs/toolkit';
 
-const Widget = styled('div')(({ theme }) => {
-  return {
-    padding: 16,
-    borderRadius: 16,
-    width: 200,
-    height: '100%',
-    maxWidth: '100%',
-    margin: 'auto',
-    position: 'relative',
-    zIndex: 1,
-    backgroundColor:
-    theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.4)',
-    backdropFilter: 'blur(40px)',
-  };
-});
+const Widget = styled('div')(({ theme }) => ({
+  backgroundColor:
+    theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.6)' : 'white',
+}));
 
-const CoverImage = styled('div')({
-  width: 100,
-  height: 100,
-  objectFit: 'cover',
-  overflow: 'hidden',
-  flexShrink: 0,
-  borderRadius: 8,
-  backgroundColor: 'rgba(0,0,0,0.08)',
-  '& > img': {
-    width: '100%',
-  },
-});
-
-const TinyText = styled(Typography)({
-  fontSize: '0.75rem',
-  opacity: 0.38,
-  fontWeight: 500,
-  letterSpacing: 0.2,
-});
-
-const MusicPlayerSlider = () => {
-  const isMobile = useMediaQuery('(min-width:600px)');
+const Player = () => {
+  const isMobile = useMediaQuery('(max-width:600px)');
   const theme = useTheme();
-  const duration = 200; // seconds
-  const [position, setPosition] = React.useState(32);
-  const [paused, setPaused] = React.useState(false);
+  const dispatch = useDispatch();
+  const mainIconColor = theme.palette.mode === 'dark' ? '#fff' : '#000';
+  const lightIconColor = theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.4)';
+
+  const [position, setPosition] = useState(0);
+  const [play, setPlay] = useState(false);
+  const [volume, setVolume] = useState(0.5);
+  const [isSeeking, setIsSeeking] = useState(false);
+  const [songDuration, setSongDuration] = useState(0);
+  const [artistName, setArtistName] = useState('');
+  const [songImage, setSongImage] = useState('');
+  const [songName, setSongName] = useState('');
+  const [globalData, setGlobalData] = useState({});
+  const [globalIndex, setGlobalIndex] = useState(0);
+  const [time, setTime] = useState({
+    played: 0,
+    playedSeconds: 0,
+  });
+
+  const refForPlayer = useRef(null);
+
   function formatDuration(value) {
     const minute = Math.floor(value / 60);
     const secondLeft = value - minute * 60;
     return `${minute}:${secondLeft < 10 ? `0${secondLeft}` : secondLeft}`;
   }
-  const mainIconColor = theme.palette.mode === 'dark' ? '#fff' : '#000';
-  const lightIconColor = theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.4)';
-  return (
 
-    <Box sx={{ width: '100%', overflow: 'hidden', padding: '10px' }}>
-      {isMobile ? (
-        <Widget>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <CoverImage>
-              <img
-                alt="can't win - Chilling Sunday"
-                src={logoLight}
-              />
-            </CoverImage>
-            <Box sx={{ ml: 1.5, minWidth: 0 }}>
-              <Typography variant="caption" color="text.secondary" fontWeight={500}>
-                Jun Pulse
-              </Typography>
-              <Typography noWrap>
-                <b>คนเก่าเขาทำไว้ดี (Can&apos;t win)</b>
-              </Typography>
-              <Typography noWrap letterSpacing={-0.25}>
-                Chilling Sunday &mdash; คนเก่าเขาทำไว้ดี
-              </Typography>
-            </Box>
-          </Box>
-          <Slider
-            aria-label="time-indicator"
-            size="small"
-            value={position}
-            min={0}
-            step={1}
-            max={duration}
-            onChange={(_, value) => { return setPosition(value); }}
-            sx={{
-              color: theme.palette.mode === 'dark' ? '#fff' : 'rgba(0,0,0,0.87)',
-              height: 4,
-              '& .MuiSlider-thumb': {
-                width: 8,
-                height: 8,
-                transition: '0.3s cubic-bezier(.47,1.64,.41,.8)',
-                '&:before': {
-                  boxShadow: '0 2px 12px 0 rgba(0,0,0,0.4)',
-                },
-                '&:hover, &.Mui-focusVisible': {
-                  boxShadow: `0px 0px 0px 8px ${
-                    theme.palette.mode === 'dark'
-                      ? 'rgb(255 255 255 / 16%)'
-                      : 'rgb(0 0 0 / 16%)'
-                  }`,
-                },
-                '&.Mui-active': {
-                  width: 20,
-                  height: 20,
-                },
-              },
-              '& .MuiSlider-rail': {
-                opacity: 0.28,
-              },
-            }}
-          />
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              mt: -2,
-            }}
-          >
-            <TinyText>{formatDuration(position)}</TinyText>
-            <TinyText>-{formatDuration(duration - position)}</TinyText>
-          </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              mt: -1,
-            }}
-          >
-            <IconButton aria-label="previous song">
-              <FastRewindRounded fontSize="large" htmlColor={mainIconColor} />
-            </IconButton>
-            <IconButton
-              aria-label={paused ? 'play' : 'pause'}
-              onClick={() => { return setPaused(!paused); }}
-            >
-              {paused ? (
-                <PlayArrowRounded
-                  sx={{ fontSize: '3rem' }}
-                  htmlColor={mainIconColor}
+  const handleVolumeChange = (e) => {
+    setVolume(parseFloat(e.target.value));
+  };
+
+  const handleSeekMouseDown = () => {
+    setIsSeeking(true);
+  };
+
+  const handleSeekMouseUp = () => {
+    setIsSeeking(false);
+  };
+
+  const handleSeekChange = (e) => {
+    setTime({ played: parseFloat(e.target.value) });
+    refForPlayer.current.seekTo(parseFloat(e.target.value));
+  };
+
+  const updatePlayPause = (value) => {
+    setPlay(value);
+  };
+
+  const selectNextMusic = () => {
+    dispatch(setActiveSong(globalData[globalIndex + 1]?.hub?.actions[1]?.uri));
+    dispatch(setArtistAndSongAndImage({ artist: globalData[globalIndex + 1].title, song: globalData[globalIndex + 1].subtitle, image: globalData[globalIndex + 1].images.coverart, alt: globalData[globalIndex + 1].title }));
+    setGlobalIndex((prev) => prev + 1);
+  };
+
+  const selectPreviousMusic = () => {
+    if (globalIndex >= 1) {
+      dispatch(setActiveSong(globalData[globalIndex - 1]?.hub?.actions[1]?.uri));
+      dispatch(setArtistAndSongAndImage({ artist: globalData[globalIndex - 1].title, song: globalData[globalIndex - 1].subtitle, image: globalData[globalIndex - 1].images.coverart, alt: globalData[globalIndex - 1].title }));
+      setGlobalIndex((prev) => prev - 1);
+    }
+  };
+
+  // Redux get global state to update the progress bar and position (time)
+  const { playedSeconds, seeking, played, duration, song, artist, alt, image, dataSongs, currentIndex } = useSelector((state) => state.playerSlice);
+
+  useEffect(() => {
+    setGlobalData(dataSongs);
+  }, [dataSongs]);
+
+  useEffect(() => {
+    setGlobalIndex(currentIndex);
+  }, [currentIndex]);
+
+  useEffect(() => {
+    setSongDuration(duration);
+  }, [duration]);
+
+  useEffect(() => {
+    setTime({ played, playedSeconds });
+  }, [played]);
+
+  useEffect(() => {
+    setIsSeeking(seeking);
+  }, [seeking]);
+
+  useEffect(() => {
+    setPosition(playedSeconds);
+  }, [playedSeconds]);
+
+  useEffect(() => {
+    setSongName(song);
+  }, [song]);
+
+  useEffect(() => {
+    setArtistName(artist);
+  }, [artist]);
+
+  useEffect(() => {
+    setSongImage(image);
+  }, [image]);
+
+  useEffect(() => {
+    setSongImage(image);
+  }, [globalIndex]);
+
+  // Redux push to set global state and update the player volume and play/pause button
+  useEffect(() => {
+    dispatch(setPlayOrPause(play));
+  }, [play]);
+
+  useEffect(() => {
+    dispatch(setGlobalVolume(volume));
+  }, [volume]);
+
+  return (
+    <Box>
+      {!isMobile ? (
+        <Box className="box-shadow">
+          <ReactMusicPlayer refForPlayer={refForPlayer} updatePlayPause={updatePlayPause} />
+          <Widget className="widget">
+            <Box sx={{ alignItems: 'center', display: 'flex' }}>
+              <div className="cover-image">
+                <img
+                  alt={alt}
+                  src={songImage}
                 />
-              ) : (
-                <PauseRounded sx={{ fontSize: '3rem' }} htmlColor={mainIconColor} />
-              )}
-            </IconButton>
-            <IconButton aria-label="next song">
-              <FastForwardRounded fontSize="large" htmlColor={mainIconColor} />
-            </IconButton>
-          </Box>
-          <Stack spacing={2} direction="row" sx={{ mb: 1, px: 1 }} alignItems="center">
-            <VolumeDownRounded htmlColor={lightIconColor} />
-            <Slider
-              aria-label="Volume"
-              defaultValue={30}
-              sx={{
-                color: theme.palette.mode === 'dark' ? '#fff' : 'rgba(0,0,0,0.87)',
-                '& .MuiSlider-track': {
-                  border: 'none',
-                },
-                '& .MuiSlider-thumb': {
-                  width: 24,
-                  height: 24,
-                  backgroundColor: '#fff',
-                  '&:before': {
-                    boxShadow: '0 4px 8px rgba(0,0,0,0.4)',
+              </div>
+              <Box sx={{ ml: 1.5, minWidth: 0 }}>
+                <Typography variant="caption" color="text.secondary" fontWeight={500}>
+                  {songName}
+                </Typography>
+                <Typography noWrap>
+                  <b>{artistName}</b>
+                </Typography>
+              </Box>
+            </Box>
+            <Box sx={{ alignItems: 'center', width: '200px', margin: 'auto 0' }}>
+              <Slider
+                aria-label="time-indicator"
+                size="small"
+                value={time.played}
+                min={0}
+                step={0.05}
+                max={0.999999}
+                onMouseDown={handleSeekMouseDown}
+                onChange={handleSeekChange}
+                onMouseUp={handleSeekMouseUp}
+                className="slider-seeking"
+                sx={{
+                  color: theme.palette.mode === 'dark' ? '#fff' : 'rgba(0,0,0,0.87)',
+                  height: 4,
+                  '& .MuiSlider-thumb': {
+                    width: 4,
+                    height: 8,
+                    transition: '0.3s cubic-bezier(.47,1.64,.41,.8)',
+                    '&:before': {
+                      boxShadow: '0 2px 12px 0 rgba(0,0,0,0.4)',
+                    },
+                    '&:hover, &.Mui-focusVisible': {
+                      boxShadow: `0px 0px 0px 8px ${
+                        theme.palette.mode === 'dark'
+                          ? 'rgb(255 255 255 / 16%)'
+                          : 'rgb(0 0 0 / 16%)'
+                      }`,
+                    },
+                    '&.Mui-active': {
+                      width: 20,
+                      height: 20,
+                    },
                   },
-                  '&:hover, &.Mui-focusVisible, &.Mui-active': {
-                    boxShadow: 'none',
+                  '& .MuiSlider-rail': {
+                    opacity: 0.28,
                   },
-                },
-              }}
-            />
-            <VolumeUpRounded htmlColor={lightIconColor} />
-          </Stack>
-        </Widget>
-      )
-        : (
-          <Widget>
+                }}
+              />
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  mt: -2,
+                }}
+              >
+                <Typography className="tinytext">{formatDuration(Math.floor(position))}</Typography>
+                <Typography className="tinytext">-{formatDuration(Math.floor(songDuration - position))}</Typography>
+              </Box>
+            </Box>
             <Box
               sx={{
                 display: 'flex',
@@ -188,29 +213,103 @@ const MusicPlayerSlider = () => {
                 mt: -1,
               }}
             >
-              <IconButton aria-label="previous song">
+              <IconButton aria-label="previous song" onClick={() => selectPreviousMusic(globalIndex)}>
                 <FastRewindRounded fontSize="large" htmlColor={mainIconColor} />
               </IconButton>
               <IconButton
-                aria-label={paused ? 'play' : 'pause'}
-                onClick={() => { return setPaused(!paused); }}
+                aria-label={play ? 'pause' : 'play'}
+                onClick={() => setPlay((prevState) => !prevState)}
               >
-                {paused ? (
+                {play ? (
+                  <PauseRounded sx={{ fontSize: '3rem' }} htmlColor={mainIconColor} />
+                ) : (
+
                   <PlayArrowRounded
                     sx={{ fontSize: '3rem' }}
                     htmlColor={mainIconColor}
                   />
-                ) : (
-                  <PauseRounded sx={{ fontSize: '3rem' }} htmlColor={mainIconColor} />
                 )}
               </IconButton>
-              <IconButton aria-label="next song">
+              <IconButton aria-label="next song" onClick={() => selectNextMusic(globalIndex)}>
+                <FastForwardRounded fontSize="large" htmlColor={mainIconColor} />
+              </IconButton>
+            </Box>
+            <Stack spacing={2} direction="row" sx={{ mb: 1, px: 1 }} alignItems="center" width="200px">
+              <VolumeDownRounded htmlColor={lightIconColor} />
+
+              <Slider
+                aria-label="Volume"
+                defaultValue={0.3}
+                step={0.1}
+                min={0}
+                max={1}
+                value={volume}
+                onChange={handleVolumeChange}
+                sx={{
+                  color: theme.palette.mode === 'dark' ? '#fff' : 'rgba(0,0,0,0.87)',
+                  '& .MuiSlider-track': {
+                    border: 'none',
+                  },
+                  '& .MuiSlider-thumb': {
+                    width: 24,
+                    height: 24,
+                    backgroundColor: '#fff',
+                    '&:before': {
+                      boxShadow: '0 4px 8px rgba(0,0,0,0.4)',
+                    },
+                    '&:hover, &.Mui-focusVisible, &.Mui-active': {
+                      boxShadow: 'none',
+                    },
+                  },
+                }}
+              />
+              <VolumeUpRounded htmlColor={lightIconColor} />
+            </Stack>
+          </Widget>
+        </Box>
+      ) : (
+        <Box>
+          <Widget style={{ overflow: 'hidden', display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', height: '100px', padding: '10px', boxShadow: '10px 0px 35px #bf0bcc' }}>
+            <div className="cover-image">
+              <img
+                alt="can't win - Chilling Sunday"
+                src={logoLight}
+              />
+            </div>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                mt: -1,
+              }}
+            >
+              <IconButton aria-label="previous song" onClick={() => console.log('clicked')}>
+                <FastRewindRounded fontSize="large" htmlColor={mainIconColor} />
+              </IconButton>
+              <IconButton
+                aria-label={play ? 'pause' : 'play'}
+                onClick={() => console.log('clicked')}
+              >
+                {play ? (
+                  <PauseRounded sx={{ fontSize: '3rem' }} htmlColor={mainIconColor} />
+                ) : (
+                  <PlayArrowRounded
+                    sx={{ fontSize: '3rem' }}
+                    htmlColor={mainIconColor}
+                  />
+
+                )}
+              </IconButton>
+              <IconButton aria-label="next song" onClick={() => {}}>
                 <FastForwardRounded fontSize="large" htmlColor={mainIconColor} />
               </IconButton>
             </Box>
           </Widget>
-        )}
+          {/* <WallPaper /> */}
+        </Box>
+      )}
     </Box>
   );
 };
-export default MusicPlayerSlider;
+export default Player;

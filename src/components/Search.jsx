@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { InputAdornment, TextField, Paper, useMediaQuery } from '@mui/material';
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
 
 import search from '../assets/images/search.png';
 
 const Search = () => {
   const [query, setQuery] = useState('');
-  const location = useLocation();
+  // const location = useLocation();
   const isMobile = useMediaQuery('(max-width:600px)');
   const handleSearch = () => {};
 
-  if (location.pathname !== '/') return 'null';
+  //   if (location.pathname !== '/') return 'null';
 
   return (
     <div>
