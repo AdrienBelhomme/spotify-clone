@@ -29,14 +29,6 @@ const GridForMusic = (props) => {
 
   pageToDisplay();
 
-  /* function usePrevious(value) {
-    const ref = useRef();
-    useEffect(() => {
-      ref.current = value;
-    });
-    return ref.current;
-  } */
-
   useEffect(() => {
     SetSlice(() => ({
       start: page * 5 - 5,
