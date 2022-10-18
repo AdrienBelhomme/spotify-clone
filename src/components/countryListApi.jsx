@@ -1,10 +1,8 @@
 import { Box, CircularProgress, Typography } from '@mui/material';
-// import { useEffect, useState } from 'react';
+
 import { useGetCountriesQuery } from '../services/shazam';
 
-const countryListApi = () => {
-  return ('empty');
-};
+const countryListApi = () => ('empty');
 
 const countriesList = () => {
   const { data, isFetching, error } = useGetCountriesQuery();
@@ -25,12 +23,10 @@ const countriesList = () => {
     );
   }
 
-  const shazamList = data.map((country) => {
-    return {
-      name: country.name,
-      code: country.code,
-    };
-  });
+  const shazamList = data.map((country) => ({
+    name: country.name,
+    code: country.code,
+  }));
 
   return isFetching ? 'wait' : shazamList;
 };
