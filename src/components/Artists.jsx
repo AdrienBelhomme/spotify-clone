@@ -4,15 +4,14 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowBack } from '@mui/icons-material';
 
 import { useGetArtistDetailsQuery } from '../services/shazam.js';
-import CardAlbum from './CardAlbum.jsx';
 
 const Artists = () => {
-  const { artistId } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
 
-  console.log(artistId);
+  console.log(id);
 
-  const { data: artistData, isFetching: isFetchingArtistDetails, error } = artistId ? useGetArtistDetailsQuery(artistId) : '';
+  const { data: artistData, isFetching: isFetchingArtistDetails, error } = id === undefined ? useGetArtistDetailsQuery(id) : useGetArtistDetailsQuery(95705522);
 
   if (isFetchingArtistDetails) {
     return (
@@ -32,10 +31,11 @@ const Artists = () => {
     );
   }
 
-  const allAlbums = Object.entries(artistData.albums);
-  const allSongs = Object.entries(artistData.songs);
-
   console.log(artistData);
+
+  const allAlbums = Object.entries(artistData?.albums);
+  const allSongs = Object.entries(artistData?.songs);
+
   console.log(allSongs);
 
   return (
