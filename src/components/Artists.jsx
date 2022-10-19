@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowBack } from '@mui/icons-material';
 
 import { useGetArtistDetailsQuery } from '../services/shazam.js';
+import CardArtistMusic from './CardArtistMusic.jsx';
 
 const Artists = () => {
   const { id } = useParams();
@@ -35,7 +36,10 @@ const Artists = () => {
 
   const allAlbums = Object.entries(artistData?.albums);
   const allSongs = Object.entries(artistData?.songs);
+  const allData = Object.entries(artistData);
 
+  console.log(allData);
+  console.log(allData[2]);
   console.log(allSongs);
 
   return (
@@ -52,7 +56,7 @@ const Artists = () => {
         ))}
         <h3>Top 5 songs: </h3>
         {allSongs.slice(0, 5).map((song, i) => (
-          <p>{song[1].attributes.name}</p>
+          <CardArtistMusic data={allData} songs={allSongs} key={i} index={i} />
         ))}
       </Grid>
     </Grid>

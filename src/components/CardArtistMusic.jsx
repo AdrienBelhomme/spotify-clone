@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { styled } from '@mui/material/styles';
 import { IconButton, Paper } from '@mui/material';
 import { Favorite, PlayCircleOutline, Chat } from '@mui/icons-material';
@@ -11,30 +10,31 @@ const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
 }));
 
-const CardMusic = (props) => {
-  const { data, index, rank } = props;
+const CardArtistMusic = (props) => {
+  const { data, index, songs } = props;
 
-  console.log(rank[index]);
+  console.log(songs);
+  console.log(songs[index][1].attributes.artwork.url);
 
   const dispatch = useDispatch();
 
-  const selectMusic = (i) => {
-    dispatch(setActiveSong(data[i]?.hub?.actions[1]?.uri));
-  };
+  /* const selectMusic = (i) => {
+    dispatch(setActiveSong(songs[i][1].attributes.previews[0].url));
+  };  */
 
-  const selectDataAndIndex = (dataCard, indexCard) => {
+  /* const selectDataAndIndex = (dataCard, indexCard) => {
     dispatch(setDataAndIndex({ data: dataCard, index: indexCard }));
   };
 
   const dispatchArtistAndSongAndImage = (i) => {
     dispatch(setArtistAndSongAndImage({ artist: data[i].title, song: data[i].subtitle, image: data[i].images.coverart, alt: data[i].title }));
-  };
+  }; */
 
   return (
     <div className="card">
       {/* chart's rank */}
       <h3>
-        { rank ? rank.start + index + 1 : index + 1 }
+        { index + 1 }
       </h3>
       {/* Card Component */}
       <Item className="card-container">
@@ -42,9 +42,9 @@ const CardMusic = (props) => {
         <div className="img">
           <img
             className="filter-img"
-            src={data[index].images.coverart}
-            srcSet={data[index].images.coverart}
-            alt={`${data[index].title}-cover`}
+            src={songs[index][1].attributes.artwork.url}
+            srcSet={songs[index][1].attributes.artwork.url}
+            alt={`${songs[index][1].attributes.artwork}-cover`}
             loading="lazy"
             width="100px"
             height="auto"
@@ -52,7 +52,7 @@ const CardMusic = (props) => {
           />
           <div className="play-button">
             <IconButton
-              onClick={() => { selectMusic(index); dispatchArtistAndSongAndImage(index); selectDataAndIndex(data, index); }}
+              // onClick={() => { selectMusic(index); dispatchArtistAndSongAndImage(index); selectDataAndIndex(data, index); }}
               aria-label="play"
               variant="soft"
               size="large"
@@ -72,10 +72,11 @@ const CardMusic = (props) => {
             <h3 style={{ textAlign: 'left', color: '#2E3271', fontWeight: '600', fontSize: '16px', margin: '0',
             }}
             >
-              {data[index].title}
+              {songs[index][1].attributes.name}
             </h3>
             <h4 style={{ margin: 0, textAlign: 'left', color: 'rgba(124, 141, 181, 0.75)', fontSize: '14px', fontWeight: '400' }}>
-              {data[index].subtitle}
+              {/*  {data[index].subtitle} */}
+              subtitle
             </h4>
           </div>
           <div className="button-container">
@@ -108,4 +109,4 @@ const CardMusic = (props) => {
   );
 };
 
-export default CardMusic;
+export default CardArtistMusic;
