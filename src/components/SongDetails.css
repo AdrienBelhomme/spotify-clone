@@ -12,11 +12,19 @@
     margin-bottom: 20px;
     outline: solid;
     width: 500px;
+    background-color:rgba(192,192,192,0.3);
 }
 .related-song{
     position: absolute;
     right: 100px;
+    flex-direction: column;
 } 
+
+.related-song-card{
+    outline: solid;
+    flex-grow: 3;
+
+}
 
 .p{
     margin-top: 30px;

@@ -44,9 +44,6 @@ const CardAlbum = ({ song }) => {
           <h4>
             {song.subtitle}
           </h4>
-          <h5>
-            {song?.key}
-          </h5>
 
         </Item>
       </Grid>
