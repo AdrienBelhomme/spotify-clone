@@ -1,9 +1,10 @@
 import { Box, Grid } from '@mui/material';
-import { useGetWorldChartsQuery } from '../services/shazam';
+import { useGetArtistDetailsQuery, useGetWorldChartsQuery } from '../services/shazam';
 import CardAlbum from './CardAlbum';
 
 const Albums = () => {
   const { data: songData } = useGetWorldChartsQuery();
+  const { artistId } = useGetArtistDetailsQuery();
   //  console.log(data);
   console.log(songData);
   return (
@@ -19,27 +20,19 @@ const Albums = () => {
         }}
       >
         <h1 style={{ marginTop: 0 }}>Albums</h1>
-        <Grid container spacing={3}>
-          <Grid
-            item
-            xs={6}
-            sm={4}
-            md={4}
-            lg={3}
-            xl={3}
-            sx={{ display: 'flex' }}
-          >
-            {songData?.map((song, i) => (
-              <div>
+        <Grid container spacing={3} sx={{ display: 'flex' }}>
+          {songData?.map((song, i) => (
+            <div>
+              <Grid sx={{ margin: '1%' }}>
                 <CardAlbum
                   songs={songData}
                   key={song.key}
                   song={song}
                   i={i}
                 />
-              </div>
-            ))}
-          </Grid>
+              </Grid>
+            </div>
+          ))}
         </Grid>
       </Box>
     </div>
