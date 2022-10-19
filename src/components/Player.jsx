@@ -1,14 +1,16 @@
+/* eslint-disable no-console */
 import { useState, useEffect, useRef } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import { Box, Typography, Slider, IconButton, Stack, useMediaQuery } from '@mui/material';
 import { PauseRounded, PlayArrowRounded, FastForwardRounded, FastRewindRounded, VolumeUpRounded, VolumeDownRounded } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
+// import { current } from '@reduxjs/toolkit';
 
 import logoLight from '../assets/images/Music_UNIVERSE__2_-removebg-preview.png';
+// eslint-disable-next-line no-unused-vars
 import { setActiveSong, setArtistAndSongAndImage, setDataAndIndex, setGlobalVolume, setPlayOrPause } from '../features/playerSlice';
 import ReactMusicPlayer from './ReactMusicPlayer';
 import './player.css';
-import { current } from '@reduxjs/toolkit';
 
 const Widget = styled('div')(({ theme }) => ({
   backgroundColor:
@@ -26,6 +28,7 @@ const Player = () => {
   const [play, setPlay] = useState(false);
   const [volume, setVolume] = useState(0.5);
   const [isSeeking, setIsSeeking] = useState(false);
+  console.log(isSeeking);
   const [songDuration, setSongDuration] = useState(0);
   const [artistName, setArtistName] = useState('');
   const [songImage, setSongImage] = useState('');
@@ -65,13 +68,13 @@ const Player = () => {
   const updatePlayPause = (value) => {
     setPlay(value);
   };
-  console.log(`globalIndex${globalIndex}`);
+
   const selectNextMusic = () => {
     dispatch(setActiveSong(globalData[globalIndex + 1]?.hub?.actions[1]?.uri));
     dispatch(setArtistAndSongAndImage({ artist: globalData[globalIndex + 1].title, song: globalData[globalIndex + 1].subtitle, image: globalData[globalIndex + 1].images.coverart, alt: globalData[globalIndex + 1].title }));
     setGlobalIndex((prev) => prev + 1);
   };
-  console.log(`globalIndex${globalIndex}`);
+
   const selectPreviousMusic = () => {
     if (globalIndex >= 1) {
       dispatch(setActiveSong(globalData[globalIndex - 1]?.hub?.actions[1]?.uri));

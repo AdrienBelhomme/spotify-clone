@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
@@ -62,6 +63,9 @@ export const playerSlice = createSlice({
       state.song = song;
       state.image = image;
       state.alt = alt;
+    },
+    playPause: (state, action) => {
+      state.isPlaying = action.payload;
     },
   },
 

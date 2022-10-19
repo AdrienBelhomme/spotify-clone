@@ -44,7 +44,6 @@ const ReactMusicPlayer = (props) => {
   };
 
   const handleDuration = (duration) => {
-    console.log('onDuration', duration);
     setControls({ ...controls, duration });
   };
 

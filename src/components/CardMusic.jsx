@@ -12,7 +12,9 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const CardCountry = (props) => {
-  const { data, index } = props;
+  const { data, index, rank } = props;
+
+  console.log(rank[index]);
 
   const dispatch = useDispatch();
 
@@ -32,7 +34,7 @@ const CardCountry = (props) => {
     <div className="card">
       {/* chart's rank */}
       <h3>
-        {index + 1}
+        { rank ? rank.start + index + 1 : index + 1 }
       </h3>
       {/* Card Component */}
       <Item className="card-container">
@@ -40,8 +42,8 @@ const CardCountry = (props) => {
         <div className="img">
           <img
             className="filter-img"
-            src={`${data[index].images.coverart}`}
-            srcSet={`${data[index].images.coverart}`}
+            src={data[index].images.coverart}
+            srcSet={data[index].images.coverart}
             alt={`${data[index].title}-cover`}
             loading="lazy"
             width="100px"
@@ -100,6 +102,7 @@ const CardCountry = (props) => {
         </div>
 
       </Item>
+
     </div>
 
   );

@@ -26,7 +26,7 @@ export const shazamApi = createApi({
     }),
     // Get song details
     getSongDetails: builder.query({
-      query: ({ trackId }) => `tracks/details?track_id=${trackId}`,
+      query: ({trackId}) => `tracks/details?track_id=${trackId}`,
     }),
     // Get world charts by genre
     getWorldChartsByGenre: builder.query({
@@ -42,21 +42,15 @@ export const shazamApi = createApi({
     }),
     // Related songs
     getRelatedSongs: builder.query({
-      query: ({ trackId }) => `tracks/related?track_id=${trackId}`,
+      query: ({trackId}) => `tracks/related?track_id=${trackId}`,
     }),
     // Search songs
     searchSongs: builder.query({
       query: (query) => {
-        console.log(query);
+        if (query === '') { return 'charts/world'; }
         return `search/multi?search_type=SONGS_ARTISTS&query=${query}`;
       },
     }),
-    // Search artist
-    //   searchArtists: builder.query({
-    //     query: (offset, query) => {
-    //       return `search/multi?offset=${offset}&query=${query}&search_type='ARTISTS'`;
-    //     },
-    //   }),
     // Get List of Countries (53 in total)
     getCountries: builder.query({
       query: () => 'https://shazam-core.p.rapidapi.com/v1/frame/cities',
