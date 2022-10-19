@@ -29,18 +29,16 @@ const Albums = () => {
             xl={3}
             sx={{ display: 'flex' }}
           >
-            {songData?.map((song, i) => {
-              return (
-                <div>
-                  <CardAlbum
-                    songs={songData}
-                    key={song.key}
-                    song={song}
-                    i={i}
-                  />
-                </div>
-              );
-            })}
+            {songData?.map((song, i) => (
+              <div>
+                <CardAlbum
+                  songs={songData}
+                  key={song.key}
+                  song={song}
+                  i={i}
+                />
+              </div>
+            ))}
           </Grid>
         </Grid>
       </Box>

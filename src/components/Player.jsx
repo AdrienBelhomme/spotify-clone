@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import { Box, Typography, Slider, IconButton, Stack, useMediaQuery } from '@mui/material';
-
 import { PauseRounded, PlayArrowRounded, FastForwardRounded, FastRewindRounded, VolumeUpRounded, VolumeDownRounded } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
+
 import logoLight from '../assets/images/Music_UNIVERSE__2_-removebg-preview.png';
 import { setActiveSong, setArtistAndSongAndImage, setDataAndIndex, setGlobalVolume, setPlayOrPause } from '../features/playerSlice';
 import ReactMusicPlayer from './ReactMusicPlayer';
@@ -18,11 +18,9 @@ const Widget = styled('div')(({ theme }) => ({
 const Player = () => {
   const isMobile = useMediaQuery('(max-width:600px)');
   const theme = useTheme();
-  const duration = 200; // seconds
-  const [position, setPosition] = useState(32);
-  const [paused, setPaused] = useState({ play: false, pause: true });
-
   const dispatch = useDispatch();
+  const mainIconColor = theme.palette.mode === 'dark' ? '#fff' : '#000';
+  const lightIconColor = theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.4)';
 
   const [position, setPosition] = useState(0);
   const [play, setPlay] = useState(false);
@@ -39,9 +37,7 @@ const Player = () => {
     playedSeconds: 0,
   });
 
-  const updatePlayerWithGlobalState = useSelector((state) => state.playerSlice.isPlayIsPause);
-
-  console.log(updatePlayerWithGlobalState);
+  const refForPlayer = useRef(null);
 
   function formatDuration(value) {
     const minute = Math.floor(value / 60);
@@ -151,10 +147,10 @@ const Player = () => {
               </div>
               <Box sx={{ ml: 1.5, minWidth: 0 }}>
                 <Typography variant="caption" color="text.secondary" fontWeight={500}>
-                  Somewhere i belong
+                  {songName}
                 </Typography>
                 <Typography noWrap>
-                  <b>by Linken Park</b>
+                  <b>{artistName}</b>
                 </Typography>
               </Box>
             </Box>
@@ -221,16 +217,17 @@ const Player = () => {
                 <FastRewindRounded fontSize="large" htmlColor={mainIconColor} />
               </IconButton>
               <IconButton
-                aria-label={paused.pause ? 'play' : 'pause'}
-                onClick={() => setPaused((prevState) => ({ play: !prevState.play, pause: !prevState.pause }))}
+                aria-label={play ? 'pause' : 'play'}
+                onClick={() => setPlay((prevState) => !prevState)}
               >
-                {paused.pause ? (
+                {play ? (
+                  <PauseRounded sx={{ fontSize: '3rem' }} htmlColor={mainIconColor} />
+                ) : (
+
                   <PlayArrowRounded
                     sx={{ fontSize: '3rem' }}
                     htmlColor={mainIconColor}
                   />
-                ) : (
-                  <PauseRounded sx={{ fontSize: '3rem' }} htmlColor={mainIconColor} />
                 )}
               </IconButton>
               <IconButton aria-label="next song" onClick={() => selectNextMusic(globalIndex)}>
@@ -239,9 +236,15 @@ const Player = () => {
             </Box>
             <Stack spacing={2} direction="row" sx={{ mb: 1, px: 1 }} alignItems="center" width="200px">
               <VolumeDownRounded htmlColor={lightIconColor} />
+
               <Slider
                 aria-label="Volume"
-                defaultValue={30}
+                defaultValue={0.3}
+                step={0.1}
+                min={0}
+                max={1}
+                value={volume}
+                onChange={handleVolumeChange}
                 sx={{
                   color: theme.palette.mode === 'dark' ? '#fff' : 'rgba(0,0,0,0.87)',
                   '& .MuiSlider-track': {
@@ -285,16 +288,17 @@ const Player = () => {
                 <FastRewindRounded fontSize="large" htmlColor={mainIconColor} />
               </IconButton>
               <IconButton
-                aria-label={paused ? 'play' : 'pause'}
+                aria-label={play ? 'pause' : 'play'}
                 onClick={() => console.log('clicked')}
               >
-                {paused ? (
+                {play ? (
+                  <PauseRounded sx={{ fontSize: '3rem' }} htmlColor={mainIconColor} />
+                ) : (
                   <PlayArrowRounded
                     sx={{ fontSize: '3rem' }}
                     htmlColor={mainIconColor}
                   />
-                ) : (
-                  <PauseRounded sx={{ fontSize: '3rem' }} htmlColor={mainIconColor} />
+
                 )}
               </IconButton>
               <IconButton aria-label="next song" onClick={() => {}}>
@@ -308,4 +312,4 @@ const Player = () => {
     </Box>
   );
 };
-export default MusicPlayerSlider;
+export default Player;

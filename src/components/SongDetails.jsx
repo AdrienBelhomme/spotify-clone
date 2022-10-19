@@ -2,16 +2,16 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Grid, Box, Button } from '@mui/material';
 
-import { useGetSongDetailsQuery } from '../services/shazam';
+import { useGetSongDetailsQuery, useGetRelatedSongsQuery } from '../services/shazam';
 import './SongDetails.css';
 
 const SongDetails = () => {
   const { trackId } = useParams();
   const { data: songData } = useGetSongDetailsQuery({ trackId });
-
+  const { data: trackData } = useGetRelatedSongsQuery({ trackId });
+  console.log(trackData);
   return (
     <div>
-      {console.log(songData)}
       <h1>
         {songData?.title}
       </h1>

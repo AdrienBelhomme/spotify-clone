@@ -42,7 +42,7 @@ export const shazamApi = createApi({
     }),
     // Related songs
     getRelatedSongs: builder.query({
-      query: (trackId) => `tracks/related?track_id=${trackId}`,
+      query: ({ trackId }) => `tracks/related?track_id=${trackId}`,
     }),
     // Search songs
     searchSongs: builder.query({
