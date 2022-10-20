@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useGetCountriesQuery, useGetWorldChartsByCountryQuery } from '../services/shazam.js';
 
 import GridForGenre from './GridForGenre.jsx';

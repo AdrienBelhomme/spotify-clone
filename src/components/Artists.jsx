@@ -10,9 +10,7 @@ const Artists = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  console.log(id);
-
-  const { data: artistData, isFetching: isFetchingArtistDetails, error } = id === undefined ? useGetArtistDetailsQuery(id) : useGetArtistDetailsQuery(95705522);
+  const { data: artistData, isFetching: isFetchingArtistDetails, error } = id === undefined || null ? useGetArtistDetailsQuery(id) : useGetArtistDetailsQuery(95705522);
 
   if (isFetchingArtistDetails) {
     return (
@@ -32,31 +30,21 @@ const Artists = () => {
     );
   }
 
-  console.log(artistData);
-
   const allAlbums = Object.entries(artistData?.albums);
   const allSongs = Object.entries(artistData?.songs);
+  const allArtists = Object.entries(artistData?.artists);
   const allData = Object.entries(artistData);
-
-  console.log(allData);
-  console.log(allData[2]);
-  console.log(allSongs);
 
   return (
     <Grid container spacing={3}>
-      <Grid item lg={5} xl={4}>
-        {/*  <CardAlbum
-          artistId={artistId}
-          artistData={artistData}
-        /> */}
-
+      <Grid item sx={{ marginBottom: '5rem' }}>
         <h3>Last 5 albums: </h3>
         {allAlbums.slice(0, 5).map((album, i) => (
           <p>{album[1].attributes.name}</p>
         ))}
         <h3>Top 5 songs: </h3>
         {allSongs.slice(0, 5).map((song, i) => (
-          <CardArtistMusic data={allData} songs={allSongs} key={i} index={i} />
+          <CardArtistMusic data={allData} songs={allSongs} key={i} index={i} artist={allArtists} />
         ))}
       </Grid>
     </Grid>

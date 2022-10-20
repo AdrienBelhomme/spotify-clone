@@ -1,34 +1,52 @@
+/* eslint-disable prefer-const */
 import { styled } from '@mui/material/styles';
-import { IconButton, Paper } from '@mui/material';
+import { CircularProgress, IconButton, Paper, Box } from '@mui/material';
 import { Favorite, PlayCircleOutline, Chat } from '@mui/icons-material';
 
 import './CardMusic.css';
+import './cardArtistMusic.css';
 import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import { setActiveSong, setArtistAndSongAndImage, setDataAndIndex } from '../features/playerSlice';
+import { useGetSongDetailsQuery } from '../services/shazam';
+import './GridForMusic.css';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
 }));
 
 const CardArtistMusic = (props) => {
-  const { data, index, songs } = props;
+  const { data, index, songs, artist } = props;
 
-  console.log(songs);
-  console.log(songs[index][1].attributes.artwork.url);
+  const [trackId, setTrackId] = useState(1481623884);
 
   const dispatch = useDispatch();
 
-  /* const selectMusic = (i) => {
+  const selectMusic = (i) => {
     dispatch(setActiveSong(songs[i][1].attributes.previews[0].url));
-  };  */
-
-  /* const selectDataAndIndex = (dataCard, indexCard) => {
-    dispatch(setDataAndIndex({ data: dataCard, index: indexCard }));
   };
 
   const dispatchArtistAndSongAndImage = (i) => {
-    dispatch(setArtistAndSongAndImage({ artist: data[i].title, song: data[i].subtitle, image: data[i].images.coverart, alt: data[i].title }));
-  }; */
+    dispatch(setArtistAndSongAndImage({ artist: artist[0][1].attributes.name,
+      song: songs[i][1].attributes.name,
+      image: 'https://images.unsplash.com/photo-1609667083964-f3dbecb7e7a5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80',
+      alt: `${songs[i][1].attributes.name}-cover` }));
+  };
+
+  const setCurrentTrackId = (i) => {
+    // eslint-disable-next-line prefer-destructuring
+    setTrackId(songs[i][0]);
+    console.log(trackId);
+  };
+
+  const { data: singleSongData } = useGetSongDetailsQuery(trackId);
+
+  console.log(singleSongData);
+  console.log(trackId);
+
+  /* const selectDataAndIndex = (dataCard, indexCard) => {
+      dispatch(setDataAndIndex({ data: dataCard, index: indexCard }));
+    }; */
 
   return (
     <div className="card">
@@ -42,9 +60,9 @@ const CardArtistMusic = (props) => {
         <div className="img">
           <img
             className="filter-img"
-            src={songs[index][1].attributes.artwork.url}
-            srcSet={songs[index][1].attributes.artwork.url}
-            alt={`${songs[index][1].attributes.artwork}-cover`}
+            src="https://images.unsplash.com/photo-1609667083964-f3dbecb7e7a5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
+            srcSet="https://images.unsplash.com/photo-1609667083964-f3dbecb7e7a5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
+            alt={`${songs[index][1].attributes.name}-cover`}
             loading="lazy"
             width="100px"
             height="auto"
@@ -52,7 +70,7 @@ const CardArtistMusic = (props) => {
           />
           <div className="play-button">
             <IconButton
-              // onClick={() => { selectMusic(index); dispatchArtistAndSongAndImage(index); selectDataAndIndex(data, index); }}
+              onClick={() => { selectMusic(index); dispatchArtistAndSongAndImage(index); setCurrentTrackId(index); }}
               aria-label="play"
               variant="soft"
               size="large"
@@ -75,8 +93,7 @@ const CardArtistMusic = (props) => {
               {songs[index][1].attributes.name}
             </h3>
             <h4 style={{ margin: 0, textAlign: 'left', color: 'rgba(124, 141, 181, 0.75)', fontSize: '14px', fontWeight: '400' }}>
-              {/*  {data[index].subtitle} */}
-              subtitle
+              {artist[0][1].attributes.name}
             </h4>
           </div>
           <div className="button-container">
