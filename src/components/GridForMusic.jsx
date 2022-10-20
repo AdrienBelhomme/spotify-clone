@@ -3,7 +3,6 @@ import { Box, Grid } from '@mui/material';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 
-import TopOneCard from './TopOneCard';
 import './GridForMusic.css';
 
 const CardMusic = React.lazy(() => import('./CardMusic'));

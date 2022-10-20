@@ -1,27 +1,14 @@
-import { styled } from '@mui/material/styles';
-import { Box, Paper, Grid } from '@mui/material';
-import { useNavigate, Link } from 'react-router-dom';
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: '20px 20px',
-  textAlign: 'center',
-  background: 'transparent',
-  color: theme.palette.text.secondary,
-  borderRadius: '12px',
-  border: '1px solid rgba(246, 129, 30, 0.25)',
-  marginRight: '4%',
-}));
+import { Box, Grid } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const CardAlbumArtist = (props) => {
-  const { index, album, data, albums } = props;
+  const { index, albums } = props;
 
-  const navigate = useNavigate();
   return (
-    <Box sx={{ width: 'fit-content' }}>
-      <Grid container sx={{ display: 'flex' }}>
-        <Item>
+    <Box sx={{ display: 'flex', width: '100%', justifyContent: 'space-between', margin: '1rem 0' }}>
+      <Grid container sx={{ display: 'flex', justifyContent: 'flex-start' }}>
+        <div className="img-album" style={{ alignItems: 'flex-start' }}>
           <img
             src={albums[index][1]?.attributes?.artwork.url
               .replace(
@@ -48,6 +35,8 @@ const CardAlbumArtist = (props) => {
             height="auto"
             style={{ borderRadius: '20px' }}
           />
+        </div>
+        <div className="title-album" style={{ display: 'flex', alignItems: 'center', marginLeft: '5rem' }}>
           <h3 style={{ textAlign: 'left', color: '#2E3271', fontWeight: '600', fontSize: '16px', margin: '12px 0',
           }}
           >
@@ -57,14 +46,14 @@ const CardAlbumArtist = (props) => {
             </Link>
 
           </h3>
-          <h4>
+          <h4 style={{ margin: '0 2rem' }}>
             {albums[index][1]?.attributes?.releaseDate.slice(0, 4)}
           </h4>
           <h4>
             {albums[index][1]?.attributes?.genreNames[0]}
           </h4>
 
-        </Item>
+        </div>
       </Grid>
     </Box>
   );

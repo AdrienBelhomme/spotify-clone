@@ -7,7 +7,7 @@ const TopOneCard = (props) => {
 
   const { data, country } = props;
   const playMusic = () => {
-    setIsPlaying((prev) => { return !prev; });
+    setIsPlaying((prev) => !prev);
     if (isPlaying) {
       console.log('paused');
     } else {
@@ -43,7 +43,7 @@ const TopOneCard = (props) => {
             style={{ borderRadius: '20px', margin: 'auto', marginBottom: '10%', boxShadow: 'rgb(38, 57, 77) 0px 20px 30px -10px' }}
           />
           <IconButton
-            onClick={() => { return playMusic(); }}
+            onClick={() => playMusic()}
             aria-label="play"
             variant="soft"
             size="large"

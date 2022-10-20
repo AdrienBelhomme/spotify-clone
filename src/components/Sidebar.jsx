@@ -12,7 +12,7 @@ const categories = [
   { label: 'Home', to: '/', value: 'home' },
   { label: 'Album', to: '/albums/:id', value: 'album' },
   { label: 'Artist', to: '/artists/:id', value: 'artist' },
-  { label: 'TopChart', to: '/country', value: 'topchart' },
+  { label: 'Country', to: '/country', value: 'country' },
 ];
 
 // eslint-disable-next-line no-unused-vars
@@ -35,29 +35,26 @@ const Sidebar = () => {
       </Link>
       <Divider />
       <List>
-        <ListSubheader> Browse Music UNIVERSE</ListSubheader>
-        {categories.map((item) => {
-          return (
-            <Link
-              color="inherit"
-              to={item.to}
-              key={item.value}
-              style={{ textDecoration: 'none', color: theme.palette.primary.main }}
-            >
-              <ListItem onClick={() => { }}>
-                <ListItemIcon>
-                  <img
-                    src={genreIcons[item.label.toLowerCase()]}
-                    alt="genreimage"
-                    height={40}
-                    // style={{ filter: theme.palette.mode === 'dark' && 'Invert(1)' }}
-                  />
-                </ListItemIcon>
-                <ListItemText primary={item.label} />
-              </ListItem>
-            </Link>
-          );
-        })}
+        <ListSubheader> Browse Music Universe</ListSubheader>
+        {categories.map((item) => (
+          <Link
+            color="inherit"
+            to={item.to}
+            key={item.value}
+            style={{ textDecoration: 'none', color: theme.palette.primary.main }}
+          >
+            <ListItem onClick={() => { }}>
+              <ListItemIcon>
+                <img
+                  src={genreIcons[item.label.toLowerCase()]}
+                  alt="genreimage"
+                  height={40}
+                />
+              </ListItemIcon>
+              <ListItemText primary={item.label} />
+            </ListItem>
+          </Link>
+        ))}
       </List>
 
     </Box>

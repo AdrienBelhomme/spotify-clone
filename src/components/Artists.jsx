@@ -43,37 +43,35 @@ const Artists = () => {
   return (
     <Grid container spacing={3}>
       <Grid item sx={{ marginBottom: '5rem' }}>
-        <Grid container sx={{ display: 'flex' }}>
-          <Grid item sx={{ width: '100%', display: 'flex' }}>
-            <div>
-              <img
-                src={allArtists[0][1].attributes.artwork.url
-                  .replace(
-                    '{w}',
-                    allArtists[0][1].attributes.artwork.width,
-                  )
-                  .replace(
-                    '{h}',
-                    allArtists[0][1].attributes.artwork.height,
-                  )}
-                srcSet={allArtists[0][1].attributes.artwork.url
-                  .replace(
-                    '{w}',
-                    allArtists[0][1].attributes.artwork.width,
-                  )
-                  .replace(
-                    '{h}',
-                    allArtists[0][1].attributes.artwork.height,
-                  )}
-                className="artist-img"
-                alt={`${allArtists[0][1].attributes.name}-artist-cover`}
-                loading="lazy"
-                width="18%"
-                height="auto"
-                style={{ borderRadius: '20px' }}
-              />
-            </div>
-            <div>
+        <Grid container sx={{ display: 'flex', marginTop: '2rem' }}>
+          <Grid item sx={{ width: '100%', display: 'flex', alignItems: 'center' }}>
+            <img
+              src={allArtists[0][1].attributes.artwork.url
+                .replace(
+                  '{w}',
+                  allArtists[0][1].attributes.artwork.width,
+                )
+                .replace(
+                  '{h}',
+                  allArtists[0][1].attributes.artwork.height,
+                )}
+              srcSet={allArtists[0][1].attributes.artwork.url
+                .replace(
+                  '{w}',
+                  allArtists[0][1].attributes.artwork.width,
+                )
+                .replace(
+                  '{h}',
+                  allArtists[0][1].attributes.artwork.height,
+                )}
+              className="artist-img"
+              alt={`${allArtists[0][1].attributes.name}-artist-cover`}
+              loading="lazy"
+              width="18%"
+              height="auto"
+              style={{ borderRadius: '20px' }}
+            />
+            <div style={{ marginLeft: '2rem' }}>
               <h2>{allArtists[0][1].attributes.name}</h2>
               <h3>{allArtists[0][1].attributes.genreNames[0]}</h3>
             </div>
@@ -101,5 +99,3 @@ const Artists = () => {
 };
 
 export default Artists;
-
-{ /* 95705522 chris brown id shazam */ }

@@ -1,14 +1,14 @@
 /* eslint-disable prefer-const */
 import { styled } from '@mui/material/styles';
-import { CircularProgress, IconButton, Paper, Box } from '@mui/material';
+import { IconButton, Paper } from '@mui/material';
 import { Favorite, PlayCircleOutline, Chat } from '@mui/icons-material';
 
 import './CardMusic.css';
 import './cardArtistMusic.css';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { setActiveSong, setArtistAndSongAndImage, setDataAndIndex } from '../features/playerSlice';
-import { useGetSongDetailsQuery } from '../services/shazam';
+import { Link } from 'react-router-dom';
+import { setActiveSong, setArtistAndSongAndImage } from '../features/playerSlice';
 import './GridForMusic.css';
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -16,8 +16,9 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const CardArtistMusic = (props) => {
-  const { data, index, songs, artist, artistId } = props;
+  const { index, songs, artist, artistId } = props;
 
+  // eslint-disable-next-line no-unused-vars
   const [trackId, setTrackId] = useState(1481623884);
 
   const dispatch = useDispatch();
@@ -111,7 +112,10 @@ const CardArtistMusic = (props) => {
               {songs[index][1].attributes.name}
             </h3>
             <h4 style={{ margin: 0, textAlign: 'left', color: 'rgba(124, 141, 181, 0.75)', fontSize: '14px', fontWeight: '400' }}>
-              {artist[0][1].attributes.name}
+              <Link to={`../artists/${artistId}`}>
+                {artist[0][1].attributes.name}
+              </Link>
+
             </h4>
           </div>
           <div className="button-container">

@@ -46,7 +46,7 @@ const Navbar = () => {
               [theme.breakpoints.up('sm')]:
                                 { display: 'none' },
             }}
-            onClick={() => { return setMobileOpen((prevOpenMobile) => { return !prevOpenMobile; }); }}
+            onClick={() => setMobileOpen((prevOpenMobile) => !prevOpenMobile)}
           >
             <Menu />
           </IconButton>
@@ -68,7 +68,7 @@ const Navbar = () => {
             <Drawer
               variant="temporary"
               open={mobileOpen}
-              onClose={() => { return setMobileOpen((prevMobileOpen) => { return !prevMobileOpen; }); }}
+              onClose={() => setMobileOpen((prevMobileOpen) => !prevMobileOpen)}
               anchor="left"
               ModalProps={{ keepMounted: true }}
               PaperProps={{ sx: { width: drawerWidth,
