@@ -11,7 +11,6 @@ export const genre = createSlice({
     countryCodeAndName: { name: 'France', code: 'FR' },
     country: {},
     query: '',
-
   },
   reducers: {
     selectGenre: (state, action) => {

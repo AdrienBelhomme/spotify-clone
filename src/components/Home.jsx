@@ -8,13 +8,14 @@ import CardMusic from './CardMusic';
 import './GridForMusic.css';
 import { useSearchSongsQuery } from '../services/shazam';
 import Loader from './Loader';
+import Search from './Search';
 
 const Home = () => {
-  const { query } = useSelector((state) => { return state.currentGenre; });
+  const { query } = useSelector((state) => state.currentGenre);
 
   const { data, isFetching, error } = useSearchSongsQuery(query);
 
-  const songs = data?.tracks?.hits.map((song) => { return song.track; });
+  const songs = data?.tracks?.hits.map((song) => song.track);
 
   if (isFetching) return <Loader title={`Searching ${query}...`} />;
 
@@ -25,6 +26,9 @@ const Home = () => {
       </div>
     );
   }
+
+  const margin = true;
+
   return (
 
     <div>
@@ -38,7 +42,10 @@ const Home = () => {
           padding: '3%',
         }}
       >
-        <h1 style={{ marginTop: 0 }}>Search for {query || 'France'}</h1>
+        <h1 style={{ marginTop: 0 }}>Search for {query || 'what inspires you today'}</h1>
+        <div style={{ margin: '3rem' }}>
+          <Search margin={margin} />
+        </div>
         <Grid container sx={{ display: 'flex' }}>
           <Grid
             item
@@ -46,12 +53,10 @@ const Home = () => {
               flexDirection: 'column',
             }}
           >
-            {songs?.map((song, index) => {
-              return (
-                <CardMusic key={song.key} data={songs} index={index} />
+            {songs?.map((song, index) => (
+              <CardMusic key={song.key} data={songs} index={index} />
 
-              );
-            })}
+            ))}
 
           </Grid>
 
@@ -62,8 +67,3 @@ const Home = () => {
   );
 };
 export default Home;
-
-//   <div key={song.key}>
-// <p>{song.title}</p>
-// <img src={song.images.coverart} alt="searchimg" />
-// </div>

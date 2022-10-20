@@ -5,6 +5,7 @@ import { Favorite, PlayCircleOutline, Chat } from '@mui/icons-material';
 
 import './CardMusic.css';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { setActiveSong, setArtistAndSongAndImage, setDataAndIndex } from '../features/playerSlice';
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -13,8 +14,6 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const CardMusic = (props) => {
   const { data, index, rank } = props;
-
-  console.log(rank[index]);
 
   const dispatch = useDispatch();
 
@@ -75,7 +74,10 @@ const CardMusic = (props) => {
               {data[index].title}
             </h3>
             <h4 style={{ margin: 0, textAlign: 'left', color: 'rgba(124, 141, 181, 0.75)', fontSize: '14px', fontWeight: '400' }}>
-              {data[index].subtitle}
+
+              <Link to={`../artists/${data[index].artists[0].adamid}`}>
+                {data[index].subtitle}
+              </Link>
             </h4>
           </div>
           <div className="button-container">

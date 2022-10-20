@@ -61,7 +61,6 @@ const GridForMusic = (props) => {
               {dataSliced.map((countrymap, i) => <CardMusic key={i} data={dataSliced} country={countrymap.name} index={i} rank={slice} />)}
             </Suspense>
           </Grid>
-          <TopOneCard data={data} country={country} />
         </Grid>
         <Stack spacing={2}>
           <Pagination count={data.length / 5} shape="rounded" onChange={(e, value) => { setPage(value); updateSlice(value); }} />

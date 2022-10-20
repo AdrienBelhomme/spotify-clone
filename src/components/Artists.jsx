@@ -5,12 +5,15 @@ import { ArrowBack } from '@mui/icons-material';
 
 import { useGetArtistDetailsQuery } from '../services/shazam.js';
 import CardArtistMusic from './CardArtistMusic.jsx';
+import CardAlbumArtist from './CardAlbumArtist.jsx';
 
 const Artists = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const { data: artistData, isFetching: isFetchingArtistDetails, error } = id === undefined || null ? useGetArtistDetailsQuery(id) : useGetArtistDetailsQuery(95705522);
+  console.log(id);
+
+  const { data: artistData, isFetching: isFetchingArtistDetails, error } = id === ':id' ? useGetArtistDetailsQuery(95705522) : useGetArtistDetailsQuery(id);
 
   if (isFetchingArtistDetails) {
     return (
@@ -35,17 +38,63 @@ const Artists = () => {
   const allArtists = Object.entries(artistData?.artists);
   const allData = Object.entries(artistData);
 
+  console.log(allSongs);
+
   return (
     <Grid container spacing={3}>
       <Grid item sx={{ marginBottom: '5rem' }}>
-        <h3>Last 5 albums: </h3>
-        {allAlbums.slice(0, 5).map((album, i) => (
-          <p>{album[1].attributes.name}</p>
-        ))}
-        <h3>Top 5 songs: </h3>
-        {allSongs.slice(0, 5).map((song, i) => (
-          <CardArtistMusic data={allData} songs={allSongs} key={i} index={i} artist={allArtists} />
-        ))}
+        <Grid container sx={{ display: 'flex' }}>
+          <Grid item sx={{ width: '100%', display: 'flex' }}>
+            <div>
+              <img
+                src={allArtists[0][1].attributes.artwork.url
+                  .replace(
+                    '{w}',
+                    allArtists[0][1].attributes.artwork.width,
+                  )
+                  .replace(
+                    '{h}',
+                    allArtists[0][1].attributes.artwork.height,
+                  )}
+                srcSet={allArtists[0][1].attributes.artwork.url
+                  .replace(
+                    '{w}',
+                    allArtists[0][1].attributes.artwork.width,
+                  )
+                  .replace(
+                    '{h}',
+                    allArtists[0][1].attributes.artwork.height,
+                  )}
+                className="artist-img"
+                alt={`${allArtists[0][1].attributes.name}-artist-cover`}
+                loading="lazy"
+                width="18%"
+                height="auto"
+                style={{ borderRadius: '20px' }}
+              />
+            </div>
+            <div>
+              <h2>{allArtists[0][1].attributes.name}</h2>
+              <h3>{allArtists[0][1].attributes.genreNames[0]}</h3>
+            </div>
+
+          </Grid>
+          <Grid container>
+            <Grid item sx={{ width: '100%', marginTop: '3rem' }}>
+              <h3>Top 5 songs: </h3>
+            </Grid>
+            {allSongs.slice(0, 5).map((song, i) => (
+              <CardArtistMusic data={allData} songs={allSongs} key={i} index={i} artist={allArtists} artistId={id} />
+            ))}
+          </Grid>
+          <Grid item sx={{ width: '100%' }}>
+            <h3>All albums: </h3>
+          </Grid>
+          {allAlbums.map((album, i) => (
+            <CardAlbumArtist data={allData} key={i} index={i} albums={allAlbums} album={album} id={id} />
+          ))}
+        </Grid>
+
       </Grid>
     </Grid>
   );
