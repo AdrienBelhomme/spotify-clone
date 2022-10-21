@@ -6,7 +6,8 @@ import { Box, Grid } from '@mui/material';
 
 import CardMusic from './CardMusic';
 import './GridForMusic.css';
-import { useGetWorldChartsQuery, useSearchSongsQuery } from '../services/shazam';
+import { Link } from 'react-router-dom';
+import { useSearchSongsQuery } from '../services/shazam';
 import Loader from './Loader';
 import Search from './Search';
 
@@ -27,8 +28,13 @@ const Home = () => {
   const margin = true;
 
   return (
+    <div style={{ color: 'white' }}>
 
-    <div>
+      <Link to="./artists">Artist</Link>
+      <Link to="./albums">Songs</Link>
+      <Link to="./topcharts">Top Charts</Link>
+      <Link to="./country">Top Charts by Country</Link>
+
       <Box
         mt={4}
         mb={4}
