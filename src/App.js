@@ -14,12 +14,12 @@ const App = () => {
         <main style={{ flexGrow: '1', padding: '2em', marginTop: '60px', width: '100%' }}>
           <div style={{ height: '70px' }}>
             <Routes>
-              <Route exact path="/" element={<Home />} />
-              <Route exact path="/albums" element={<Albums />} />
-              <Route exact path="/artists/:artistId" element={<Artists />} />
-              <Route exact path="/country" element={<MusicByCountry />} />
-              <Route exact path="/songdetails/:trackId" element={<SongDetails />} />
-              <Route exact path="*" element={<h1>PAGE NOT FOUND 404</h1>} />
+              <Route path="/" element={<Home />} />
+              <Route path="/albums" element={<Albums />} />
+              <Route path="/artists/:artistId" element={<Artists />} />
+              <Route path="/country" element={<MusicByCountry />} />
+              <Route path="/songdetails/:trackId" element={<SongDetails />} />
+              <Route path="*" element={<h1>PAGE NOT FOUND 404</h1>} />
             </Routes>
           </div>
         </main>

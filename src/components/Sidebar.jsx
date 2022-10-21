@@ -3,11 +3,9 @@ import { List, ListItem, ListItemIcon, ListItemText, ListSubheader, Divider, Box
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import { useDispatch } from 'react-redux';
+
 import { selectGenre } from '../features/currentGenre';
 import { images } from '../assets';
-// import { useDispatch } from 'react-redux';
-
-// import { selectGenre } from '../features/currentGenre';
 import { logoLight, logoDark } from '../assets/index';
 import genreIcons from '../assets/genres';
 
