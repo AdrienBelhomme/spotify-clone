@@ -1,49 +1,87 @@
-/* eslint-disable no-console */
+/* eslint-disable prefer-const */
 import { styled } from '@mui/material/styles';
 import { IconButton, Paper } from '@mui/material';
 import { Favorite, PlayCircleOutline, Chat } from '@mui/icons-material';
 
 import './CardMusic.css';
+import './cardArtistMusic.css';
 import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { setActiveSong, setArtistAndSongAndImage, setDataAndIndex } from '../features/playerSlice';
+import { setActiveSong, setArtistAndSongAndImage } from '../features/playerSlice';
+import './GridForMusic.css';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
 }));
 
-const CardMusic = (props) => {
-  const { data, index, rank } = props;
+const CardArtistMusic = (props) => {
+  const { index, songs, artist, artistId } = props;
+
+  // eslint-disable-next-line no-unused-vars
+  const [trackId, setTrackId] = useState(1481623884);
 
   const dispatch = useDispatch();
 
   const selectMusic = (i) => {
-    dispatch(setActiveSong(data[i]?.hub?.actions[1]?.uri));
+    dispatch(setActiveSong(songs[i][1].attributes.previews[0].url));
   };
 
-  const selectDataAndIndex = (dataCard, indexCard) => {
-    dispatch(setDataAndIndex({ data: dataCard, index: indexCard }));
-  };
+  const correctImageUrl = artist[0][1].attributes.artwork.url
+    .replace(
+      '{w}',
+      artist[0][1].attributes.artwork.width,
+    )
+    .replace(
+      '{h}',
+      artist[0][1].attributes.artwork.height,
+
+    );
+  console.log(correctImageUrl);
 
   const dispatchArtistAndSongAndImage = (i) => {
-    dispatch(setArtistAndSongAndImage({ artist: data[i].title, song: data[i].subtitle, image: data[i].images.coverart, alt: data[i].title }));
+    dispatch(setArtistAndSongAndImage({ artist: artist[0][1].attributes.name,
+      song: songs[i][1].attributes.name,
+      image: correctImageUrl,
+      alt: `${songs[i][1].attributes.name}-cover` }));
+  };
+
+  const setCurrentTrackId = (i) => {
+    // eslint-disable-next-line prefer-destructuring
+    setTrackId(songs[i][0]);
   };
 
   return (
     <div className="card">
       {/* chart's rank */}
       <h3>
-        { rank ? rank.start + index + 1 : index + 1 }
+        { index + 1 }
       </h3>
       {/* Card Component */}
       <Item className="card-container">
 
         <div className="img">
           <img
+            src={artist[0][1].attributes.artwork.url
+              .replace(
+                '{w}',
+                artist[0][1].attributes.artwork.width,
+              )
+              .replace(
+                '{h}',
+                artist[0][1].attributes.artwork.height,
+              )}
+            srcSet={artist[0][1].attributes.artwork.url
+              .replace(
+                '{w}',
+                artist[0][1].attributes.artwork.width,
+              )
+              .replace(
+                '{h}',
+                artist[0][1].attributes.artwork.height,
+              )}
             className="filter-img"
-            src={data[index].images.coverart}
-            srcSet={data[index].images.coverart}
-            alt={`${data[index].title}-cover`}
+            alt={`${songs[index][1].attributes.name}-cover`}
             loading="lazy"
             width="100px"
             height="auto"
@@ -51,7 +89,7 @@ const CardMusic = (props) => {
           />
           <div className="play-button">
             <IconButton
-              onClick={() => { selectMusic(index); dispatchArtistAndSongAndImage(index); selectDataAndIndex(data, index); }}
+              onClick={() => { selectMusic(index); dispatchArtistAndSongAndImage(index); setCurrentTrackId(index); }}
               aria-label="play"
               variant="soft"
               size="large"
@@ -71,13 +109,13 @@ const CardMusic = (props) => {
             <h3 style={{ textAlign: 'left', color: '#2E3271', fontWeight: '600', fontSize: '16px', margin: '0',
             }}
             >
-              {data[index].title}
+              {songs[index][1].attributes.name}
             </h3>
             <h4 style={{ margin: 0, textAlign: 'left', color: 'rgba(124, 141, 181, 0.75)', fontSize: '14px', fontWeight: '400' }}>
-
-              <Link to={`../artists/${data[index].artists[0].adamid}`}>
-                {data[index].subtitle}
+              <Link to={`../artists/${artistId}`}>
+                {artist[0][1].attributes.name}
               </Link>
+
             </h4>
           </div>
           <div className="button-container">
@@ -106,8 +144,7 @@ const CardMusic = (props) => {
       </Item>
 
     </div>
-
   );
 };
 
-export default CardMusic;
+export default CardArtistMusic;

@@ -4,7 +4,6 @@ import { styled, useTheme } from '@mui/material/styles';
 import { Box, Typography, Slider, IconButton, Stack, useMediaQuery } from '@mui/material';
 import { PauseRounded, PlayArrowRounded, FastForwardRounded, FastRewindRounded, VolumeUpRounded, VolumeDownRounded } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
-// import { current } from '@reduxjs/toolkit';
 
 import logoLight from '../assets/images/Music_UNIVERSE__2_-removebg-preview.png';
 // eslint-disable-next-line no-unused-vars
@@ -309,7 +308,6 @@ const Player = () => {
               </IconButton>
             </Box>
           </Widget>
-          {/* <WallPaper /> */}
         </Box>
       )}
     </Box>

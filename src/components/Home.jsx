@@ -6,25 +6,26 @@ import { Box, Grid } from '@mui/material';
 
 import CardMusic from './CardMusic';
 import './GridForMusic.css';
-import { useSearchSongsQuery } from '../services/shazam';
-import Loader from './Loader';
+import { useGetWorldChartsQuery, useSearchSongsQuery } from '../services/shazam';
+import { Loader } from './Loader';
+import Search from './Search';
 
 const Home = () => {
   const { query } = useSelector((state) => state.currentGenre);
 
   const { data, isFetching, error } = useSearchSongsQuery(query);
+  const { data: worldData, isFetching: worldIsFetching, error: worldError } = useGetWorldChartsQuery();
 
   const songs = data?.tracks?.hits.map((song) => song.track);
 
   if (isFetching) return <Loader title={`Searching ${query}...`} />;
+  if (worldIsFetching) return <Loader />;
 
-  if (error) {
-    return (
-      <div>
-        Sorry, something went wrong, try again.
-      </div>
-    );
-  }
+  if (error) { <div>unknown error</div>; }
+  if (worldError) { <div>unknown error</div>; }
+
+  const margin = true;
+
   return (
 
     <div>
@@ -38,7 +39,10 @@ const Home = () => {
           padding: '3%',
         }}
       >
-        <h1 style={{ marginTop: 0 }}>Search for {query || 'France'}</h1>
+        <h1 style={{ marginTop: 0 }}>Search for {query || 'what inspires you today'}</h1>
+        <div style={{ margin: '3rem' }}>
+          <Search margin={margin} />
+        </div>
         <Grid container sx={{ display: 'flex' }}>
           <Grid
             item
@@ -48,9 +52,14 @@ const Home = () => {
           >
             {songs?.map((song, index) => (
               <CardMusic key={song.key} data={songs} index={index} />
-
             ))}
 
+          </Grid>
+          <Grid sx={{ marginBottom: '6rem' }}>
+            <h2 style={{ marginTop: '1rem' }}>Discover Top world charts</h2>
+            {worldData?.slice(0, 20).map((song, index) => (
+              <CardMusic key={index} data={worldData} index={index} />
+            ))}
           </Grid>
 
         </Grid>
@@ -60,8 +69,3 @@ const Home = () => {
   );
 };
 export default Home;
-
-//   <div key={song.key}>
-// <p>{song.title}</p>
-// <img src={song.images.coverart} alt="searchimg" />
-// </div>

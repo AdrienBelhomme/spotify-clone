@@ -12,7 +12,7 @@ const categories = [
   { label: 'Home', to: '/', value: 'home' },
   { label: 'Album', to: '/albums/:id', value: 'album' },
   { label: 'Artist', to: '/artists/:id', value: 'artist' },
-  { label: 'TopChart', to: '/country', value: 'topchart' },
+  { label: 'Country', to: '/country', value: 'country' },
 ];
 
 // eslint-disable-next-line no-unused-vars
@@ -35,7 +35,7 @@ const Sidebar = () => {
       </Link>
       <Divider />
       <List>
-        <ListSubheader> Browse Music UNIVERSE</ListSubheader>
+        <ListSubheader> Browse Music Universe</ListSubheader>
         {categories.map((item) => (
           <Link
             color="inherit"
