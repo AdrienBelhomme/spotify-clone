@@ -17,7 +17,7 @@ const Search = (props) => {
   const handleSearch = (event) => {
     console.log(event.target.value);
     console.log(query);
-    if (event.key === 'Enter') { dispatch(searchSongs(query)); }
+    if (event.key === 'Enter') dispatch(searchSongs(query));
   };
   if (location.pathname !== '/') { return null; }
 

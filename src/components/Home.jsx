@@ -2,7 +2,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Box, Grid } from '@mui/material';
-// import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import CardMusic from './CardMusic';
 import './GridForMusic.css';
@@ -21,14 +21,19 @@ const Home = () => {
   if (isFetching) return <Loader title={`Searching ${query}...`} />;
   if (worldIsFetching) return <Loader />;
 
-  if (error) { <div>unknown error</div>; }
-  if (worldError) { <div>unknown error</div>; }
+  if (error) { return <div>unknown error</div>; }
+  if (worldError) { return <div>unknown error</div>; }
 
   const margin = true;
 
   return (
+    <div style={{ color: 'white' }}>
 
-    <div>
+      <Link to="./artists">Artist</Link>
+      <Link to="./albums">Songs</Link>
+      <Link to="./topcharts">Top Charts</Link>
+      <Link to="./country">Top Charts by Country</Link>
+
       <Box
         mt={4}
         mb={4}

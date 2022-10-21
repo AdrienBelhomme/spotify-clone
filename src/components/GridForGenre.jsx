@@ -1,6 +1,6 @@
 import { Box, Grid } from '@mui/material';
-import CardCountry from './CardCountry';
 
+import CardCountry from './CardCountry';
 import { topCountries } from './countryListApi';
 import CountrySelector from './CountrySelector';
 import './GridForGenre.css';
