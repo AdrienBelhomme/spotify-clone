@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Grid, Box, Button } from '@mui/material';
+import { Grid, Box, Button, Typography } from '@mui/material';
 
 import { useGetSongDetailsQuery, useGetRelatedSongsQuery } from '../services/shazam';
 import './SongDetails.css';
@@ -9,10 +9,24 @@ import Loader from './Loader';
 const SongDetails = () => {
   const navigate = useNavigate();
   const { trackId } = useParams();
-  const { data: songData } = useGetSongDetailsQuery({ trackId });
+  const { data: songData, isFetching, error } = useGetSongDetailsQuery({ trackId });
   const { data: trackData } = useGetRelatedSongsQuery({ trackId });
 
-    <Loader />;
+  if (isFetching) {
+    return (
+      <Box display="flex" justifyContent="center">
+        <Loader />
+      </Box>
+    );
+  }
+
+  if (error) {
+    return (
+      <Typography>
+        unknown error
+      </Typography>
+    );
+  }
     console.log(songData);
     console.log(trackData);
     return (
