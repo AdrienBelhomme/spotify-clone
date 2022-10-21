@@ -11,8 +11,6 @@ const Artists = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  console.log(id);
-
   const { data: artistData, isFetching: isFetchingArtistDetails, error } = id === ':id' ? useGetArtistDetailsQuery(95705522) : useGetArtistDetailsQuery(id);
 
   if (isFetchingArtistDetails) {
@@ -37,8 +35,6 @@ const Artists = () => {
   const allSongs = Object.entries(artistData?.songs);
   const allArtists = Object.entries(artistData?.artists);
   const allData = Object.entries(artistData);
-
-  console.log(allSongs);
 
   return (
     <Grid container spacing={3}>
