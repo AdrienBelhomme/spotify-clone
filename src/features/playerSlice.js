@@ -26,9 +26,6 @@ export const playerSlice = createSlice({
   initialState,
   reducers: {
     setActiveSong: (state, action) => {
-      console.log('here');
-      console.log(state.currentIndex);
-      console.log(action.payload);
       state.songUrl = action.payload;
     },
     setPlayOrPause: (state, action) => {

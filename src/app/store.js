@@ -10,5 +10,5 @@ export default configureStore({
     playerSlice: playerReducer,
     currentGenre: genreReducer,
   },
-  middleware: (getDefaultMiddleware) => { return getDefaultMiddleware().concat(shazamApi.middleware); },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(shazamApi.middleware),
 });

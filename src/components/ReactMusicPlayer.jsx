@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -25,7 +25,7 @@ const ReactMusicPlayer = (props) => {
     playedSeconds: 0,
   });
 
-  const { songUrl, isPlaying, volume, currentIndex } = useSelector((state) => state.playerSlice);
+  const { songUrl, isPlaying, volume } = useSelector((state) => state.playerSlice);
 
   const handleProgress = (state) => {
     // We only want to update time slider if we are not currently seeking

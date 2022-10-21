@@ -1,9 +1,8 @@
-import React, { Suspense, useEffect, useRef, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { Box, Grid } from '@mui/material';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 
-import TopOneCard from './TopOneCard';
 import './GridForMusic.css';
 
 const CardMusic = React.lazy(() => import('./CardMusic'));
@@ -61,7 +60,6 @@ const GridForMusic = (props) => {
               {dataSliced.map((countrymap, i) => <CardMusic key={i} data={dataSliced} country={countrymap.name} index={i} rank={slice} />)}
             </Suspense>
           </Grid>
-          <TopOneCard data={data} country={country} />
         </Grid>
         <Stack spacing={2}>
           <Pagination count={data.length / 5} shape="rounded" onChange={(e, value) => { setPage(value); updateSlice(value); }} />

@@ -1,8 +1,6 @@
 import { styled } from '@mui/material/styles';
 import { IconButton, Paper } from '@mui/material';
 import { PlayCircleOutline } from '@mui/icons-material';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
 
 import { selectGenre } from '../features/currentGenre.js';
 

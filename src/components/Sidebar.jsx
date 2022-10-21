@@ -13,7 +13,7 @@ const categories = [
   { label: 'Home', to: '/', value: 'home' },
   { label: 'Song', to: '/albums', value: 'album' },
   { label: 'Artist', to: '/artists/:id', value: 'artist' },
-  { label: 'TopChart', to: '/country', value: 'topchart' },
+  { label: 'Country', to: '/country', value: 'country' },
 ];
 
 const genre = [
@@ -35,7 +35,7 @@ const Sidebar = () => {
       </Link>
       <Divider />
       <List>
-        <ListSubheader> Browse Music UNIVERSE</ListSubheader>
+        <ListSubheader> Browse Music Universe</ListSubheader>
         {categories.map((item) => (
           <Link
             color="inherit"
