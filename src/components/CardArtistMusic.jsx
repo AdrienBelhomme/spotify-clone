@@ -2,12 +2,12 @@
 import { styled } from '@mui/material/styles';
 import { IconButton, Paper } from '@mui/material';
 import { Favorite, PlayCircleOutline, Chat } from '@mui/icons-material';
-
-import './CardMusic.css';
-import './cardArtistMusic.css';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+
+import './CardMusic.css';
+import './cardArtistMusic.css';
 import { setActiveSong, setArtistAndSongAndImage } from '../features/playerSlice';
 import './GridForMusic.css';
 
