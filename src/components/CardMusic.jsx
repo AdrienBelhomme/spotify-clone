@@ -2,10 +2,10 @@
 import { styled } from '@mui/material/styles';
 import { IconButton, Paper } from '@mui/material';
 import { Favorite, PlayCircleOutline, Chat } from '@mui/icons-material';
-
-import './CardMusic.css';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import './CardMusic.css';
 import { setActiveSong, setArtistAndSongAndImage, setDataAndIndex } from '../features/playerSlice';
 
 const Item = styled(Paper)(({ theme }) => ({
