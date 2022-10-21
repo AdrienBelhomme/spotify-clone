@@ -12,8 +12,9 @@ import ReactMusicPlayer from './ReactMusicPlayer';
 import './player.css';
 
 const Widget = styled('div')(({ theme }) => ({
-  backgroundColor:
-    theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.6)' : 'white',
+  boxShadow: theme.palette.mode === 'dark' ? '10px 0px 30px #bf0bcc' : '10px 0px 30px rgba(0,0,0,0.6)',
+  backgroundColor: theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.6)' : 'white',
+  backdropFilter: 'blur(40px)',
 }));
 
 const Player = () => {
@@ -271,7 +272,7 @@ const Player = () => {
         </Box>
       ) : (
         <Box>
-          <Widget style={{ overflow: 'hidden', display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', height: '100px', padding: '10px', boxShadow: '10px 0px 35px #bf0bcc' }}>
+          <Widget style={{ overflow: 'hidden', display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', height: '100px', padding: '10px' }}>
             <div className="cover-image">
               <img
                 alt="can't win - Chilling Sunday"

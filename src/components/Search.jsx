@@ -25,7 +25,6 @@ const Search = (props) => {
     <div style={margin ? { marginBottom: '5rem' } : {}}>
 
       <Paper
-        variant="outlined"
         sx={{
           padding: '0.7rem',
           display: 'flex',

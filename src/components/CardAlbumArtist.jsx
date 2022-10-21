@@ -1,9 +1,11 @@
 
 import { Box, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { useTheme } from '@mui/material/styles';
 
 const CardAlbumArtist = (props) => {
   const { index, albums } = props;
+  const theme = useTheme();
 
   return (
     <Box sx={{ display: 'flex', width: '100%', justifyContent: 'space-between', margin: '1rem 0' }}>
@@ -41,7 +43,13 @@ const CardAlbumArtist = (props) => {
           }}
           >
 
-            <Link to={`../albums/${albums[index][1].id}`}>
+            <Link
+              style={{ textDecoration: 'none',
+                color: theme.palette.mode === 'dark' ? 'white' : '#2E3271',
+                fontSize: '14px',
+                fontWeight: '400' }}
+              to={`../albums/${albums[index][1].id}`}
+            >
               {albums[index][1]?.attributes?.name}
             </Link>
 

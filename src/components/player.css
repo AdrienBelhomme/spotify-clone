@@ -45,10 +45,11 @@
     margin: auto;
     position: relative;
     backdrop-filter: blur(40px);
+
 }
 
-.box-shadow {
+/* .box-shadow {
     width: 100%;
     overflow: hidden;
     box-shadow: 1px 0px 1px black;
-}
+} */

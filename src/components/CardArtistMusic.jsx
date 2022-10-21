@@ -1,5 +1,6 @@
+/* eslint-disable no-console */
 /* eslint-disable prefer-const */
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import { IconButton, Paper } from '@mui/material';
 import { Favorite, PlayCircleOutline, Chat } from '@mui/icons-material';
 
@@ -16,6 +17,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const CardArtistMusic = (props) => {
+  const theme = useTheme();
   const { index, songs, artist, artistId } = props;
 
   // eslint-disable-next-line no-unused-vars
@@ -52,13 +54,13 @@ const CardArtistMusic = (props) => {
   };
 
   return (
-    <div className="card">
+    <div className="cardmusic">
       {/* chart's rank */}
       <h3>
         { index + 1 }
       </h3>
       {/* Card Component */}
-      <Item className="card-container">
+      <Item className="card-containermusic">
 
         <div className="img">
           <img
@@ -106,13 +108,19 @@ const CardArtistMusic = (props) => {
         </div>
         <div className="action">
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-            <h3 style={{ textAlign: 'left', color: '#2E3271', fontWeight: '600', fontSize: '16px', margin: '0',
+            <h3 style={{ textAlign: 'left', fontWeight: '600', fontSize: '16px', margin: '0', color: theme.palette.mode === 'dark' ? 'white' : '#2E3271',
             }}
             >
               {songs[index][1].attributes.name}
             </h3>
             <h4 style={{ margin: 0, textAlign: 'left', color: 'rgba(124, 141, 181, 0.75)', fontSize: '14px', fontWeight: '400' }}>
-              <Link to={`../artists/${artistId}`}>
+              <Link
+                style={{ textDecoration: 'none',
+                  color: theme.palette.mode === 'dark' ? 'white' : '#2E3271',
+                  fontSize: '14px',
+                  fontWeight: '400' }}
+                to={`../artists/${artistId}`}
+              >
                 {artist[0][1].attributes.name}
               </Link>
 
