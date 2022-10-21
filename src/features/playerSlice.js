@@ -75,4 +75,3 @@ export const { setActiveSong, setPlayOrPause, setGlobalVolume, setPlayedSeconds,
 export default playerSlice.reducer;
 
 export const globalStateUrl = (state) => state.songUrl;
-

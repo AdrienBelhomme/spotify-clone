@@ -6,15 +6,16 @@ import { Box, Grid } from '@mui/material';
 
 import CardMusic from './CardMusic';
 import './GridForMusic.css';
+import { Link } from 'react-router-dom';
 import { useSearchSongsQuery } from '../services/shazam';
 import Loader from './Loader';
 
 const Home = () => {
-  const { query } = useSelector((state) => { return state.currentGenre; });
+  const { query } = useSelector((state) => state.currentGenre);
 
   const { data, isFetching, error } = useSearchSongsQuery(query);
 
-  const songs = data?.tracks?.hits.map((song) => { return song.track; });
+  const songs = data?.tracks?.hits.map((song) => song.track);
 
   if (isFetching) return <Loader title={`Searching ${query}...`} />;
 
@@ -26,8 +27,13 @@ const Home = () => {
     );
   }
   return (
+    <div style={{ color: 'white' }}>
 
-    <div>
+      <Link to="./artists">Artist</Link>
+      <Link to="./albums">Songs</Link>
+      <Link to="./topcharts">Top Charts</Link>
+      <Link to="./country">Top Charts by Country</Link>
+
       <Box
         mt={4}
         mb={4}
@@ -46,12 +52,10 @@ const Home = () => {
               flexDirection: 'column',
             }}
           >
-            {songs?.map((song, index) => {
-              return (
-                <CardMusic key={song.key} data={songs} index={index} />
+            {songs?.map((song, index) => (
+              <CardMusic key={song.key} data={songs} index={index} />
 
-              );
-            })}
+            ))}
 
           </Grid>
 
