@@ -5,18 +5,18 @@
 .slider-seeking.MuiSlider-thumb {
     width: 4px;
     height: 8px;
-    transition: 0.3s cubic-bezier(.47,1.64,.41,.8);
+    transition: 0.3s cubic-bezier(.47, 1.64, .41, .8);
 }
 
 .slider-seeking.MuiSlider-thumb:before {
-    boxShadow: 0 2px 12px 0 rgba(0,0,0,0.4),
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.4),
 }
 
 .tinytext {
-font-size: 0.75rem!important;
-opacity: 0.38!important;
-font-weight: 500!important;
-letter-spacing: 0.2!important;
+    font-size: 0.75rem !important;
+    opacity: 0.38 !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.2 !important;
 }
 
 .cover-image {
@@ -26,7 +26,8 @@ letter-spacing: 0.2!important;
     overflow: hidden;
     flex-shrink: 0;
     border-radius: 60px;
-    background-color: rgba(0,0,0,0.08);
+    background-color: rgba(0, 0, 0, 0.08);
+
 }
 
 .cover-image img {
@@ -46,8 +47,8 @@ letter-spacing: 0.2!important;
     backdrop-filter: blur(40px);
 }
 
-.box-shadow { 
+.box-shadow {
     width: 100%;
     overflow: hidden;
     box-shadow: 1px 0px 1px black;
-  } 
+}

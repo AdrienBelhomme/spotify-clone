@@ -148,11 +148,11 @@ const Player = () => {
                   src={songImage}
                 />
               </div>
-              <Box sx={{ ml: 1.5, minWidth: 0 }}>
+              <Box sx={{ width: 'fit-content', ml: 1.5 }}>
                 <Typography variant="caption" color="text.secondary" fontWeight={500}>
                   {songName}
                 </Typography>
-                <Typography noWrap>
+                <Typography Wrap>
                   <b>{artistName}</b>
                 </Typography>
               </Box>

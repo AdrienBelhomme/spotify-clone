@@ -7,7 +7,7 @@ const ToggleColorMode = ({ children }) => {
   const [mode, setMode] = useState('light');
 
   const toggleColorMode = () => {
-    setMode((prevMode) => { return (prevMode === 'light' ? 'dark' : 'light'); });
+    setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
   };
 
   // eslint-disable-next-line arrow-body-style

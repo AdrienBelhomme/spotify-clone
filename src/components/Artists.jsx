@@ -1,7 +1,5 @@
-const CustomizedInputBase = () => {
-  return (
-    <div>Artist</div>
-  );
-};
+const CustomizedInputBase = () => (
+  <div>Artist</div>
+);
 
 export default CustomizedInputBase;

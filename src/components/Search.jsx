@@ -18,7 +18,7 @@ const Search = () => {
   const handleSearch = (event) => {
     if (event.key === 'Enter') { dispatch(searchSongs(query)); }
   };
-  if (location.pathname !== '/') { return 'null'; }
+  if (location.pathname !== '/') { return null; }
 
   return (
     <div>
@@ -38,7 +38,7 @@ const Search = () => {
           size="small"
           placeholder="Search Artist, Songs .."
           onKeyPress={handleSearch}
-          onChange={(event) => { return setQuery(event.target.value); }}
+          onChange={(event) => setQuery(event.target.value)}
           sx={{ width: isMobile ? '200px' : '350px', background: 'transparent' }}
           InputProps={{
             'aria-label': 'Search Artist, Songs ..',
