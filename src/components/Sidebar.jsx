@@ -2,20 +2,20 @@ import React from 'react';
 import { List, ListItem, ListItemIcon, ListItemText, ListSubheader, Divider, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-// import { selectGenre } from '../features/currentGenre';
+import { selectGenre } from '../features/currentGenre';
+import { images } from '../assets';
 import { logoLight, logoDark } from '../assets/index';
 import genreIcons from '../assets/genres';
 
 const categories = [
   { label: 'Home', to: '/', value: 'home' },
-  { label: 'Album', to: '/albums/:id', value: 'album' },
+  { label: 'Song', to: '/albums', value: 'album' },
   { label: 'Artist', to: '/artists/:id', value: 'artist' },
   { label: 'Country', to: '/country', value: 'country' },
 ];
 
-// eslint-disable-next-line no-unused-vars
 const genre = [
   { label: 'Pop', value: 'POP' },
   { label: 'Dance', value: 'DANCE' },
