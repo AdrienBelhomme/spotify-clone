@@ -68,13 +68,13 @@ const Player = () => {
   const updatePlayPause = (value) => {
     setPlay(value);
   };
-  console.log(`globalIndex${globalIndex}`);
+
   const selectNextMusic = () => {
     dispatch(setActiveSong(globalData[globalIndex + 1]?.hub?.actions[1]?.uri));
     dispatch(setArtistAndSongAndImage({ artist: globalData[globalIndex + 1].title, song: globalData[globalIndex + 1].subtitle, image: globalData[globalIndex + 1].images.coverart, alt: globalData[globalIndex + 1].title }));
     setGlobalIndex((prev) => prev + 1);
   };
-  console.log(`globalIndex${globalIndex}`);
+
   const selectPreviousMusic = () => {
     if (globalIndex >= 1) {
       dispatch(setActiveSong(globalData[globalIndex - 1]?.hub?.actions[1]?.uri));
