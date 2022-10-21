@@ -20,6 +20,7 @@ const Item = styled(Paper)(({ theme }) => ({
 const CardAlbum = ({ song }) => {
   const navigate = useNavigate();
   return (
+
     <Box sx={{ width: 'fit-content' }}>
       <Grid container sx={{ display: 'flex' }}>
         <Item

@@ -11,7 +11,7 @@ import genreIcons from '../assets/genres';
 
 const categories = [
   { label: 'Home', to: '/', value: 'home' },
-  { label: 'Album', to: '/albums', value: 'album' },
+  { label: 'Song', to: '/albums', value: 'album' },
   { label: 'Artist', to: '/artists/:id', value: 'artist' },
   { label: 'TopChart', to: '/country', value: 'topchart' },
 ];

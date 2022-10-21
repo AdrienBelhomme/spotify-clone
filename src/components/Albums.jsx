@@ -36,7 +36,7 @@ const Albums = () => {
           padding: '3%',
         }}
       >
-        <h1 style={{ marginTop: 0 }}>Albums</h1>
+        <h1 style={{ marginTop: 0 }}>Songs</h1>
         <Grid container spacing={3} sx={{ display: 'flex' }}>
           {songData?.map((song, i) => (
             <Grid sx={{ margin: '1%' }} key={song.key}>

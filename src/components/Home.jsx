@@ -30,7 +30,7 @@ const Home = () => {
     <div style={{ color: 'white' }}>
 
       <Link to="./artists">Artist</Link>
-      <Link to="./albums">Albums</Link>
+      <Link to="./albums">Songs</Link>
       <Link to="./topcharts">Top Charts</Link>
       <Link to="./country">Top Charts by Country</Link>
 
