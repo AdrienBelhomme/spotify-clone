@@ -10,10 +10,10 @@ import CardArtistMusic from './CardArtistMusic.jsx';
 import CardAlbumArtist from './CardAlbumArtist.jsx';
 
 const Artists = () => {
-  const { id } = useParams();
+  const { artistId } = useParams();
   const navigate = useNavigate();
 
-  const { data: artistData, isFetching: isFetchingArtistDetails, error } = id === ':id' ? useGetArtistDetailsQuery(95705522) : useGetArtistDetailsQuery(id);
+  const { data: artistData, isFetching: isFetchingArtistDetails, error } = artistId === ':artistId' ? useGetArtistDetailsQuery(95705522) : useGetArtistDetailsQuery(artistId);
 
   if (isFetchingArtistDetails) {
     return (
@@ -80,14 +80,14 @@ const Artists = () => {
               <h3>Top 5 songs: </h3>
             </Grid>
             {allSongs.slice(0, 5).map((song, i) => (
-              <CardArtistMusic data={allData} songs={allSongs} key={i} index={i} artist={allArtists} artistId={id} />
+              <CardArtistMusic data={allData} songs={allSongs} key={i} index={i} artist={allArtists} artistId={artistId} />
             ))}
           </Grid>
           <Grid item sx={{ width: '100%' }}>
             <h3>All albums: </h3>
           </Grid>
           {allAlbums.map((album, i) => (
-            <CardAlbumArtist data={allData} key={i} index={i} albums={allAlbums} album={album} id={id} />
+            <CardAlbumArtist data={allData} key={i} index={i} albums={allAlbums} album={album} id={artistId} />
           ))}
         </Grid>
 

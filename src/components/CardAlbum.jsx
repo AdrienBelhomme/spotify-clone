@@ -11,10 +11,8 @@ const Item = styled(Paper)(({ theme }) => ({
   height: '330px',
   margin: '10px',
   textAlign: 'center',
-  // background: 'transparent',
   color: theme.palette.mode === 'dark' ? '#fff' : '#2E3271',
   borderRadius: '12px',
-  // border: '1px solid rgba(246, 129, 30, 0.25)',
   marginRight: '4%',
 }));
 

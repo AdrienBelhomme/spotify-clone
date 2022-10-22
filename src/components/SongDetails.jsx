@@ -88,7 +88,7 @@ const SongDetails = () => {
           {songData?.sections[1].type === 'LYRICS'
             ? songData?.sections[1].text.map((line) => (
               <p>{line}</p>
-            )) : <p>Sorry, no lyrics found</p>}
+            )) : <p>Sorry, no lyrics found (blame the API, not the JSM dev)</p>}
         </Grid>
       </Box>
 
