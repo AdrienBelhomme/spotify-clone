@@ -1,24 +1,25 @@
 /* eslint-disable no-console */
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import { Box, Paper, Grid } from '@mui/material';
 import { useNavigate, Link } from 'react-router-dom';
 
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  background: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
   padding: '10px 30px',
   width: '280px',
   height: '330px',
   margin: '10px',
   textAlign: 'center',
-  background: 'transparent',
-  color: theme.palette.text.secondary,
+  // background: 'transparent',
+  color: theme.palette.mode === 'dark' ? '#fff' : '#2E3271',
   borderRadius: '12px',
-  border: '1px solid rgba(246, 129, 30, 0.25)',
+  // border: '1px solid rgba(246, 129, 30, 0.25)',
   marginRight: '4%',
 }));
 
 const CardAlbum = ({ song }) => {
+  const theme = useTheme();
   const navigate = useNavigate();
   return (
 
@@ -36,12 +37,21 @@ const CardAlbum = ({ song }) => {
             loading="lazy"
             width="180px"
             height="180px"
-            style={{ borderRadius: '15px' }}
+            style={{ borderRadius: '15px', paddingTop: '10px' }}
           />
-          <h3 style={{ textAlign: 'center', color: '#2E3271', fontWeight: '600', fontSize: '16px', margin: '12px 0',
-          }}
+          <h3 style={{ textAlign: 'center',
+            fontWeight: '600',
+            fontSize: '16px',
+            margin: '12px 0',
+            color: theme.palette.mode === 'dark' ? 'white' : '#2E3271' }}
           >
-            <Link to={`../SongDetails/${song?.key}`}>
+            <Link
+              style={{ textDecoration: 'none',
+                color: theme.palette.mode === 'dark' ? 'white' : '#2E3271',
+                fontSize: '14px',
+                fontWeight: '400' }}
+              to={`../SongDetails/${song?.key}`}
+            >
               {song?.title}
             </Link>
 
