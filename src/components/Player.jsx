@@ -272,6 +272,7 @@ const Player = () => {
         </Box>
       ) : (
         <Box>
+          <ReactMusicPlayer refForPlayer={refForPlayer} updatePlayPause={updatePlayPause} />
           <Widget style={{ overflow: 'hidden', display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%', height: '100px', padding: '10px' }}>
             <div className="cover-image">
               <img
@@ -287,12 +288,12 @@ const Player = () => {
                 mt: -1,
               }}
             >
-              <IconButton aria-label="previous song" onClick={() => console.log('clicked')}>
+              <IconButton aria-label="previous song" onClick={() => selectPreviousMusic(globalIndex)}>
                 <FastRewindRounded fontSize="large" htmlColor={mainIconColor} />
               </IconButton>
               <IconButton
                 aria-label={play ? 'pause' : 'play'}
-                onClick={() => console.log('clicked')}
+                onClick={() => setPlay((prevState) => !prevState)}
               >
                 {play ? (
                   <PauseRounded sx={{ fontSize: '3rem' }} htmlColor={mainIconColor} />
@@ -304,7 +305,7 @@ const Player = () => {
 
                 )}
               </IconButton>
-              <IconButton aria-label="next song" onClick={() => {}}>
+              <IconButton aria-label="next song" onClick={() => selectNextMusic(globalIndex)}>
                 <FastForwardRounded fontSize="large" htmlColor={mainIconColor} />
               </IconButton>
             </Box>
