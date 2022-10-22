@@ -55,7 +55,7 @@
     display: none;
 }
 
-.card-container:hover .play-button {
+.card-containermusic:hover .play-button {
     display: block;
 }
 
