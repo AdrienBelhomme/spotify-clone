@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { PauseCircleOutline, PlayCircleOutline } from '@mui/icons-material';
 import { Box, Grid, IconButton, Typography } from '@mui/material';
 import { useState } from 'react';

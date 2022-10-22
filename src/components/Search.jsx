@@ -19,14 +19,12 @@ const Search = (props) => {
     console.log(query);
     if (event.key === 'Enter') dispatch(searchSongs(query));
   };
-
-  if (location.pathname !== '/') return null;
+  if (location.pathname !== '/') { return null; }
 
   return (
     <div style={margin ? { marginBottom: '5rem' } : {}}>
 
       <Paper
-        variant="outlined"
         sx={{
           padding: '0.7rem',
           display: 'flex',

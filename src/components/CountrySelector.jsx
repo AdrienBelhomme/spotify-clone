@@ -46,8 +46,11 @@ const CountrySelector = (props) => {
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...params}
           label="Select a country"
+          color="secondary"
+          focused
           inputProps={{
             ...params.inputProps,
+            color: 'black',
           }}
         />
       )}

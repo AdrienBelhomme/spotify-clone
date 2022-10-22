@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import { IconButton, Paper } from '@mui/material';
 import { Favorite, PlayCircleOutline, Chat } from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
@@ -13,6 +13,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const CardMusic = (props) => {
+  const theme = useTheme();
   const { data, index, rank } = props;
 
   const dispatch = useDispatch();
@@ -30,13 +31,13 @@ const CardMusic = (props) => {
   };
 
   return (
-    <div className="card">
+    <div className="cardmusic">
       {/* chart's rank */}
       <h3>
         { rank ? rank.start + index + 1 : index + 1 }
       </h3>
       {/* Card Component */}
-      <Item className="card-container">
+      <Item className="card-containermusic">
 
         <div className="img">
           <img
@@ -68,14 +69,30 @@ const CardMusic = (props) => {
         </div>
         <div className="action">
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-            <h3 style={{ textAlign: 'left', color: '#2E3271', fontWeight: '600', fontSize: '16px', margin: '0',
+            <h3 style={{ textAlign: 'left',
+              color: theme.palette.mode === 'dark' ? 'white' : '#2E3271',
+              fontWeight: '600',
+              fontSize: '16px',
+              margin: '0',
             }}
             >
               {data[index].title}
             </h3>
-            <h4 style={{ margin: 0, textAlign: 'left', color: 'rgba(124, 141, 181, 0.75)', fontSize: '14px', fontWeight: '400' }}>
+            <h4 style={{ margin: 0,
+              textAlign: 'left',
+              color: 'rgba(124, 141, 181, 0.75)',
+              fontSize: '14px',
+              fontWeight: '400',
+            }}
+            >
 
-              <Link to={`../artists/${data[index].artists[0].adamid}`}>
+              <Link
+                style={{ textDecoration: 'none',
+                  color: theme.palette.mode === 'dark' ? 'white' : '#2E3271',
+                  fontSize: '14px',
+                  fontWeight: '400' }}
+                to={`../artists/${data[index].artists[0].adamid}`}
+              >
                 {data[index].subtitle}
               </Link>
             </h4>

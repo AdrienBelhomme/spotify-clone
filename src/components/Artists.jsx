@@ -1,3 +1,5 @@
+/* eslint-disable no-lone-blocks */
+/* eslint-disable no-console */
 import React from 'react';
 import { Box, Button, CircularProgress, Grid } from '@mui/material';
 import { useParams, useNavigate } from 'react-router-dom';

@@ -49,7 +49,7 @@ const Navbar = () => {
             }}
             onClick={() => setMobileOpen((prevOpenMobile) => !prevOpenMobile)}
           >
-            <Menu />
+            <Menu style={{ color: theme.palette.mode === 'light' ? 'black' : '#bf0bcc' }} />
           </IconButton>
           )}
           {!isMobile && <Search />}

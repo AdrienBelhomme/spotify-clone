@@ -12,12 +12,18 @@ const GridForGenre = (props) => {
     <div>
       <Box
         mt={4}
-        mb={4}
         sx={{
-          backgroundColor: 'rgba(255, 255, 255, 0.8)',
+          backgroundColor: 'rgba(236, 242, 253, 1)',
           borderRadius: '40px',
           flexGrow: 1,
-          padding: '3%',
+          padding: '10px',
+          minWidth: '330px',
+          margin: 'auto',
+          color: 'black',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginBottom: '30px',
+
         }}
       >
         <h1 style={{ marginTop: 0 }}>Top charts by country</h1>
