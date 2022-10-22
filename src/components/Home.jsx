@@ -8,6 +8,7 @@ import './GridForMusic.css';
 import { useGetWorldChartsQuery, useSearchSongsQuery } from '../services/shazam';
 import Loader from './Loader';
 import Search from './Search';
+import './home.css';
 
 const Home = () => {
   const { query } = useSelector((state) => state.currentGenre);
@@ -42,6 +43,7 @@ const Home = () => {
           justifyContent: 'center',
         }}
       >
+
         <h1 style={{ marginTop: 0 }}>Search for {query || 'what inspires you today'}</h1>
         <div style={{ margin: '3rem' }}>
           <Search margin={margin} />
