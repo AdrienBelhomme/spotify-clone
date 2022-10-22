@@ -26,7 +26,7 @@ export const shazamApi = createApi({
     }),
     // Get song details
     getSongDetails: builder.query({
-      query: (trackId) => `tracks/details?track_id=${trackId}`,
+      query: ({ trackId }) => `tracks/details?track_id=${trackId}`,
     }),
     // Get world charts by genre
     getWorldChartsByGenre: builder.query({
@@ -42,7 +42,7 @@ export const shazamApi = createApi({
     }),
     // Related songs
     getRelatedSongs: builder.query({
-      query: (trackId) => `tracks/related?track_id=${trackId}`,
+      query: ({ trackId }) => `tracks/related?track_id=${trackId}`,
     }),
     // Search songs
     searchSongs: builder.query({

@@ -2,7 +2,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Box, Grid } from '@mui/material';
-import { Link } from 'react-router-dom';
 
 import CardMusic from './CardMusic';
 import './GridForMusic.css';
@@ -28,12 +27,6 @@ const Home = () => {
 
   return (
     <div style={{ color: 'white' }}>
-
-      <Link to="./artists">Artist</Link>
-      <Link to="./albums">Songs</Link>
-      <Link to="./topcharts">Top Charts</Link>
-      <Link to="./country">Top Charts by Country</Link>
-
       <Box
         mt={4}
         mb={4}

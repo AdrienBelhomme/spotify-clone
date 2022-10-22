@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { styled } from '@mui/material/styles';
 import { Box, Paper, Grid } from '@mui/material';
 import { useNavigate, Link } from 'react-router-dom';
