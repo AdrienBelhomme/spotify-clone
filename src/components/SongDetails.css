@@ -32,3 +32,28 @@
     align-items: baseline;
 
 }
+
+@media screen and (max-width: 850px) {
+    .related-song {
+        position: initial;
+    }
+    .related-song-card {
+        outline: transparent;
+    }
+
+    .rounded-image {
+    width: 120px;
+    height: auto;
+    }
+    
+    .p {
+        width: 160px;
+    }
+
+    .lyric-container {
+        width: 330px;
+        padding-bottom: 12rem;
+
+    } 
+
+}

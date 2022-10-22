@@ -3,6 +3,8 @@ import { Box, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 
+import './cardAlbumArtist.css';
+
 const CardAlbumArtist = (props) => {
   const { index, albums } = props;
   const theme = useTheme();

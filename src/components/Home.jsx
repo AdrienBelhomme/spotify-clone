@@ -46,7 +46,7 @@ const Home = () => {
         <div style={{ margin: '3rem' }}>
           <Search margin={margin} />
         </div>
-        <Grid container sx={{ display: 'flex' }}>
+        <Grid container sx={{ display: 'flex' }} className="justifyCenter">
           <Grid
             item
             sx={{ display: 'flex',

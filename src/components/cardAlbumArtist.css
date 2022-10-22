@@ -1,0 +1,11 @@
+@media screen and (max-width: 900px) {
+    .title-album {
+        display: flex!important;
+    align-items: center!important;
+    margin-left: 2rem!important;
+    width: 100px!important;
+    }
+}
+
+
+
