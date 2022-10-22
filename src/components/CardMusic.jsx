@@ -76,7 +76,9 @@ const CardMusic = (props) => {
               margin: '0',
             }}
             >
-              {data[index].title}
+              <Link to={`../SongDetails/${data[index].key}`}>
+                {data[index].title}
+              </Link>
             </h3>
             <h4 style={{ margin: 0,
               textAlign: 'left',
