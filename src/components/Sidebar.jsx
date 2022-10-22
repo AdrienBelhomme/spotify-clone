@@ -5,14 +5,13 @@ import { useTheme } from '@mui/material/styles';
 import { useDispatch } from 'react-redux';
 
 import { selectGenre } from '../features/currentGenre';
-import { images } from '../assets';
-import { logoLight, logoDark } from '../assets/index';
+import { images, logoLight, logoDark } from '../assets';
 import genreIcons from '../assets/genres';
 
 const categories = [
   { label: 'Home', to: '/', value: 'home' },
   { label: 'Song', to: '/albums', value: 'album' },
-  { label: 'Artist', to: '/artists/:id', value: 'artist' },
+  { label: 'Artist', to: '/artists/:artistId', value: 'artist' },
   { label: 'Country', to: '/country', value: 'country' },
 ];
 
